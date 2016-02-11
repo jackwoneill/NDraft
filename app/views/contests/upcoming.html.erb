@@ -1,0 +1,50 @@
+<h1>Upcoming Contests</h1>
+
+<table>
+    <th>Contest</th>
+    <th>Entry</th>
+    <th>Prizes</th>
+    <th>Start Time</th>
+    <th>Size</th>
+    <th>Total Entries</th>
+
+  <tbody>
+    <% @contests.each do |contest| %>
+    <% @line = Lineup.where(contest_id: contest.id) %>
+    <% @line = @line.where(user_id: current_user.id).take %>
+      <tr class="contest-details">
+        <td>
+          <%= link_to "#{contest.title}", contest %>
+        </td>
+        <td>
+          <%= "$#{number_with_precision(contest.fee, precision: 2)}" %>
+        </td>
+        <td>
+          <%= "$#{number_with_precision(contest.prize_pool, precision: 2)}" %>
+        </td>
+        <td>
+          <%= (contest.start_time).strftime("%m/%d/%Y") %>
+        </td>
+        <td>
+          <%= contest.max_size %>
+        </td>
+        <td>
+          <%= contest.curr_size %>
+        </td>
+
+        <td><% if @line %>
+        <td><%= link_to 'Edit Entry', edit_lineup_path(@line.id, :contest_id => @line.contest_id)%></td>
+        <td><%= link_to 'Cancel Entry', @line, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+  
+  <% @contests.each do |c| %>
+    
+
+  <% end %>
+
+  </table>

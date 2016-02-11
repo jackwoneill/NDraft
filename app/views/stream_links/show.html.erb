@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Slate:</strong>
+  <%= @stream_link.slate_id %>
+</p>
+
+<p>
+  <strong>Url:</strong>
+  <%= @stream_link.url %>
+</p>
+
+<%= link_to 'Edit', edit_stream_link_path(@stream_link) %> |
+<%= link_to 'Back', stream_links_path %>

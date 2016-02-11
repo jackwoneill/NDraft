@@ -1,0 +1,39 @@
+<% if @contests.length == 0 %>
+	<h3>No Live Entries!</h3>
+<% else %>
+	<h3>Live Entries</h3>
+	<table>
+	  <th>Contest</th>
+	  <th>Entry</th>
+	  <th>Prizes</th>
+	  <th>Start Time</th>
+	  <th>Size</th>
+	  <th>Entries</th>
+	<% @contests.each do |c| %>
+	  <tr class="contest-details">
+	    <td>
+	      <%= link_to "#{c.title}", c %>
+	    </td>
+	    <td>
+	      <%= "$#{number_with_precision(c.fee, precision: 2)}" %>
+	    </td>
+	    <td>
+	      <%= "$#{number_with_precision(c.prize_pool, precision: 2)}" %>
+	    </td>
+	    <td>
+	      <%= (c.start_time).strftime("%m/%d/%Y") %>
+	    </td>
+	    <td>
+	      <%= c.max_size %>
+	    </td>
+	    <td>
+	      <%= c.curr_size %>
+	    </td>
+
+	  </tr>
+
+	<% end %>
+
+	</table>
+	
+<% end %>

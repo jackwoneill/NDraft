@@ -1,0 +1,72 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Available Contests</h1>
+
+<table>
+  <th>Contest</th>
+  <th>Entry</th>
+  <th>Prizes</th>
+  <th>Start Time</th>
+  <th>Size</th>
+  <th>Total Entries</th>
+
+
+
+        <td><% if @line %>
+        <td><%= link_to 'Edit Entry', edit_lineup_path(@line.id, :contest_id => @line.contest_id)%></td>
+        <td><%= link_to 'Cancel Entry', @line, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %></td>
+      </tr>
+
+
+
+    <% @contests.each do |contest| %>
+      <tr class="contest-details">
+        <td>
+          <%= link_to "#{contest.title}", contest %>
+        </td>
+        <td>
+          <%= "$#{number_with_precision(contest.fee, precision: 2)}" %>
+        </td>
+        <td>
+          <%= "$#{number_with_precision(contest.prize_pool, precision: 2)}" %>
+        </td>
+        <td>
+          <%= (contest.start_time).strftime("%m/%d/%Y") %>
+        </td>
+        <td>
+          <%= contest.max_size %>
+        </td>
+        <td>
+          <%= contest.curr_size %>
+        </td>
+        <% l = (Lineup.where("user_id" => current_user.id).all) %>
+
+        <% l = l.where("contest_id" => contest.id).first %>
+        <td>
+          <% if l.nil? %>
+            <% if current_user.balance >= contest.fee %>
+              <%= link_to 'Enter Contest', new_lineup_path(contest_id: contest.id) %>
+            <% end %>
+          <% else %>
+            <%= link_to 'Edit Entry', edit_lineup_path(l.id, :contest_id => l.contest_id)%>
+          <% end %>
+        </td> <br>
+        <td><% if current_user.permissions == 2 %>
+        <td>
+          <%= link_to 'Remove Contest', contest, method: :delete, data: { confirm: 'Are you sure?' } %>
+          <%= link_to 'Pay Out Contest', contests_pay5050_path(:contest_id => contest.id), data: { confirm: 'Are you sure?' } %>
+    
+        </td>
+        <% end %></td>
+
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<% if current_user.permissions == 2 %>
+  <%= link_to 'New Contest', new_contest_path %>
+<% end %>

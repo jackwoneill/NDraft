@@ -1,0 +1,114 @@
+<%= form_for(@lineup) do |f| %>
+  <% if @lineup.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@lineup.errors.count, "error") %> prohibited this lineup from being saved:</h2>
+
+      <ul>
+      <% @lineup.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <h2 name="salary">60000</h2>
+  </div>
+
+  <div class="field">
+    <h2>Top</h2>
+    <% @tops.each do |player| %>
+
+      <%= radio_button("lineup", "top", "#{player.id}", 'data-salary' => player.salary) %>
+
+      <%= player.name %> 
+      <%= content_tag(:span, player.salary, :class => "player_salary", :id => "salary[#{player.id}]") %>      
+      <br>
+
+    <% end %>
+  </div>
+
+  <div class="field">
+    <h2>Mid</h2>
+    <% @mids.each do |player| %>
+
+      <%= radio_button("lineup", "mid", "#{player.id}", 'data-salary' => player.salary) %>
+
+      <%= player.name %> <br>
+
+    <% end %>
+  </div>
+
+  <div class="field">
+    <h2>ADC</h2>
+    <% @adcs.each do |player| %>
+
+      <%= radio_button("lineup", "adc", "#{player.id}", 'data-salary' => player.salary) %>
+
+      <%= player.name %> <br>
+
+    <% end %>
+  </div>
+
+  <div class="field">
+    <h2>Support</h2>
+    <% @supports.each do |player| %>
+
+      <%= radio_button("lineup", "support", "#{player.id}", 'data-salary' => player.salary) %>
+
+      <%= player.name %> <br>
+
+    <% end %>
+  </div>
+
+  <div class="field">
+    <h2>Jungler</h2>
+    <% @junglers.each do |player| %>
+
+      <%= radio_button("lineup", "jungler", "#{player.id}", 'data-salary' => player.salary) %>
+
+      <%= player.name %> <br>
+
+    <% end %>
+  </div>
+
+  <div class="field">
+    <h2>Flex #1</h2>
+    <% @players.each do |player| %>
+
+      <%= radio_button("lineup", "flex_1", "#{player.id}", 'data-salary' => player.salary) %>
+
+      <%= player.name %> <br>
+
+    <% end %>
+  </div>
+
+  <div class="field">
+    <h2>Flex #2</h2>
+    <% @players.each do |player| %>
+
+      <%= radio_button("lineup", "flex_2", "#{player.id}", 'data-salary' => player.salary) %>
+
+      <%= player.name %> <br>
+
+    <% end %>
+  </div>
+
+  <div class="field">
+    <h2>Flex #3</h2>
+    <% @players.each do |player| %>
+
+      <%= radio_button("lineup", "flex_3", "#{player.id}", 'data-salary' => player.salary) %>
+
+      <%= player.name %> <br>
+
+    <% end %>
+  </div>
+
+  <%= hidden_field_tag :contest_id, @lineup.contest_id %>
+
+
+  <div class="actions">
+    <%= f.submit('disabled' => true) %>
+  </div>
+<% end %>

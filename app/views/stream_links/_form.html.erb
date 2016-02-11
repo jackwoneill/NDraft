@@ -1,0 +1,29 @@
+<%= form_for(@stream_link) do |f| %>
+  <% if @stream_link.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@stream_link.errors.count, "error") %> prohibited this stream_link from being saved:</h2>
+
+      <ul>
+      <% @stream_link.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :slate_id %><br>
+    <% if @slate_id != nil %>
+      <%= f.number_field :slate_id, value: @slate_id %>
+    <% else %>
+      <%= f.number_field :slate_id %>
+    <% end %>
+  </div>
+  <div class="field">
+    <%= f.label :url %><br>
+    <%= f.text_field :url %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

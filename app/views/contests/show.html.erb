@@ -1,0 +1,207 @@
+<p id="notice"><%= notice %></p>
+<% started = true if @contest.start_time < Time.now %>
+<% l = (Lineup.where("user_id" => current_user.id)) %>
+<% l = l.where("contest_id" => @contest).take %>
+<% entered = true if !l.nil? %>
+
+<table>
+  <th>Contest</th>
+  <th>Entry</th>
+  <th>Prizes</th>
+  <th>Start Time</th>
+  <th>Size</th>
+  <th>Entries</th>
+
+  <tr class="contest-details">
+    <td>
+      <%= @contest.title %>
+    </td>
+    <td>
+      <%= "$#{number_with_precision(@contest.fee, precision: 2)}" %>
+    </td>
+    <td>
+      <%= "$#{number_with_precision(@contest.prize_pool, precision: 2)}" %>
+    </td>
+    <td>
+      <%= (@contest.start_time).strftime("%m/%d/%Y") %>
+    </td>
+    <td>
+      <%= @contest.max_size %>
+    </td>
+    <td>
+      <%= @contest.curr_size %>
+    </td>
+  </tr>
+
+</table>
+
+<% if entered %>
+  <% if current_user.permissions == 2 && @contest.start_time > Time.now%>
+    <%= link_to 'Edit', edit_contest_path(@contest) %>
+  <% end %>
+  <h3>Your Lineup</h3>
+
+  <table>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <tr class="contest-entries">
+      <td>
+        <span><b>Top</b></span>
+      </td>
+      <td>
+        <span><%= Player.find(l.top).name %></span>
+      </td>
+      <td></td>
+      <td><%= Player.find(l.top).salary %></td>
+      <% if started %>
+        <td><%= Player.find(l.top).live_score %></td>
+      <% end %>
+    </tr>
+
+    <tr class="contest-entries">
+      <td>
+        <span><b>Mid</b></span>
+      </td>
+      <td>
+        <span><%= Player.find(l.mid).name %></span>
+      </td>
+      <td></td>
+      <td><%= Player.find(l.mid).salary %></td>
+      <% if started %>
+        <td><%= Player.find(l.mid).live_score %></td>
+      <% end %>
+    </tr>
+
+    <tr class="contest-entries">
+      <td>
+        <span><b>ADC</b></span>
+      </td>
+      <td>
+        <span><%= Player.find(l.adc).name %></span>
+      </td>
+      <td></td>
+      <td><%= Player.find(l.adc).salary %></td>
+      <% if started %>
+        <td><%= Player.find(l.adc).live_score %></td>
+      <% end %>
+    </tr>
+
+    <tr class="contest-entries">
+      <td>
+        <span><b>Support</b></span>
+      </td>
+      <td>
+        <span><%= Player.find(l.support).name %></span>
+      </td>
+      <td></td>
+      <td><%= Player.find(l.support).salary %></td>
+      <% if started %>
+        <td><%= Player.find(l.support).live_score %></td>
+      <% end %>
+    </tr>
+
+    <tr class="contest-entries">
+      <td>
+        <span><b>Jungler</b></span>
+      </td>
+      <td>
+        <span><%= Player.find(l.jungler).name %></span>
+      </td>
+      <td></td>
+      <td><%= Player.find(l.jungler).salary %></td>
+      <% if started %>
+        <td><%= Player.find(l.jungler).live_score %></td>
+      <% end %>
+    </tr>
+
+    <tr class="contest-entries">
+      <td>
+        <span><b>Flex 1</b></span>
+      </td>
+      <td>
+        <span><%= Player.find(l.flex_1).name %></span>
+      </td>
+      <td></td>
+      <td><%= Player.find(l.flex_1).salary %></td>
+      <% if started %>
+        <td><%= Player.find(l.flex_1).live_score %></td>
+      <% end %>
+    </tr>
+
+    <tr class="contest-entries">
+      <td>
+        <span><b>Flex 2</b></span>
+      </td>
+      <td>
+        <span><%= Player.find(l.flex_2).name %></span>
+      </td>
+      <td></td>
+      <td><%= Player.find(l.flex_2).salary %></td>
+      <% if started %>
+        <td><%= Player.find(l.flex_2).live_score %></td>
+      <% end %>
+    </tr>
+
+    <tr class="contest-entries">
+      <td>
+        <span><b>Flex 3</b></span>
+      </td>
+      <td>
+        <span><%= Player.find(l.flex_3).name %></span>
+      </td>
+      <td></td>
+      <td><%= Player.find(l.flex_3).salary %></td>
+      <% if started %>
+        <td><%= Player.find(l.flex_3).live_score %></td>
+      <% end %>
+    </tr>
+
+  </table>
+<% end %>
+
+<br>
+<h2>Games</h2>
+<% @games.each do |game| %>
+  <span><%= "#{Team.find(game.team_1).name} vs #{Team.find(game.team_2).name}" %></span>
+<% end %>
+<br>
+<% if current_user.permissions == 1 %>
+  <% if @contest.start_time > Time.now %>
+    <% if !entered %>
+
+      <%= link_to 'Enter Contest', new_lineup_path(contest_id: @contest.id) %> <br>
+    <% else %>
+      <%= link_to 'Edit Entry', edit_lineup_path(l.id, :contest_id => @contest.id)%>
+      <br>
+    <% end %>
+  <% end %>
+
+<% else %>
+  <h2>Games</h2>
+  <% @games.each do |game| %>
+    <span><%= "#{Team.find(game.team_1).name} vs #{Team.find(game.team_2).name}" %></span>
+  <% end %>
+<% end %>
+
+<% if @contest.start_time < Time.now %>
+  <br><br>
+  <table name = lineups-table, cellspacing="0">
+    <th>User</th>
+    <th>Score</th>
+  <% @lineups.each do |lineup| %>
+    <tr class="contest-entries">
+      <% user = User.find(lineup.user_id) %>
+      <td>
+        <%= link_to "#{user.display_name}", lineup %>
+      </td>
+      <td><%= lineup.total_score %></td>
+    </tr>
+
+  <% end %>
+  </table>
+<% end %>
+
+

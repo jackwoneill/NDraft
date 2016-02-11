@@ -1,0 +1,8 @@
+<h1>Updating Scores For Slate</h1>
+<!-- MOVE THIS TO SLATES CONTROLLER/ROUTE -->
+<% @players.each do |player| %>
+	<%= player.name %>
+	<%= link_to 'Edit', edit_player_path(player) %>
+	<br>
+<% end %>
+

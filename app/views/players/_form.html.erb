@@ -1,0 +1,48 @@
+<%= form_for(@player) do |f| %>
+  <% if @player.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@player.errors.count, "error") %> prohibited this player from being saved:</h2>
+
+      <ul>
+      <% @player.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :team_id %><br>
+    <%= f.collection_select :team_id, @teams, :id, :name, include_blank: true %>
+  </div>
+  <div class="field">
+    <%= f.label :salary %><br>
+    <%= f.number_field :salary %>
+  </div>
+
+  <div class="field">
+    <%= f.label :avgFP %><br>
+    <%= f.text_field :avgFP %>
+  </div>
+
+  <div class="field">
+    <%= f.label :position %><br>
+    <% @positions.each do |position| %>
+      <%= radio_button("player", "position", "#{position}") %>
+      <%= position %>
+    <% end %>
+  </div>
+
+  <div class="field">
+    <%= f.label :live_score %><br>
+    <%= f.number_field :live_score, :class => 'text_field', :step => 0.5 %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit%>
+  </div>
+<% end %>

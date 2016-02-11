@@ -1,0 +1,2 @@
+module SlatesHelper
+end

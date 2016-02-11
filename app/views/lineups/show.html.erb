@@ -1,0 +1,54 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Top:</strong>
+  <%= @lineup.top %>
+</p>
+
+<p>
+  <strong>Mid:</strong>
+  <%= @lineup.mid %>
+</p>
+
+<p>
+  <strong>Adc:</strong>
+  <%= @lineup.adc %>
+</p>
+
+<p>
+  <strong>Support:</strong>
+  <%= @lineup.support %>
+</p>
+
+<p>
+  <strong>Jungler:</strong>
+  <%= @lineup.jungler %>
+</p>
+
+<p>
+  <strong>Flex 1:</strong>
+  <%= @lineup.flex_1 %>
+</p>
+
+<p>
+  <strong>Flex 2:</strong>
+  <%= @lineup.flex_2 %>
+</p>
+
+<p>
+  <strong>Flex 3:</strong>
+  <%= @lineup.flex_3 %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @lineup.user_id %>
+</p>
+
+<p>
+  <strong>Contest:</strong>
+  <%= @lineup.contest_id %>
+</p>
+
+<%= link_to 'Edit', edit_lineup_path(@lineup) %> |
+<%= link_to 'Back', lineups_path %>

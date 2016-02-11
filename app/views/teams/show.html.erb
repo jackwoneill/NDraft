@@ -1,0 +1,43 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @team.name %>
+</p>
+
+<p>
+  <strong>Abbrev:</strong>
+  <%= @team.abbrev %>
+</p>
+
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Position</th>
+      <th>Salary</th>
+      <th>Avg FP/Game</th>
+      <th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @players.each do |player| %>
+      <tr>
+      	<td><%= player.id %> </td>
+        <td><%= link_to "#{player.name}", edit_player_path(player) %> </td>
+        <td><%= player.position %></td>
+        <td><%= player.salary %></td>
+        <td><%= player.avgFP %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Edit', edit_team_path(@team) %> |
+<%= link_to 'Back', teams_path %>

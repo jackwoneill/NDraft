@@ -1,0 +1,22 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Start time:</strong>
+  <%= @slate.start_time %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @slate.name %>
+</p>
+
+<p>
+  <strong>Streams:</strong>
+  <% @streams.each do |s| %>
+  	<%= s.url %>
+  	<br>
+  <% end %>
+</p>
+
+<%= link_to 'Edit', edit_slate_path(@slate) %> |
+<%= link_to 'Back', slates_path %>

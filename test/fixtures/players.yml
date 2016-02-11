@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  id: 1
+  name: MyString
+  team: 1
+  salary: 1
+
+two:
+  id: 1
+  name: MyString
+  team: 1
+  salary: 1

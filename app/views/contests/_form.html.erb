@@ -1,0 +1,42 @@
+<%= form_for(@contest) do |f| %>
+  <% if @contest.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@contest.errors.count, "error") %> prohibited this contest from being saved:</h2>
+
+      <ul>
+      <% @contest.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :fee %><br>
+    <%= f.text_field :fee %>
+  </div>
+  <div class="field">
+    <%= f.label :payment_structure %> <br>
+    <%= f.number_field :payment_structure %>    
+  </div>
+  <div class="field">
+    <%= f.label "Slate" %><br>
+    <%= collection_select(:contest, :slate_id, @slates, :id, :name, {:prompt => true}) %>
+  </div>
+  <div class="field">
+    <%= f.label :max_size %><br>
+    <%= f.number_field :max_size %>
+  </div>
+  <div class="field">
+    <%= f.label :prize_pool %><br>
+    <%= f.text_field :prize_pool %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,27 @@
+// Place all the styles related to the contests controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.lineup_display_position{
+display: inline;
+  margin: 0 1em 0 1em;
+  width: 30%;
+}
+
+.contest-details > td {
+  padding-left: 30px;
+  padding-right: 30px;
+  text-align: center;
+}
+
+.contest-entries > td {
+  padding-left: 15px;
+  padding-right: 15px;
+  text-align: center;
+}
+
+
+.contest-entries:hover{
+  background:red;
+}

@@ -1,0 +1,32 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Slates</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Start time</th>
+      <th>Name</th>
+      <th>Streams</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @slates.each do |slate| %>
+      <tr>
+        <td><%= slate.start_time %></td>
+        <td><%= slate.name %></td>
+        <td><%= (StreamLink.where(slate_id: slate.id)).count %></td>
+        <td><%= link_to 'Show', slate %></td>
+        <td><%= link_to 'Edit', edit_slate_path(slate) %></td>
+        <td><%= link_to 'Add Stream', new_stream_link_path(slate_id: slate.id) %></td>
+        <td><%= link_to 'Destroy', slate, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Slate', new_slate_path %>

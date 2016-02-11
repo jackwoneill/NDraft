@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>DfsEsport</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<% if user_signed_in? %>
+	Signed in as <%= current_user.display_name %> <%= link_to "Sign out", destroy_user_session_path,:method => 'delete' %>
+	<% if current_user.permissions == 1 %>
+		Deposit Request Withdrawal
+	<% end %>
+	<br><br>
+	<ul class="nav-bar">
+		<li><%= link_to 'Lobby', contests_path %></li>
+		<li><%= link_to 'Upcoming Contests', contests_upcoming_path %></li>
+		<li><%= link_to 'Live Contests', contests_live_path %></li>
+		<li><%= link_to 'Watch', contests_path %></li>
+		<% if current_user.permissions == 2 %>
+			<li><%= link_to 'Admin Panel', admin_index_path %></li>
+		<% end %>
+		<li name="deposit"><%= link_to 'Deposit', new_deposit_path %></li>
+
+		<li name="deposit"><span>Current Balance: <%= "$#{number_with_precision(current_user.balance, precision: 2)}" %></span></li> 
+	</ul>
+<% else %>
+	<ul class="nav-bar">
+		<li><%= link_to "Login", new_user_session_path %></li> 
+		<li><%= link_to "Sign Up", new_user_registration_path %></li>
+	</ul>
+<% end %>
+<%= yield %>
+
+</body>
+</html>

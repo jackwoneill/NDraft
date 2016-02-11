@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Stream Links</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Slate</th>
+      <th>Url</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @stream_links.each do |stream_link| %>
+      <tr>
+        <td><%= stream_link.slate_id %></td>
+        <td><%= stream_link.url %></td>
+        <td><%= link_to 'Show', stream_link %></td>
+        <td><%= link_to 'Edit', edit_stream_link_path(stream_link) %></td>
+        <td><%= link_to 'Destroy', stream_link, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Stream link', new_stream_link_path %>
