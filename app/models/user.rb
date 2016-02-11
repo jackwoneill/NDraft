@@ -27,7 +27,7 @@ end
 
       yield  # this makes the save happen
 
-        balance = Balance.new(user_id: self.id, amount: 0)
+        balance = Balance.new(user_id: self.id, amount: 250.00)
 
         balance.save
     end
