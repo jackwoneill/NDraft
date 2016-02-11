@@ -22,7 +22,7 @@ end
   private
     def register_hook
       self.permissions = 1
-      self.balance = 0
+      self.balance = 250.00
       self.total_winnings = 0.00
 
       yield  # this makes the save happen
