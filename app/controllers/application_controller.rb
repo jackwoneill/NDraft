@@ -19,16 +19,9 @@ class ApplicationController < ActionController::Base
   end
 
   def ensure_admin
-    redirect_to welcome_path if current_user.permissions != 2
+    redirect_to contests_path if current_user.permissions != 2
   end
 
-  def checkDisplayName
-    if user_signed_in?
-      if current_user.display_name.nil?
-        redirect_to set_display_name_path
-      end
-    end
-  end
 
   def calcTotalScore(lineup)
 

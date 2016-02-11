@@ -37,11 +37,14 @@
     <% end %>
   </div>
 
+<% if !@player.new_record? %>
+  
+
   <div class="field">
     <%= f.label :live_score %><br>
     <%= f.number_field :live_score, :class => 'text_field', :step => 0.5 %>
   </div>
-
+<% end %>
   <div class="actions">
     <%= f.submit%>
   </div>

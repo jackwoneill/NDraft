@@ -9,9 +9,6 @@
 <body>
 <% if user_signed_in? %>
 	Signed in as <%= current_user.display_name %> <%= link_to "Sign out", destroy_user_session_path,:method => 'delete' %>
-	<% if current_user.permissions == 1 %>
-		Deposit Request Withdrawal
-	<% end %>
 	<br><br>
 	<ul class="nav-bar">
 		<li><%= link_to 'Lobby', contests_path %></li>
