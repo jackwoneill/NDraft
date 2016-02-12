@@ -19,14 +19,13 @@
     <%= f.label :team_2 %><br>
     <%= collection_select(:game, :team_2, @teams, :id, :name, {:prompt => true}) %>
   </div>
-  <div class="field">
-    <%= f.label :start_time %><br>
-    <%= f.datetime_select :start_time %>
-  </div>
 
-    <div class="field">
+  <div class="field">
+    <label for="">Slate</label>
+    <br>
     <%= collection_select(:game, :slate_id, @slates, :id, :name, {:prompt => true}) %>
   </div>
+  <br>
 
   <div class="actions">
     <%= f.submit %>

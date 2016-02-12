@@ -28,6 +28,8 @@ class GamesController < ApplicationController
   # POST /games.json
   def create
     @game = Game.new(game_params)
+    slate = Slate.find(@game.slate_id)
+    @game.start_time = slate.start_time
 
     respond_to do |format|
       if @game.save
