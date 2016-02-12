@@ -32,7 +32,11 @@
           <%= "$#{number_with_precision(contest.prize_pool, precision: 2)}" %>
         </td>
         <td>
-          <%= (contest.start_time).strftime("%m/%d/%Y") %>
+          <% s = (contest.start_time.strftime("%A")) %>
+         
+          <% s = s[0..2].gsub(/\s\w+\s*$/, '') %>
+          
+          <%= "#{s} #{contest.start_time.strftime("%l:%M %P")}" %>
         </td>
         <td>
           <%= contest.max_size %>
