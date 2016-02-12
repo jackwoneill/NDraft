@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
 
-  resources :stream_links
   resources :deposits
   resources :notifications
   get 'contests/upcoming'
@@ -9,7 +8,7 @@ Rails.application.routes.draw do
   get 'contests/pay5050'
 
   devise_for :users
-  resources :streamlinks
+  resources :stream_links, path: :watch
   resources :admin
   resources :notifications
   resources :lineups
@@ -23,6 +22,7 @@ Rails.application.routes.draw do
     end
   end
   root 'welcome#index'
+
 
   get 'slates/:id/scores' => 'slates#scores'
   # The priority is based upon order of creation: first created -> highest priority.

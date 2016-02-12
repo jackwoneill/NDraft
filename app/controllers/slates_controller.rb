@@ -23,6 +23,9 @@ class SlatesController < ApplicationController
   def edit
   end
 
+  def payout
+    @contests = Contest.where(slate_id: @slate.id)
+  end
 
   def scores
     @contest = Contest.find(params[:id])

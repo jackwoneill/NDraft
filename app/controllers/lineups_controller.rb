@@ -227,8 +227,8 @@ class LineupsController < ApplicationController
 
     if @lineup.save 
       current_user.balance -= @contest.fee
-      bal = Balance.where(user_id: current_user.id)
-      bal -= @contest.fee
+      bal = Balance.where(user_id: current_user.id).take
+      bal.amount -= @contest.fee
       bal.save
       current_user.save
     end

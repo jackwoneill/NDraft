@@ -179,11 +179,6 @@
     <% end %>
   <% end %>
 
-<% else %>
-  <h2>Games</h2>
-  <% @games.each do |game| %>
-    <span><%= "#{Team.find(game.team_1).name} vs #{Team.find(game.team_2).name}" %></span>
-  <% end %>
 <% end %>
 
 <% if @contest.start_time < Time.now %>

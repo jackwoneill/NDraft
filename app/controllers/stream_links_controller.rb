@@ -1,11 +1,26 @@
 class StreamLinksController < ApplicationController
   before_action :set_stream_link, only: [:show, :edit, :update, :destroy]
-  before_filter :ensure_admin
+  before_filter :ensure_admin, except: [:index]
 
   # GET /stream_links
   # GET /stream_links.json
   def index
-    @stream_links = StreamLink.all
+    cons = Array.new
+    slates = Array.new
+
+    lines = Lineup.where(user_id: current_user.id)
+
+    lines.each do |line|
+      c = Contest.find(line.contest_id)
+      if !c.paid_out
+        cons.append(c)
+        slates.append(Slate.find(c.slate_id))
+      end
+    end
+
+    @slates = slates.uniq
+    @contests = cons.uniq
+
   end
 
   # GET /stream_links/1
@@ -15,7 +30,7 @@ class StreamLinksController < ApplicationController
 
   # GET /stream_links/new
   def new
-    @stream_link = StreamLink.new
+    @stream_link = Stream_Link.new
     @slate_id = params[:slate_id]
   end
 
@@ -26,7 +41,7 @@ class StreamLinksController < ApplicationController
   # POST /stream_links
   # POST /stream_links.json
   def create
-    @stream_link = StreamLink.new(stream_link_params)
+    @stream_link = Stream_Link.new(stream_link_params)
 
     respond_to do |format|
       if @stream_link.save
@@ -66,7 +81,7 @@ class StreamLinksController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_stream_link
-      @stream_link = StreamLink.find(params[:id])
+      @stream_link = Stream_Link.find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

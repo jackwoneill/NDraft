@@ -14,7 +14,7 @@
 		<li><%= link_to 'Lobby', contests_path %></li>
 		<li><%= link_to 'Upcoming Contests', contests_upcoming_path %></li>
 		<li><%= link_to 'Live Contests', contests_live_path %></li>
-		<li><%= link_to 'Watch', contests_path %></li>
+		<li><%= link_to 'Watch', stream_links_path %></li>
 		<% if current_user.permissions == 2 %>
 			<li><%= link_to 'Admin Panel', admin_index_path %></li>
 		<% end %>

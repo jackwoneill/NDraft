@@ -180,7 +180,79 @@ class ContestsController < ApplicationController
     end
   end
 
-  def pay5050
+  def payDoubleUp
+    if current_user.permissions != 2
+      redirect_to contests_path
+    end
+    @contest = Contest.find(params[:contest_id])
+    if @contest.curr_size == 3
+      line = Lineup.where(contest_id: @contest.id)
+      returnUser = User.find(line.user_id)
+      returnUser.balance += @contest.fee
+      returnUser.save
+      #RETURN MONEY TO LINEUP OWNER AND EXIT
+    end
+
+    lines = Lineup.where(contest_id: @contest.id).all
+    #linesArray = Array.new
+    scores = Array.new
+
+    if @contest.curr_size != @contest.max_size
+      prizePool = (0.90 * (@contest.curr_size * @contest.fee)).floor
+      numPaid = (curr_size * 0.45).floor
+
+    else
+      prizePool = @contest.prize_pool
+      numPaid = (@contest.max_size * 0.45).floor
+    end
+
+    lines.each do |l|
+      #linesArray += l
+      calcTotalScore(l)
+      scores.append(l.total_score)
+    end
+
+    lines.order(total_score: :desc)
+    #linesArray.sort! { |a,b| a.total_score <=> b.total_score }
+
+    cutoffScore = lines[numPaid - 1]
+
+    cutoffCount = (scores.grep(cutoffScore).size).to_f
+
+    cutoffLines = lines.where(total_score: cutoffScore).all
+
+    cutoffLines.each do |cl|
+      cutoffUser = User.find(cl.user_id)
+      cutoffUser.balance += ((2 * @contest.fee)/cutoffCount)
+      cutoffUser.total_winnings += ((2* @contest.fee)/cutoffCount)
+      cutoffUser.save
+
+
+      cutoffBalance = Balance.where(user_id: cl.user_id)
+      cutoffBalance.amount += ((2* @contest.fee)/cutoffCount)
+      cutoffBalance.save
+    end
+
+    #PAY EVERYONE ELSE WHO SCORE > CUTOFF
+
+    payLines = lines[0..numPaid - 1]
+
+    payLines.each do |line|
+      payUser = User.find(line.user_id)
+      payUser.balance += (2 * @contest.fee)
+      payUser.total_winnings += (2 * @contest.fee)
+      payUser.save
+
+      payBalance = Balance.where(user_id: line.user_id).first
+      payBalance.amount += (2 * @contest.fee)
+      payBalance.save
+    end
+    redirect_to @contest
+
+  end
+
+
+   def pay5050
     if current_user.permissions != 2
       redirect_to contests_path
     end
@@ -269,6 +341,6 @@ class ContestsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def contest_params
-      params.require(:contest).permit(:title, :fee, :start_time, :max_size, :curr_size, :prize_pool, :slate_id)
+      params.require(:contest).permit(:title, :fee, :start_time, :max_size, :curr_size, :prize_pool, :slate_id, :payment_structure)
     end
 end

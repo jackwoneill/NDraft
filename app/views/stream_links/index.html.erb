@@ -1,29 +1,41 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Stream Links</h1>
+<h1>Watch Live Contests!</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Slate</th>
-      <th>Url</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<iframe src="http://player.twitch.tv/?channel=riotgames" frameborder="0" scrolling="no" height="378" width="620"></iframe>
 
-  <tbody>
-    <% @stream_links.each do |stream_link| %>
+
+<% if @slates.count != 0 %>
+  <h3>Your Live Entries</h3>
+  <table>
+    <thead>
       <tr>
-        <td><%= stream_link.slate_id %></td>
-        <td><%= stream_link.url %></td>
-        <td><%= link_to 'Show', stream_link %></td>
-        <td><%= link_to 'Edit', edit_stream_link_path(stream_link) %></td>
-        <td><%= link_to 'Destroy', stream_link, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th>Contest</th>
+        <th colspan="3"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @slates.each do |slate| %>
+        <tr>
+          <td>
+            <% contests = Contest.where(id: Lineup.where(user_id: current_user.id)).where(slate_id: slate.id).all %>
+            <% count = contests.count %>
+            <% if count == 1 %>
+                <%= contests.first.title %>
+            <% elsif count == 2 %>
+                <%= "#{contests.first.title} and 1 other" %>
+                <button></button>
+            <% elsif count > 2 %>
+                <%= "#{contests.first.title} and #{count - 1} others" %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+<h3>All Streams</h3>
+
 
 <br>
-
-<%= link_to 'New Stream link', new_stream_link_path %>
