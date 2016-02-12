@@ -198,7 +198,7 @@ class LineupsController < ApplicationController
       totSalary += Player.find(player).salary
     end
 
-    if totSalary > 60000
+    if totSalary > 100000
       redirect_to contests_path
       return
     end
