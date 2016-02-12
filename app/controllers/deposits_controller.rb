@@ -1,5 +1,6 @@
 class DepositsController < ApplicationController
   before_action :set_deposit, only: [:show, :edit, :update, :destroy]
+  before_filter :ensure_admin
 
   # GET /deposits
   # GET /deposits.json
