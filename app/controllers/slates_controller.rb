@@ -25,6 +25,8 @@ class SlatesController < ApplicationController
 
   def payout
     @contests = Contest.where(slate_id: @slate.id)
+
+
   end
 
   def scores

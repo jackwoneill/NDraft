@@ -8,6 +8,10 @@ class ContestsController < ApplicationController
     c = Array.new
     cons = Array.new
 
+    if current_user.permissions == 2
+      @contests = Contest.where(paid_out: false).all
+    end
+
     c += Contest.where('start_time >?', Time.now)
 
     c.each do |c|
