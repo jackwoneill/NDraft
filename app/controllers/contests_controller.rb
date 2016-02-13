@@ -10,6 +10,7 @@ class ContestsController < ApplicationController
 
     if current_user.permissions == 2
       @contests = Contest.where(paid_out: false).all
+      return
     end
 
     c += Contest.where('start_time >?', Time.now)
