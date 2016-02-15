@@ -24,6 +24,10 @@ Rails.application.routes.draw do
   root 'welcome#index'
 
 
+
+  get 'slates/:id/payout' => 'slates#payout'
+
+
   get 'slates/:id/scores' => 'slates#scores'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

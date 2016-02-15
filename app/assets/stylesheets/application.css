@@ -42,7 +42,8 @@
 li[name="deposit"] {
   float: right;
 }
-.navbar > li > span {
+
+li[name="deposit"] > span {
   display: inline-block;
   color: white;
   text-align: center;
