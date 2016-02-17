@@ -87,7 +87,7 @@ ready = ->
 
 		checkPlayers()
 
-	$("input[name='lineup[mid]'").change ->
+	$("input[name='lineup[mid]']").change ->
 
 		salary += midSal if midSal?
 
@@ -110,7 +110,7 @@ ready = ->
 
 		checkPlayers()
 
-	$("input[name='lineup[adc]'").change ->
+	$("input[name='lineup[adc]']").change ->
 
 		salary += adcSal if adcSal?
 
@@ -133,7 +133,7 @@ ready = ->
 
 		checkPlayers()
 
-	$("input[name='lineup[support]'").change ->
+	$("input[name='lineup[support]']").change ->
 
 		salary += supportSal if supportSal?
 
@@ -156,7 +156,7 @@ ready = ->
 
 		checkPlayers()
 
-	$("input[name='lineup[jungler]'").change ->
+	$("input[name='lineup[jungler]']").change ->
 
 		salary += junglerSal if junglerSal?
 
@@ -180,7 +180,7 @@ ready = ->
 		checkPlayers()
 
 
-	$("input[name='lineup[flex_1]'").change ->
+	$("input[name='lineup[flex_1]']").change ->
 
 		salary += flex_1Sal if flex_1Sal?
 
@@ -224,7 +224,7 @@ ready = ->
 		checkPlayers()
 
 
-	$("input[name='lineup[flex_2]'").change ->
+	$("input[name='lineup[flex_2]']").change ->
 
 		salary += flex_2Sal if flex_2Sal?
 
@@ -267,7 +267,7 @@ ready = ->
 
 		checkPlayers()
 
-	$("input[name='lineup[flex_3]'").change ->
+	$("input[name='lineup[flex_3]']").change ->
 
 		salary += flex_3Sal if flex_3Sal?
 
