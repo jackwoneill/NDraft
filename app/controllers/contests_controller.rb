@@ -195,7 +195,7 @@ class ContestsController < ApplicationController
   # DELETE /contests/1
   # DELETE /contests/1.json
   def destroy
-    if contest.paid_out == false
+    if @contest.paid_out == false
       lines = Lineup.where(contest_id: @contest.id)
       if !lines.nil?
         lines.each do |l|
