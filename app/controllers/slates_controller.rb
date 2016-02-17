@@ -90,6 +90,11 @@ end
   def update
     respond_to do |format|
       if @slate.update(slate_params)
+        contests = Contest.where(slate_id: @slate.id).all?
+        contests.each do |c|
+          c.start_time = @slate.start_time
+          c.save
+        end
         format.html { redirect_to @slate, notice: 'Slate was successfully updated.' }
         format.json { render :show, status: :ok, location: @slate }
       else
