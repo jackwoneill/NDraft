@@ -198,11 +198,13 @@ class ContestsController < ApplicationController
     if contest.paid_out == false
       lines = Lineup.where(contest_id: @contest.id)
       lines.each do |l|
-      Balance.where(user_id: l.user_id).first
-      returnUser = User.find(l.user_id).first
-      returnUser.balance += @contest.fee
-      returnUser.save
+        Balance.where(user_id: l.user_id).first
+        returnUser = User.find(l.user_id).first
+        returnUser.balance += @contest.fee
+        returnUser.save
+      end
     end
+
       #RETURN MONEY TO LINEUP OWNER AND EXIT
     @contest.destroy
     respond_to do |format|
