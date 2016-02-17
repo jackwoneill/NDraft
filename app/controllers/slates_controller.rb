@@ -39,8 +39,6 @@ class SlatesController < ApplicationController
     end
 
 
-
-
   end
 
   def scores
@@ -146,11 +144,14 @@ end
     if current_user.permissions != 2
       redirect_to contests_path
     end
-    if @contest.curr_size == 1
-      line = Lineup.where(contest_id: @contest.id)
-      returnUser = User.find(line.user_id)
-      returnUser.balance += @contest.fee
-      returnUser.save
+    if @contest.curr_size <= @contest.max_size / 4
+      lines = Lineup.where(contest_id: @contest.id)
+      lines.each do |l|
+        Balance.where(user_id: l.user_id).first
+        returnUser = User.find(l.user_id).first
+        returnUser.balance += @contest.fee
+        returnUser.save
+      end
       #RETURN MONEY TO LINEUP OWNER AND EXIT
     end
 
@@ -216,12 +217,14 @@ end
       redirect_to contests_path
     end
     @contest = Contest.find(params[:contest_id])
-    if @contest.curr_size == 3
-      Balance.where(user_id: current_user.id).first
-      line = Lineup.where(contest_id: @contest.id)
-      returnUser = User.find(line.user_id)
-      returnUser.balance += @contest.fee
-      returnUser.save
+    if @contest.curr_size <= @contest.max_size / 4
+      lines = Lineup.where(contest_id: @contest.id)
+      lines.each do |l|
+        Balance.where(user_id: l.user_id).first
+        returnUser = User.find(l.user_id).first
+        returnUser.balance += @contest.fee
+        returnUser.save
+      end
       #RETURN MONEY TO LINEUP OWNER AND EXIT
     end
 

@@ -195,6 +195,15 @@ class ContestsController < ApplicationController
   # DELETE /contests/1
   # DELETE /contests/1.json
   def destroy
+    if contest.paid_out == false
+      lines = Lineup.where(contest_id: @contest.id)
+      lines.each do |l|
+      Balance.where(user_id: l.user_id).first
+      returnUser = User.find(l.user_id).first
+      returnUser.balance += @contest.fee
+      returnUser.save
+    end
+      #RETURN MONEY TO LINEUP OWNER AND EXIT
     @contest.destroy
     respond_to do |format|
       format.html { redirect_to contests_url, notice: 'Contest was successfully destroyed.' }
