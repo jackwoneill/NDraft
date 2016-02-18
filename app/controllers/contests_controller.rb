@@ -134,7 +134,7 @@ class ContestsController < ApplicationController
       @lineups.each do |line|
         calcTotalScore(line)
       end
-      @lineups.order(total_score: :desc)
+      @lineups.order(total_score: :desc).to_a
 
     end
 
