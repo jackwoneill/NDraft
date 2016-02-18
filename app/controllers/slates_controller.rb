@@ -37,6 +37,7 @@ class SlatesController < ApplicationController
         
           
     end
+    redirect_to contests_path
 
 
   end

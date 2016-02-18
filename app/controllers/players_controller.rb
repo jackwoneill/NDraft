@@ -43,6 +43,14 @@ class PlayersController < ApplicationController
     end
   end
 
+  def clearscore
+    @player = Player.find(params[:id])
+
+    @player.live_score = 0.0
+    @player.save
+
+  end
+
   def update_individual
     @ids = params[:live_score]
     print("hello#{@ids}")

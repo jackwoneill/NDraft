@@ -22,11 +22,11 @@ Rails.application.routes.draw do
     end
   end
   root 'welcome#index'
+ 
 
+  get 'slates/:id/payout' => 'slates#payout', :as => :payout
 
-
-  get 'slates/:id/payout' => 'slates#payout'
-
+  get 'players/:id/clearscore' => 'players#clearscore', :as => :clearscore
 
   get 'slates/:id/scores' => 'slates#scores'
   # The priority is based upon order of creation: first created -> highest priority.

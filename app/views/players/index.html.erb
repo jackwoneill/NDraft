@@ -26,6 +26,9 @@
         <td><%= player.avgFP %></td>
         <td><%= player.position %></td>
         <td><%= player.live_score %></td>
+        <td><%= link_to 'Clear Score', clearscore_path(:id => player.id), :remote=>true %></td> 
+
+
         <td><%= link_to 'Show', player %></td>
         <td><%= link_to 'Edit', edit_player_path(player) %></td>
         <td><%= link_to 'Destroy', player, method: :delete, data: { confirm: 'Are you sure?' } %></td>
