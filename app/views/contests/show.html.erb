@@ -163,24 +163,7 @@
 <% end %>
 
 <br>
-<h2>Games</h2>
-<% @games.each do |game| %>
-  <span><%= "#{Team.find(game.team_1).name} vs #{Team.find(game.team_2).name}" %></span>
-  <br>
-<% end %>
-<br>
-<% if current_user.permissions == 1 %>
-  <% if @contest.start_time > Time.now %>
-    <% if !entered %>
 
-      <%= link_to 'Enter Contest', new_lineup_path(contest_id: @contest.id) %> <br>
-    <% else %>
-      <%= link_to 'Edit Entry', edit_lineup_path(l.id, :contest_id => @contest.id)%>
-      <br>
-    <% end %>
-  <% end %>
-
-<% end %>
 
 <% if @contest.start_time < Time.now %>
   <br><br>
@@ -198,6 +181,25 @@
 
   <% end %>
   </table>
+<% end %>
+
+<h2>Games</h2>
+<% @games.each do |game| %>
+  <span><%= "#{Team.find(game.team_1).name} vs #{Team.find(game.team_2).name}" %></span>
+  <br>
+<% end %>
+<br>
+<% if current_user.permissions == 1 %>
+  <% if @contest.start_time > Time.now %>
+    <% if !entered %>
+
+      <%= link_to 'Enter Contest', new_lineup_path(contest_id: @contest.id) %> <br>
+    <% else %>
+      <%= link_to 'Edit Entry', edit_lineup_path(l.id, :contest_id => @contest.id)%>
+      <br>
+    <% end %>
+  <% end %>
+
 <% end %>
 
 

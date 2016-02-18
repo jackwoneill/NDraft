@@ -10,8 +10,7 @@
   <th>Size</th>
   <th>Total Entries</th>
 
-
-
+      <tr>
         <td><% if @line %>
         <td><%= link_to 'Edit Entry', edit_lineup_path(@line.id, :contest_id => @line.contest_id)%></td>
         <td><%= link_to 'Cancel Entry', @line, method: :delete, data: { confirm: 'Are you sure?' } %></td>
