@@ -15,6 +15,47 @@
     <h2 name="salary">60000</h2>
   </div>
 
+  <div class="player-select-container">
+    <div class="position-select-container">
+      <ul class="position-select">
+        <li>
+          <a href="#">All</a>
+        </li>
+        <li>
+          <a href="#">Top</a>
+        </li>
+        <li>
+          <a href="#">Mid</a>
+        </li>
+        <li>
+          <a href="#">ADC</a>
+        </li>
+        <li>
+          <a href="#">Support</a>
+        </li>
+        <li>
+          <a href="#">Jungler</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+    <div>
+      <table class="player-select">
+        <% @players.each do |player| %>
+          <tr>
+            <td>
+              <a href="#"><%= player.name %> <%= player.position %></a>
+            </td>
+          </tr>
+
+        <% end %>
+      </table>
+
+
+    </div>
+
+
   <div class="field">
     <h2>Top</h2>
     <% @tops.each do |player| %>
