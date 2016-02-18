@@ -170,6 +170,7 @@
   <table name = lineups-table, cellspacing="0">
     <th>User</th>
     <th>Score</th>
+    <% @lineups.order(total_score: :desc) %>
   <% @lineups.each do |lineup| %>
     <tr class="contest-entries">
       <% user = User.find(lineup.user_id) %>
