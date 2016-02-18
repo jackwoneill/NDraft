@@ -131,10 +131,11 @@ class ContestsController < ApplicationController
 
     if @contest.start_time < Time.now
       @lineups = Lineup.where(contest_id: @contest.id)
-      @lineups.order(total_score: :desc)
       @lineups.each do |line|
         calcTotalScore(line)
       end
+      @lineups.order(total_score: :desc)
+
     end
 
   end
