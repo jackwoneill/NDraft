@@ -179,7 +179,7 @@ end
       scores.append(l.total_score)
     end
 
-    lines.order(total_score: :desc)
+    lines = lines.order(total_score: :desc)
     #linesArray.sort! { |a,b| a.total_score <=> b.total_score }
 
     cutoffScore = lines[numPaid - 1]
@@ -252,7 +252,7 @@ end
       scores.append(l.total_score)
     end
 
-    lines.order(total_score: :desc)
+    lines = lines.order(total_score: :desc)
     #linesArray.sort! { |a,b| a.total_score <=> b.total_score }
 
     cutoffScore = lines[numPaid - 1]
