@@ -24,7 +24,7 @@ Rails.application.routes.draw do
   root 'welcome#index'
  
 
-  get 'slates/:id/payout' => 'slates#payout', :as => :payout
+  get 'slates/:id/payout' => 'slates#payout'
 
   get 'players/:id/clearscore' => 'players#clearscore', :as => :clearscore
 
