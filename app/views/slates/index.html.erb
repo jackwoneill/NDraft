@@ -21,7 +21,7 @@
         <td><%= link_to 'Show', slate %></td>
         <td><%= link_to 'Edit', edit_slate_path(slate) %></td>
         <td><%= link_to 'Add Stream', new_stream_link_path(slate_id: slate.id) %></td>
-        <td><%= link_to 'Payout Slate', payout_path(id: slate.id) %></td>
+        <td><%= link_to 'Payout Slate', "/slates/#{slate.id}/payout" %></td>
         <td><%= link_to 'Destroy', slate, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
