@@ -61,25 +61,28 @@ class ContestsController < ApplicationController
   end
 
   def completed
-    cons = Array.new
+    #cons = Array.new
 
-    lines = Lineup.where(user_id: current_user.id)
-    l = Array.new
+    @contests = Contest.where(id: (Lineup.where(user_id: current_user.id))).where(paid_out: true)
+    #lines = Lineup.where(user_id: current_user.id)
+    #l = Array.new
 
-    lines.each do |line|
-      c = Contest.find(line.contest_id)
-      if c.start_time < Time.now
-        if contest.closed
-          if contest.paid_out?
-            l.append(line)
-            cons.append(c)
-          end
-        end
-      end
-    end
+    # lines.each do |line|
+    #   c = Contest.find(line.contest_id)
+    #   if c.start_time < Time.now
+    #     if contest.closed
+    #       if contest.paid_out?
+    #         l.append(line)
+    #         cons.append(c)
+    #       end
+    #     end
+    #   end
+    # end
 
     # @lineups = l.uniq
     # @contests = cons.uniq
+
+
 
   end
 

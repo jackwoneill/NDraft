@@ -34,12 +34,11 @@ class SlatesController < ApplicationController
         c.save
 
       end
+
         
-          
+  
     end
     redirect_to contests_path
-
-
   end
 
   def scores
