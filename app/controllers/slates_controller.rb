@@ -202,8 +202,7 @@ end
       cutoffBalance.amount += ((1.8 * @contest.fee)/cutoffCount)
       cutoffBalance.save
 
-      payTrans = Transaction.new(user_id: cl.user_id, amount: ((1.8 * @contest.fee)/cutoffCount), 
-        description: "Contest Payout: Contest ID: #{@contest.id} ")
+      payTrans = Transaction.new(user_id: cl.user_id, amount: ((1.8 * @contest.fee)/cutoffCount), description: "Contest Payout: Contest ID: #{@contest.id}")
       payTrans.save
 
     end
