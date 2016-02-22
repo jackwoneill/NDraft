@@ -231,6 +231,10 @@ class LineupsController < ApplicationController
       bal.amount -= @contest.fee
       bal.save
       current_user.save
+
+      entryTrans = Transaction.new(user_id: line.user_id, amount: (-1* (@contest.fee)), 
+        description: "Contest Entry: Contest ID: #{@contest.id} ")
+      entryTrans.save
     end
 
     @contest.curr_size += 1
@@ -272,6 +276,15 @@ class LineupsController < ApplicationController
     @contest = Contest.find(@lineup.contest_id)
     @contest.curr_size -= 1
     @contest.save
+
+    Balance.where(user_id: current_user.id).first
+    returnUser = User.find(current_user.id).first
+    returnUser.balance += @contest.fee
+    returnUser.save
+    refundTrans = Transaction.new(user_id: l.user_id, amount: @contest.fee, 
+      description: "Entry Canceled: Contest ID: #{@contest.id} ")
+    refundTrans.save
+
 
     @lineup.destroy
     respond_to do |format|

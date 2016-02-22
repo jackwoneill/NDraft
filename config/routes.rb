@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :transactions
   resources :deposits
   resources :notifications
   get 'contests/upcoming'

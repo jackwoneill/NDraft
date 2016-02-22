@@ -156,6 +156,9 @@ end
         returnUser = User.find(l.user_id).first
         returnUser.balance += @contest.fee
         returnUser.save
+        refundTrans = Transaction.new(user_id: l.user_id, amount: @contest.fee, 
+          description: "Contest Refund: Contest ID: #{@contest.id} ")
+        refundTrans.save
       end
       #RETURN MONEY TO LINEUP OWNER AND EXIT
     end
@@ -198,6 +201,11 @@ end
       cutoffBalance = Balance.where(user_id: cl.user_id)
       cutoffBalance.amount += ((1.8 * @contest.fee)/cutoffCount)
       cutoffBalance.save
+
+      payTrans = Transaction.new(user_id: cl.user_id, amount: (1.8 * @contest.fee)/cutoffCount), 
+        description: "Contest Payout: Contest ID: #{@contest.id} ")
+      payTrans.save
+
     end
 
     #PAY EVERYONE ELSE WHO SCORE > CUTOFF
@@ -213,6 +221,11 @@ end
       payBalance = Balance.where(user_id: line.user_id).first
       payBalance.amount += (1.8 * @contest.fee)
       payBalance.save
+
+      payTrans = Transaction.new(user_id: line.user_id, amount: (1.8 * @contest.fee)), 
+        description: "Contest Payout: Contest ID: #{@contest.id} ")
+      payTrans.save
+
     end
     redirect_to @contest
   end
