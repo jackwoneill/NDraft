@@ -10,11 +10,13 @@ display: inline;
 
 .player-select-container {
   width: 36%;
-  height: 80%;
-  overflow-y: auto;
+  height: 100px;
+  background-color: #E95144;
+  overflow: auto;
 }
 
 .position-select{
+  width: 36%;
   list-style-type: none;
   margin: 0;
   padding: 0;
@@ -41,13 +43,9 @@ display: inline;
 }
 
 .player-select {
-  background-color: #E95144;
 
   width: 36%;
   height: 80%;
-  overflow-y: scroll;
-
-
 }
 
 .player-select > tr { 
