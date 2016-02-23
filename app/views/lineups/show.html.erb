@@ -1,54 +1,127 @@
-   <p id="notice"><%= notice %></p>
+<p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Top:</strong>
-  <%= @lineup.top.name %>
-</p>
+<h3>Your Lineup</h3>
 
-<p>
-  <strong>Mid:</strong>
-  <%= @lineup.mid.name %>
-</p>
+  <table>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <th></th>
+    <tr class="contest-entries">
+      <td>
+        <span><b>Top</b></span>
+      </td>
+      <td>
+        <span><%= Player.find(@lineup.top).name %></span>
+      </td>
+      <td></td>
+      <td><%= Player.find(@lineup.top).salary %></td>
+      <% if started %>
+        <td><%= Player.find(@lineup.top).live_score %></td>
+      <% end %>
+    </tr>
 
-<p>
-  <strong>Adc:</strong>
-  <%= @lineup.adc.name %>
-</p>
+    <tr class="contest-entries">
+      <td>
+        <span><b>Mid</b></span>
+      </td>
+      <td>
+        <span><%= Player.find(@lineup.mid).name %></span>
+      </td>
+      <td></td>
+      <td><%= Player.find(@lineup.mid).salary %></td>
+      <% if started %>
+        <td><%= Player.find(@lineup.mid).live_score %></td>
+      <% end %>
+    </tr>
 
-<p>
-  <strong>Support:</strong>
-  <%= @lineup.support %>
-</p>
+    <tr class="contest-entries">
+      <td>
+        <span><b>ADC</b></span>
+      </td>
+      <td>
+        <span><%= Player.find(@lineup.adc).name %></span>
+      </td>
+      <td></td>
+      <td><%= Player.find(@lineup.adc).salary %></td>
+      <% if started %>
+        <td><%= Player.find(@lineup.adc).live_score %></td>
+      <% end %>
+    </tr>
 
-<p>
-  <strong>Jungler:</strong>
-  <%= @lineup.jungler %>
-</p>
+    <tr class="contest-entries">
+      <td>
+        <span><b>Support</b></span>
+      </td>
+      <td>
+        <span><%= Player.find(@lineup.support).name %></span>
+      </td>
+      <td></td>
+      <td><%= Player.find(@lineup.support).salary %></td>
+      <% if started %>
+        <td><%= Player.find(@lineup.support).live_score %></td>
+      <% end %>
+    </tr>
 
-<p>
-  <strong>Flex 1:</strong>
-  <%= @lineup.flex_1 %>
-</p>
+    <tr class="contest-entries">
+      <td>
+        <span><b>Jungler</b></span>
+      </td>
+      <td>
+        <span><%= Player.find(@lineup.jungler).name %></span>
+      </td>
+      <td></td>
+      <td><%= Player.find(@lineup.jungler).salary %></td>
+      <% if started %>
+        <td><%= Player.find(@lineup.jungler).live_score %></td>
+      <% end %>
+    </tr>
 
-<p>
-  <strong>Flex 2:</strong>
-  <%= @lineup.flex_2 %>
-</p>
+    <tr class="contest-entries">
+      <td>
+        <span><b>Flex 1</b></span>
+      </td>
+      <td>
+        <span><%= Player.find(@lineup.flex_1).name %></span>
+      </td>
+      <td></td>
+      <td><%= Player.find(@lineup.flex_1).salary %></td>
+      <% if started %>
+        <td><%= Player.find(@lineup.flex_1).live_score %></td>
+      <% end %>
+    </tr>
 
-<p>
-  <strong>Flex 3:</strong>
-  <%= @lineup.flex_3 %>
-</p>
+    <tr class="contest-entries">
+      <td>
+        <span><b>Flex 2</b></span>
+      </td>
+      <td>
+        <span><%= Player.find(@lineup.flex_2).name %></span>
+      </td>
+      <td></td>
+      <td><%= Player.find(@lineup.flex_2).salary %></td>
+      <% if started %>
+        <td><%= Player.find(@lineup.flex_2).live_score %></td>
+      <% end %>
+    </tr>
 
-<p>
-  <strong>User:</strong>
-  <%= @lineup.user_id %>
-</p>
+    <tr class="contest-entries">
+      <td>
+        <span><b>Flex 3</b></span>
+      </td>
+      <td>
+        <span><%= Player.find(@lineup.flex_3).name %></span>
+      </td>
+      <td></td>
+      <td><%= Player.find(@lineup.flex_3).salary %></td>
+      <% if started %>
+        <td><%= Player.find(@lineup.flex_3).live_score %></td>
+      <% end %>
+    </tr>
 
-<p>
-  <strong>Contest:</strong>
-  <%= @lineup.contest_id %>
-</p>
+  </table>
+<% end %>
 
 <%= link_to 'Edit', edit_lineup_path(@lineup) %> |
 <%= link_to 'Back', lineups_path %>
