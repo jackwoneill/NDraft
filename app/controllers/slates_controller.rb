@@ -184,7 +184,7 @@ end
 
     cutoffScore = lines[numPaid - 1]
 
-    cutoffCount = (scores.grep(cutoffScore).size).to_f
+    cutoffCount = (scores.select(cutoffScore).size).to_f
     print "THE CUTOFF COUNT IS #{cutoffCount}"
 
     cutoffLines = lines.where(total_score: cutoffScore).all
