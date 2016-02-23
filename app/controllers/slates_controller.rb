@@ -185,7 +185,6 @@ end
     cutoffScore = lines[numPaid - 1]
 
     cutoffCount = (scores.select(cutoffScore).size).to_f
-    print "THE CUTOFF COUNT IS #{cutoffCount}"
 
     cutoffLines = lines.where(total_score: cutoffScore).all
 
@@ -273,14 +272,21 @@ end
     lines = lines.order(total_score: :desc)
     scores = (scores.sort).reverse!
 
-    cutoffScore = lines[numPaid - 1]
+    cutoffScore = lines[numPaid - 1].total_score
     print("THE CUTOFF SCORE IS #{cutoffScore}")
 
-    cutoffCount = (scores.grep(cutoffScore).size)
+    cutoffCount = (scores.grep(cutoffScore).size).to_f
     print("THE CUTOFF COUNT IS #{cutoffCount}")
 
     cutoffLines = lines.where(total_score: cutoffScore).all
-    print ("THERE ARE #{cutoffLines.count} CUTOFF LINES")
+    print ("THERE ARE #{lines.count} LINES TOTAL")
+
+
+        cutoffScore = lines[numPaid - 1]
+
+    cutoffCount = (scores.select(cutoffScore).size).to_f
+
+    cutoffLines = lines.where(total_score: cutoffScore).all
 
     cutoffLines.each do |cl|
       cutoffUser = User.find(cl.user_id)
