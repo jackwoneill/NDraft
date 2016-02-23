@@ -11,6 +11,7 @@ display: inline;
 .player-select-container {
   width: 36%;
   height: 80%;
+  overflow-y: auto;
 }
 
 .position-select{
@@ -45,6 +46,7 @@ display: inline;
   width: 36%;
   height: 80%;
   overflow-y: scroll;
+
 
 }
 
