@@ -30,8 +30,14 @@ class ApplicationController < ActionController::Base
     adc = Player.find(lineup.adc)
     support = Player.find(lineup.support)
     jungler = Player.find(lineup.jungler)
+    flex_1 = Player.find(lineup.flex_1)
+    flex_2 = Player.find(lineup.flex_2)
+    flex_3 = Player.find(lineup.flex_3)
 
-    lineup.total_score = top.live_score + mid.live_score + adc.live_score + support.live_score + jungler.live_score
+    total_score = top.live_score + mid.live_score + adc.live_score + support.live_score + jungler.live_score
+    total_score = total_score + flex_1.live_score + flex_2.live_score + flex_3.live_score
+
+    lineup.total_score = total_score
     lineup.save
     
   end
