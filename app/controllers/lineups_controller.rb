@@ -232,7 +232,9 @@ class LineupsController < ApplicationController
       bal.save
       current_user.save
 
-      entryTrans = Transaction.new(user_id: @lineup.user_id, amount: (-1* (@contest.fee)), description: "Contest Entry: Contest ID: #{@contest.id} ")
+      deduct_amount = ((@contest.fee) * -1.0)
+
+      entryTrans = Transaction.new(user_id: current_user.id, amount: deduct_amount, description: "Contest Entry: Contest ID: #{@contest.id} ")
       entryTrans.save
     end
 
