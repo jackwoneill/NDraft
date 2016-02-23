@@ -30,7 +30,7 @@ class ContestsController < ApplicationController
     l = Array.new
 
     lines.each do |line|
-      c = Contest.find(line.contest_id)
+      c = Contest.where(id: line.contest_id).where(paid_out: false)
       if c.start_time > Time.now
         l.append(line)
         cons.append(c)
