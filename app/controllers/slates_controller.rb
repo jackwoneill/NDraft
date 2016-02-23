@@ -287,7 +287,7 @@ end
       cutoffUser.total_winnings += ((1.8 * @contest.fee)/cutoffCount)
       cutoffUser.save
 
-      cutoffBalance = Balance.where(user_id: cl.user_id)
+      cutoffBalance = Balance.where(user_id: cl.user_id).take
       cutoffBalance.amount += ((1.8 * @contest.fee)/cutoffCount)
       cutoffBalance.save
 
