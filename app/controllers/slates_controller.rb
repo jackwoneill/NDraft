@@ -144,6 +144,93 @@ end
       
     end
 
+
+################## BEGIN H2H ###############
+
+
+
+  def payH2H(aCon)
+    @contest = aCon
+    if current_user.permissions != 2
+      redirect_to contests_path
+    end
+    if @contest.curr_size == 1
+      l = Lineup.where(contest_id: @contest.id).take
+      returnBal = Balance.where(user_id: l.user_id).first
+      returnBal += @contest.fee
+      returnBal.save
+
+      returnUser = User.find(l.user_id).first
+      returnUser.balance += @contest.fee
+      returnUser.save
+
+      refundTrans = Transaction.new(user_id: l.user_id, amount: @contest.fee, description: "Contest Refund: Contest ID: #{@contest.id} ")
+      refundTrans.save
+      #RETURN MONEY TO LINEUP OWNER AND EXIT
+    end
+
+    lines = Lineup.where(contest_id: @contest.id).all
+    scores = Array.new
+
+    prizePool = @contest.prize_pool
+    numPaid = 1
+
+    lines.each do |l|
+      calcTotalScore(l)
+      scores.append(l.total_score)
+    end
+
+    lines = lines.order(total_score: :desc)
+
+    cutoffScore = lines[numPaid - 1]
+
+    cutoffCount = (scores.grep(cutoffScore).size).to_f
+    print "THE CUTOFF COUNT IS #{cutoffCount}"
+
+    cutoffLines = lines.where(total_score: cutoffScore).all
+
+    cutoffLines.each do |cl|
+      cutoffUser = User.find(cl.user_id)
+      cutoffUser.balance += ((1.8 * @contest.fee)/cutoffCount)
+      cutoffUser.total_winnings += ((1.8 * @contest.fee)/cutoffCount)
+      cutoffUser.save
+
+      cutoffBalance = Balance.where(user_id: cl.user_id)
+      cutoffBalance.amount += ((1.8 * @contest.fee)/cutoffCount)
+      cutoffBalance.save
+
+      payTrans = Transaction.new(user_id: cl.user_id, amount: ((1.8 * @contest.fee)/cutoffCount), description: "Contest Payout: Contest ID: #{@contest.id}")
+      payTrans.save
+
+    end
+
+    #PAY EVERYONE ELSE WHO SCORE > CUTOFF
+
+    payLines = lines[0..numPaid - 1]
+
+    payLines.each do |line|
+      payUser = User.find(line.user_id)
+      payUser.balance += (1.8 * @contest.fee)
+      payUser.total_winnings += (1.8 * @contest.fee)
+      payUser.save
+
+      payBalance = Balance.where(user_id: line.user_id).first
+      payBalance.amount += (1.8 * @contest.fee)
+      payBalance.save
+
+      payTrans = Transaction.new(user_id: line.user_id, amount: ((1.8 * @contest.fee)), 
+        description: "Contest Payout: Contest ID: #{@contest.id} ")
+      payTrans.save
+
+    end
+    redirect_to @contest
+  end
+
+
+################## END H2H ###############
+
+
+
   def pay5050(aCon)
     @contest = aCon
     if current_user.permissions != 2
@@ -152,12 +239,15 @@ end
     if @contest.curr_size <= @contest.max_size / 4
       lines = Lineup.where(contest_id: @contest.id)
       lines.each do |l|
-        Balance.where(user_id: l.user_id).first
+        returnBal = Balance.where(user_id: l.user_id).first
+        returnBal += @contest.fee
+        returnBal.save
+
         returnUser = User.find(l.user_id).first
         returnUser.balance += @contest.fee
         returnUser.save
-        refundTrans = Transaction.new(user_id: l.user_id, amount: @contest.fee, 
-          description: "Contest Refund: Contest ID: #{@contest.id} ")
+
+        refundTrans = Transaction.new(user_id: l.user_id, amount: @contest.fee, description: "Contest Refund: Contest ID: #{@contest.id} ")
         refundTrans.save
       end
       #RETURN MONEY TO LINEUP OWNER AND EXIT
@@ -188,6 +278,8 @@ end
     cutoffScore = lines[numPaid - 1]
 
     cutoffCount = (scores.grep(cutoffScore).size).to_f
+    print "THE CUTOFF COUNT IS #{cutoffCount}"
+
 
     cutoffLines = lines.where(total_score: cutoffScore).all
 
@@ -221,8 +313,7 @@ end
       payBalance.amount += (1.8 * @contest.fee)
       payBalance.save
 
-      payTrans = Transaction.new(user_id: line.user_id, amount: ((1.8 * @contest.fee)), 
-        description: "Contest Payout: Contest ID: #{@contest.id} ")
+      payTrans = Transaction.new(user_id: line.user_id, amount: ((1.8 * @contest.fee)), description: "Contest Payout: Contest ID: #{@contest.id} ")
       payTrans.save
 
     end
@@ -237,10 +328,16 @@ end
     if @contest.curr_size <= @contest.max_size / 4
       lines = Lineup.where(contest_id: @contest.id)
       lines.each do |l|
-        Balance.where(user_id: l.user_id).first
+        returnBal = Balance.where(user_id: l.user_id).first
+        returnBal += @contest.fee
+        returnBal.save
+
         returnUser = User.find(l.user_id).first
         returnUser.balance += @contest.fee
         returnUser.save
+
+        refundTrans = Transaction.new(user_id: l.user_id, amount: @contest.fee, description: "Contest Refund: Contest ID: #{@contest.id} ")
+        refundTrans.save
       end
       #RETURN MONEY TO LINEUP OWNER AND EXIT
     end
