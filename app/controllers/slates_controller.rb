@@ -270,25 +270,17 @@ end
       scores.append(l.total_score)
     end
 
-    scores.each do |s|
-      print("#{s}")
-    end
-
-    lines.each do |line|
-      print("#{line.total_score}")
-    end
-
     lines = lines.order(total_score: :desc)
     scores = (scores.sort).reverse!
 
     cutoffScore = lines[numPaid - 1]
     print("THE CUTOFF SCORE IS #{cutoffScore}")
 
-    cutoffCount = (scores.grep(cutoffScore).size).to_f
+    cutoffCount = (scores.grep(cutoffScore).size)
     print("THE CUTOFF COUNT IS #{cutoffCount}")
 
     cutoffLines = lines.where(total_score: cutoffScore).all
-    print ("THERE ARE #{cutoffLines} CUTOFF LINES")
+    print ("THERE ARE #{cutoffLines.count} CUTOFF LINES")
 
     cutoffLines.each do |cl|
       cutoffUser = User.find(cl.user_id)
