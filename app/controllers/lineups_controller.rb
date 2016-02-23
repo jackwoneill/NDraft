@@ -12,6 +12,7 @@ class LineupsController < ApplicationController
   # GET /lineups/1
   # GET /lineups/1.json
   def show
+    @contest = Contest.find(params[:contest_id])
   end
 
   # GET /lineups/new
@@ -275,18 +276,20 @@ class LineupsController < ApplicationController
   # DELETE /lineups/1.json
   def destroy
     @contest = Contest.find(@lineup.contest_id)
-    @contest.curr_size -= 1
-    @contest.save
 
-    returnBal = Balance.where(user_id: current_user.id).first
+    returnBal = Balance.where(user_id: current_user.id).take
     returnBal += @contest.fee
     returnBal.save
 
     returnUser = User.find(current_user.id)
     returnUser.balance += @contest.fee
     returnUser.save
+
     refundTrans = Transaction.new(user_id: l.user_id, amount: @contest.fee, description: "Entry Canceled: Contest ID: #{@contest.id} ")
     refundTrans.save
+
+    @contest.curr_size -= 1
+    @contest.save
 
 
     @lineup.destroy
