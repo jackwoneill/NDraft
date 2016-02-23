@@ -235,6 +235,7 @@ end
       redirect_to contests_path
     end
     if @contest.curr_size <= @contest.max_size / 4
+      print("SIZING BABY")
       lines = Lineup.where(contest_id: @contest.id)
       lines.each do |l|
         returnBal = Balance.where(user_id: l.user_id).first
