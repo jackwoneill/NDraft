@@ -281,13 +281,6 @@ end
     cutoffLines = lines.where(total_score: cutoffScore).all
     print ("THERE ARE #{lines.count} LINES TOTAL")
 
-
-        cutoffScore = lines[numPaid - 1]
-
-    cutoffCount = (scores.select(cutoffScore).size).to_f
-
-    cutoffLines = lines.where(total_score: cutoffScore).all
-
     cutoffLines.each do |cl|
       cutoffUser = User.find(cl.user_id)
       cutoffUser.balance += ((1.8 * @contest.fee)/cutoffCount)
