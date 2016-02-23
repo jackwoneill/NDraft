@@ -174,7 +174,7 @@
     <tr class="contest-entries">
       <% user = User.find(lineup.user_id) %>
       <td>
-        <%= link_to "#{user.display_name}", lineup_path %>
+        <%= link_to "#{user.display_name}", lineup_path(lineup.id, :contest_id => @contest.id) %>
       </td>
       <td><%= lineup.total_score %></td>
     </tr>
