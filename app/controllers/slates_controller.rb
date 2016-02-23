@@ -270,8 +270,10 @@ end
     end
 
     lines = lines.order(total_score: :desc)
+    scores = scores.order(:desc)
 
     cutoffScore = lines[numPaid - 1]
+    print("THE CUTOFF SCORE IS #{cutoffScore}")
 
     cutoffCount = (scores.grep(cutoffScore).size).to_f
     print("THE CUTOFF COUNT IS #{cutoffCount}")
