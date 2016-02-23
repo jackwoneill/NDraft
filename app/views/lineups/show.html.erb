@@ -1,4 +1,7 @@
 <p id="notice"><%= notice %></p>
+<% @contest = Contest.find(@lineup.contest_id) %>
+<% started = true if @contest.start_time < Time.now %>
+
 
 <h3>Your Lineup</h3>
 
@@ -121,7 +124,10 @@
     </tr>
 
   </table>
-<% end %>
+  <% if started %>
+      <h3>Total Score = <%= calcTotalScore(line) %> </h3>
+  <% end %>
+
 
 <%= link_to 'Edit', edit_lineup_path(@lineup) %> |
 <%= link_to 'Back', lineups_path %>
