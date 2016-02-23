@@ -31,9 +31,11 @@ class ContestsController < ApplicationController
 
     lines.each do |line|
       c = Contest.where(id: line.contest_id).where(paid_out: false)
-      if c.start_time > Time.now
-        l.append(line)
-        cons.append(c)
+      if !c.nil?
+        if c.start_time > Time.now
+          l.append(line)
+          cons.append(c)
+        end
       end
     end
 
