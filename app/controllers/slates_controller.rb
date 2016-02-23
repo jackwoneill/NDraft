@@ -301,21 +301,24 @@ end
 
     #PAY EVERYONE ELSE WHO SCORE > CUTOFF
 
-    payLines = lines[0..numPaid - 1]
+    if cutoffCount != @contest.curr_size
 
-    payLines.each do |line|
-      payUser = User.find(line.user_id)
-      payUser.balance += (1.8 * @contest.fee)
-      payUser.total_winnings += (1.8 * @contest.fee)
-      payUser.save
+      payLines = lines[0..numPaid - 1]
 
-      payBalance = Balance.where(user_id: line.user_id).first
-      payBalance.amount += (1.8 * @contest.fee)
-      payBalance.save
+      payLines.each do |line|
+        payUser = User.find(line.user_id)
+        payUser.balance += (1.8 * @contest.fee)
+        payUser.total_winnings += (1.8 * @contest.fee)
+        payUser.save
 
-      payTrans = Transaction.new(user_id: line.user_id, amount: ((1.8 * @contest.fee)), description: "Contest Payout: Contest ID: #{@contest.id} ")
-      payTrans.save
+        payBalance = Balance.where(user_id: line.user_id).first
+        payBalance.amount += (1.8 * @contest.fee)
+        payBalance.save
 
+        payTrans = Transaction.new(user_id: line.user_id, amount: ((1.8 * @contest.fee)), description: "Contest Payout: Contest ID: #{@contest.id} ")
+        payTrans.save
+
+      end
     end
     redirect_to @contest
   end
