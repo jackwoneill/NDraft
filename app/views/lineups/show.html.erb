@@ -1,5 +1,8 @@
 <p id="notice"><%= notice %></p>
-<% @contest = Contest.find(@lineup.contest_id) %>
+<% if @contest.nil? %>
+  <% @contest = Contest.find(@lineup.contest_id) %>
+<% end %>
+
 <% started = true if @contest.start_time < Time.now %>
 
 
