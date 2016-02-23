@@ -87,7 +87,6 @@ class ContestsController < ApplicationController
   # GET /contests/1.json
   def show
     @games = Game.where(slate_id: @contest.slate_id)
-    print("games=#{@games.count}")
     teams = Array.new
     players = Array.new
     tops = Array.new

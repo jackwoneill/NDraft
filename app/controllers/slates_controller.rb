@@ -228,10 +228,8 @@ end
 
 
 ################## END H2H ###############
-
-
-
   def pay5050(aCon)
+    print("WE IN HERE")
     @contest = aCon
     if current_user.permissions != 2
       redirect_to contests_path
@@ -250,11 +248,11 @@ end
         refundTrans = Transaction.new(user_id: l.user_id, amount: @contest.fee, description: "Contest Refund: Contest ID: #{@contest.id} ")
         refundTrans.save
       end
+      return
       #RETURN MONEY TO LINEUP OWNER AND EXIT
     end
 
     lines = Lineup.where(contest_id: @contest.id).all
-    #linesArray = Array.new
     scores = Array.new
 
     if @contest.curr_size != @contest.max_size
@@ -267,28 +265,25 @@ end
     end
 
     lines.each do |l|
-      #linesArray += l
       calcTotalScore(l)
       scores.append(l.total_score)
     end
 
     lines = lines.order(total_score: :desc)
-    #linesArray.sort! { |a,b| a.total_score <=> b.total_score }
 
     cutoffScore = lines[numPaid - 1]
 
     cutoffCount = (scores.grep(cutoffScore).size).to_f
-    print "THE CUTOFF COUNT IS #{cutoffCount}"
-
+    print("THE CUTOFF COUNT IS #{cutoffCount}")
 
     cutoffLines = lines.where(total_score: cutoffScore).all
+    print ("THERE ARE #{cutoffLines} CUTOFF LINES")
 
     cutoffLines.each do |cl|
       cutoffUser = User.find(cl.user_id)
       cutoffUser.balance += ((1.8 * @contest.fee)/cutoffCount)
       cutoffUser.total_winnings += ((1.8 * @contest.fee)/cutoffCount)
       cutoffUser.save
-
 
       cutoffBalance = Balance.where(user_id: cl.user_id)
       cutoffBalance.amount += ((1.8 * @contest.fee)/cutoffCount)
