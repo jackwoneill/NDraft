@@ -278,7 +278,6 @@ end
     end
 
     lines = lines.order(total_score: :desc)
-    scores = scores.order(:desc)
 
     cutoffScore = lines[numPaid - 1]
     print("THE CUTOFF SCORE IS #{cutoffScore}")
