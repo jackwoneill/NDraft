@@ -32,8 +32,12 @@ class SlatesController < ApplicationController
         pay5050(c)
         c.paid_out = true
         c.save
-
+      elsif c.payment_structure == 2
+        payDoubleUp(c)
+        c.paid_out = true
+        c.save
       end
+
 
         
   
@@ -144,97 +148,13 @@ end
       
     end
 
-
-################## BEGIN H2H ###############
-
-
-
-  def payH2H(aCon)
-    @contest = aCon
-    if current_user.permissions != 2
-      redirect_to contests_path
-    end
-    if @contest.curr_size == 1
-      l = Lineup.where(contest_id: @contest.id).take
-      returnBal = Balance.where(user_id: l.user_id).first
-      returnBal += @contest.fee
-      returnBal.save
-
-      returnUser = User.find(l.user_id).first
-      returnUser.balance += @contest.fee
-      returnUser.save
-
-      refundTrans = Transaction.new(user_id: l.user_id, amount: @contest.fee, description: "Contest Refund: Contest ID: #{@contest.id} ")
-      refundTrans.save
-      #RETURN MONEY TO LINEUP OWNER AND EXIT
-    end
-
-    lines = Lineup.where(contest_id: @contest.id).all
-    scores = Array.new
-
-    prizePool = @contest.prize_pool
-    numPaid = 1
-
-    lines.each do |l|
-      calcTotalScore(l)
-      scores.append(l.total_score)
-    end
-
-    lines = lines.order(total_score: :desc)
-
-    cutoffScore = lines[numPaid - 1]
-
-    cutoffCount = (scores.select(cutoffScore).size).to_f
-
-    cutoffLines = lines.where(total_score: cutoffScore).all
-
-    cutoffLines.each do |cl|
-      cutoffUser = User.find(cl.user_id)
-      cutoffUser.balance += ((1.8 * @contest.fee)/cutoffCount)
-      cutoffUser.total_winnings += ((1.8 * @contest.fee)/cutoffCount)
-      cutoffUser.save
-
-      cutoffBalance = Balance.where(user_id: cl.user_id)
-      cutoffBalance.amount += ((1.8 * @contest.fee)/cutoffCount)
-      cutoffBalance.save
-
-      payTrans = Transaction.new(user_id: cl.user_id, amount: ((1.8 * @contest.fee)/cutoffCount), description: "Contest Payout: Contest ID: #{@contest.id}")
-      payTrans.save
-
-    end
-
-    #PAY EVERYONE ELSE WHO SCORE > CUTOFF
-
-    payLines = lines[0..numPaid - 1]
-
-    payLines.each do |line|
-      payUser = User.find(line.user_id)
-      payUser.balance += (1.8 * @contest.fee)
-      payUser.total_winnings += (1.8 * @contest.fee)
-      payUser.save
-
-      payBalance = Balance.where(user_id: line.user_id).first
-      payBalance.amount += (1.8 * @contest.fee)
-      payBalance.save
-
-      payTrans = Transaction.new(user_id: line.user_id, amount: ((1.8 * @contest.fee)), 
-        description: "Contest Payout: Contest ID: #{@contest.id} ")
-      payTrans.save
-
-    end
-    redirect_to @contest
-  end
-
-
-################## END H2H ###############
+######### BEGIN 50/50 ###############
   def pay5050(aCon)
-    print("WE IN HERE")
     @contest = aCon
     if current_user.permissions != 2
       redirect_to contests_path
     end
     if @contest.curr_size <= @contest.max_size / 4
-      print("SIZING BABY")
       lines = Lineup.where(contest_id: @contest.id)
       lines.each do |l|
         returnBal = Balance.where(user_id: l.user_id).first
@@ -270,16 +190,12 @@ end
     end
 
     lines = lines.order(total_score: :desc)
-    scores = (scores.sort).reverse!
 
     cutoffScore = lines[numPaid - 1].total_score
-    print("THE CUTOFF SCORE IS #{cutoffScore}")
 
     cutoffCount = (scores.grep(cutoffScore).size).to_f
-    print("THE CUTOFF COUNT IS #{cutoffCount}")
 
     cutoffLines = lines.where(total_score: cutoffScore).all
-    print ("THERE ARE #{lines.count} LINES TOTAL")
 
     cutoffLines.each do |cl|
       cutoffUser = User.find(cl.user_id)
@@ -308,7 +224,7 @@ end
         payUser.total_winnings += (1.8 * @contest.fee)
         payUser.save
 
-        payBalance = Balance.where(user_id: line.user_id).first
+        payBalance = Balance.where(user_id: line.user_id).take
         payBalance.amount += (1.8 * @contest.fee)
         payBalance.save
 
@@ -320,11 +236,15 @@ end
     return
   end
 
-  def payDoubleUp
+######## END 50/50 #######
+
+
+######### BEGIN doubleUp ###############
+  def payDoubleUp(aCon)
+    @contest = aCon
     if current_user.permissions != 2
       redirect_to contests_path
     end
-    @contest = Contest.find(params[:contest_id])
     if @contest.curr_size <= @contest.max_size / 4
       lines = Lineup.where(contest_id: @contest.id)
       lines.each do |l|
@@ -339,16 +259,16 @@ end
         refundTrans = Transaction.new(user_id: l.user_id, amount: @contest.fee, description: "Contest Refund: Contest ID: #{@contest.id} ")
         refundTrans.save
       end
+      return
       #RETURN MONEY TO LINEUP OWNER AND EXIT
     end
 
     lines = Lineup.where(contest_id: @contest.id).all
-    #linesArray = Array.new
     scores = Array.new
 
     if @contest.curr_size != @contest.max_size
       prizePool = (0.90 * (@contest.curr_size * @contest.fee)).floor
-      numPaid = (curr_size * 0.45).floor
+      numPaid = (0.45 * curr_size).floor
 
     else
       prizePool = @contest.prize_pool
@@ -356,15 +276,13 @@ end
     end
 
     lines.each do |l|
-      #linesArray += l
       calcTotalScore(l)
       scores.append(l.total_score)
     end
 
     lines = lines.order(total_score: :desc)
-    #linesArray.sort! { |a,b| a.total_score <=> b.total_score }
 
-    cutoffScore = lines[numPaid - 1]
+    cutoffScore = lines[numPaid - 1].total_score
 
     cutoffCount = (scores.grep(cutoffScore).size).to_f
 
@@ -373,31 +291,43 @@ end
     cutoffLines.each do |cl|
       cutoffUser = User.find(cl.user_id)
       cutoffUser.balance += ((2 * @contest.fee)/cutoffCount)
-      cutoffUser.total_winnings += ((2* @contest.fee)/cutoffCount)
+      cutoffUser.total_winnings += ((2 * @contest.fee)/cutoffCount)
       cutoffUser.save
 
-
-      cutoffBalance = Balance.where(user_id: cl.user_id)
-      cutoffBalance.amount += ((2* @contest.fee)/cutoffCount)
+      cutoffBalance = Balance.where(user_id: cl.user_id).take
+      cutoffBalance.amount += ((2 * @contest.fee)/cutoffCount)
       cutoffBalance.save
+
+      payTrans = Transaction.new(user_id: cl.user_id, amount: ((2 * @contest.fee)/cutoffCount), description: "Contest Payout: Contest ID: #{@contest.id}")
+      payTrans.save
+
     end
 
     #PAY EVERYONE ELSE WHO SCORE > CUTOFF
 
-    payLines = lines[0..numPaid - 1]
+    if cutoffCount != @contest.curr_size
 
-    payLines.each do |line|
-      payUser = User.find(line.user_id)
-      payUser.balance += (2 * @contest.fee)
-      payUser.total_winnings += (2 * @contest.fee)
-      payUser.save
+      payLines = lines[0..numPaid - 1]
 
-      payBalance = Balance.where(user_id: line.user_id).first
-      payBalance.amount += (2 * @contest.fee)
-      payBalance.save
+      payLines.each do |line|
+        payUser = User.find(line.user_id)
+        payUser.balance += (2 * @contest.fee)
+        payUser.total_winnings += (2 * @contest.fee)
+        payUser.save
+
+        payBalance = Balance.where(user_id: line.user_id).take
+        payBalance.amount += (2 * @contest.fee)
+        payBalance.save
+
+        payTrans = Transaction.new(user_id: line.user_id, amount: ((2 * @contest.fee)), description: "Contest Payout: Contest ID: #{@contest.id} ")
+        payTrans.save
+
+      end
     end
-    redirect_to @contest
-
+    return
   end
+
+######## END doubleUp #######
+
 
 end
