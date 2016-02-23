@@ -269,6 +269,14 @@ end
       scores.append(l.total_score)
     end
 
+    scores.each do |s|
+      print("#{s}")
+    end
+
+    lines.each do |line|
+      print("#{line.total_score}")
+    end
+
     lines = lines.order(total_score: :desc)
     scores = scores.order(:desc)
 
