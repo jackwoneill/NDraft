@@ -318,7 +318,7 @@ end
 
       end
     end
-    redirect_to @contest
+    return
   end
 
   def payDoubleUp
