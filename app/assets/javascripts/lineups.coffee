@@ -65,12 +65,15 @@ ready = ->
 	checkPlayers()
 
 
-	$(".position-select > li > a").click (evt) ->
+	$(".position-select > li > button").click ->
 		pos = $(this).data('position-filter')
+		$('.position-select').animate { scrollTop: 0 }, 'fast'
 
 		$(".player-select > tbody > tr").hide()
-		$(".position-select > li > a").css backgroundColor: '#273034'
+		$(".position-select > li > button").css backgroundColor: '#273034'
+		$(".position-select > li").css backgroundColor: '#273034'
 		$(this).css backgroundColor: '#E95144'
+		$(this).parent().css backgroundColor: '#E95144'
 
 		$("h2[name='salary']").text(pos)
 		if pos == "all"
@@ -78,6 +81,11 @@ ready = ->
 		else
 			p = "lineup-"+pos
 			$("."+p).show()
+
+	false
+
+
+	$(".player-select > tbody > tr").click (evt) ->
 
 
 	false

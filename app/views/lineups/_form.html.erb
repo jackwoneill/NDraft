@@ -19,27 +19,27 @@
     <div class="position-select-container">
       <ul class="position-select">
         <li>
-          <a href="#" data-position-filter="all">All</a>
+          <button type="button" data-position-filter="all">All</button>
         </li>
         <li>
-          <a href="#" data-position-filter="top" >Top</a>
+          <button type="button" data-position-filter="top">Top</button>
         </li>
         <li>
-          <a href="#" data-position-filter="mid" >Mid</a>
+          <button type="button" data-position-filter="mid">Mid</button>
         </li>
         <li>
-          <a href="#" data-position-filter="adc" >ADC</a>
+          <button type="button" data-position-filter="adc">ADC</button>
         </li>
         <li>
-          <a href="#" data-position-filter="support" >Support</a>
+          <button type="button" data-position-filter="support">Support</button>
         </li>
         <li>
-          <a href="#" data-position-filter="jungle" >Jungler</a>
+          <button type="button" data-position-filter="jungle">Jungler</button>
         </li>
       </ul>
     </div>
     <div class="player-select-container">
-      <table class="player-select">
+      <table class="player-select" cellpadding="0" border="0" align="center" cellspacing="0">
         <% @players.each do |player| %>
             <tr class=<%= "lineup-#{player.position}" %>>
 
