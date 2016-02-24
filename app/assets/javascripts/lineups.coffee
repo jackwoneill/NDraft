@@ -64,6 +64,24 @@ ready = ->
 
 	checkPlayers()
 
+
+	$(".position-select > li > a").click (evt) ->
+		pos = $(this).data('position-filter')
+
+		$(".player-select > tbody > tr").hide()
+		$(".position-select > li > a").css backgroundColor: '#273034'
+		$(this).css backgroundColor: '#E95144'
+
+		$("h2[name='salary']").text(pos)
+		if pos == "all"
+			$(".player-select > tbody > tr").show()
+		else
+			p = "lineup-"+pos
+			$("."+p).show()
+
+
+	false
+
 	$("input[name='lineup[top]']").change ->
 
 		salary += topSal if topSal?

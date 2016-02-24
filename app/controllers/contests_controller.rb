@@ -187,9 +187,6 @@ class ContestsController < ApplicationController
       end
     end
   end
-
- 
-
    
 
   # DELETE /contests/1
@@ -199,10 +196,16 @@ class ContestsController < ApplicationController
       lines = Lineup.where(contest_id: @contest.id)
       if !lines.nil?
         lines.each do |l|
-          Balance.where(user_id: l.user_id).first
-          returnUser = User.find(l.user_id).first
+          returnBal = Balance.where(user_id: l.user_id).take
+          returnBal.amount += @contest.fee
+          returnBal.save
+
+          returnUser = User.find(l.user_id)
           returnUser.balance += @contest.fee
           returnUser.save
+
+          refundTrans = Transaction.new(user_id: l.user_id, amount: @contest.fee, description: "Entry Canceled: Contest ID: #{@contest.id} ")
+          refundTrans.save
         end
       end
     end

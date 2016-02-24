@@ -19,33 +19,34 @@
     <div class="position-select-container">
       <ul class="position-select">
         <li>
-          <a href="#">All</a>
+          <a href="#" data-position-filter="all">All</a>
         </li>
         <li>
-          <a href="#">Top</a>
+          <a href="#" data-position-filter="top" >Top</a>
         </li>
         <li>
-          <a href="#">Mid</a>
+          <a href="#" data-position-filter="mid" >Mid</a>
         </li>
         <li>
-          <a href="#">ADC</a>
+          <a href="#" data-position-filter="adc" >ADC</a>
         </li>
         <li>
-          <a href="#">Support</a>
+          <a href="#" data-position-filter="support" >Support</a>
         </li>
         <li>
-          <a href="#">Jungler</a>
+          <a href="#" data-position-filter="jungle" >Jungler</a>
         </li>
       </ul>
     </div>
     <div class="player-select-container">
       <table class="player-select">
         <% @players.each do |player| %>
-          <tr>
-            <td>
-              <a href="#"><%= player.name %> <%= player.position %></a>
-            </td>
-          </tr>
+            <tr class=<%= "lineup-#{player.position}" %>>
+
+              <td>
+                <a href="#"><%= player.name %> <%= player.position %></a>
+              </td>
+            </tr>
 
         <% end %>
       </table>

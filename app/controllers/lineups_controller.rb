@@ -246,7 +246,7 @@ class LineupsController < ApplicationController
 
     respond_to do |format|
       if @lineup.save 
-        format.html { redirect_to @lineup, notice: 'Lineup was successfully created.' }
+        format.html { redirect_to @contest, notice: 'Lineup was successfully created.' }
         format.json { render :show, status: :created, location: @lineup }
       else
         format.html { render :new }
@@ -261,9 +261,11 @@ class LineupsController < ApplicationController
     if @lineup.user_id != current_user.id
       redirect_to contests_path
     end
+    @contest = Contest.find(@lineup.contest_id)
+
     respond_to do |format|
       if @lineup.update(lineup_params)
-        format.html { redirect_to @lineup, notice: 'Lineup was successfully updated.' }
+        format.html { redirect_to @contest, notice: 'Lineup was successfully updated.' }
         format.json { render :show, status: :ok, location: @lineup }
       else
         format.html { render :edit }
@@ -274,18 +276,25 @@ class LineupsController < ApplicationController
 
   # DELETE /lineups/1
   # DELETE /lineups/1.json
-  def destroy
+  def destroy    
     @contest = Contest.find(@lineup.contest_id)
 
+    if ((Time.now - @contest.start_time) >= -600)
+      respond_to do |format|
+        redirect_to contests_url, notice: "You cannot cancel an entry within 10 minutes of the Contest\'s start time"
+        return
+      end 
+    end
+
     returnBal = Balance.where(user_id: current_user.id).take
-    returnBal += @contest.fee
+    returnBal.amount += @contest.fee
     returnBal.save
 
     returnUser = User.find(current_user.id)
     returnUser.balance += @contest.fee
     returnUser.save
 
-    refundTrans = Transaction.new(user_id: l.user_id, amount: @contest.fee, description: "Entry Canceled: Contest ID: #{@contest.id} ")
+    refundTrans = Transaction.new(user_id: @lineup.user_id, amount: @contest.fee, description: "Entry Canceled: Contest ID: #{@contest.id} ")
     refundTrans.save
 
     @contest.curr_size -= 1
