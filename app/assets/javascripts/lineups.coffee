@@ -75,7 +75,6 @@ ready = ->
 		$(this).css backgroundColor: '#E95144'
 		$(this).parent().css backgroundColor: '#E95144'
 
-		$("h2[name='salary']").text(pos)
 		if pos == "all"
 			$(".player-select > tbody > tr").show()
 		else
@@ -86,11 +85,7 @@ ready = ->
 
 
 	$(".player-select > tbody > tr").click (evt) ->
-		arr = $(this).attr('id').split "_"
-		id = arr.pop()
-		top = id
 
-		$("h2[name='salary']").text("fdsafdas")
 
 	false
 
