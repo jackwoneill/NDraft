@@ -86,7 +86,11 @@ ready = ->
 
 
 	$(".player-select > tbody > tr").click (evt) ->
+		arr = $(this).attr('id').split "_"
+		id = arr.pop()
+		top = id
 
+		$("h2[name='salary']").text("fdsafdas")
 
 	false
 

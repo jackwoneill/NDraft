@@ -44,7 +44,21 @@
             <tr class=<%= "lineup-#{player.position}" %>>
 
               <td>
-                <a href="#"><%= player.name %> <%= player.position %></a>
+                <div class="player-info">
+                  <% case player.position 
+                     when "top" %>
+                  <span class="player-position">TOP</span>
+                  <% when "mid" %>
+                  <span class="player-position">MID</span>
+                  <% when 'adc' %>
+                  <span class="player-position">ADC</span>
+                  <% when 'support' %>                  
+                  <span class="player-position">SUP</span>
+                  <% when 'jungle' %>
+                  <span class="player-position">JNG</span>
+                  <% end %>
+                  <span class="player-name"><%= player.name %></span>
+                </div>
               </td>
             </tr>
 

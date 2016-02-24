@@ -57,14 +57,23 @@ display: inline;
 }
 .player-select > tbody > tr > td {
   height: 45px;
+  margin-right: 0;
 }
 
-.player-select > tbody > tr > td > a { 
-
+.player-select > tbody > tr > td > .player-info { 
+  color: #E95144;
   height: 45px;
   display: block; 
   border: 1px solid black;
   padding: 16px; 
+  padding-left: 5px;
+}
+
+.player-select > tbody > tr > td > .player-info > .player-position{ 
+  color: #AFBFC6;
+  margin-left: 0;
+  padding-right: 10px; 
+
 }
 
 .position-select > li > button {
@@ -76,7 +85,7 @@ display: inline;
   padding-bottom: 5px;
   float: left;
   display: inline-block;
-  color: white;
+  color: #AFBFC6;
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
