@@ -2,338 +2,530 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 ready = ->
-	Array::unique = ->
-	  output = {}
-	  output[@[key]] = @[key] for key in [0...@length]
-	  value for key, value of output
+    Array::unique = ->
+      output = {}
+      output[@[key]] = @[key] for key in [0...@length]
+      value for key, value of output
+
+    lineup = 
+        top: top 
+        topSal: topSal 
+        mid: mid
+        midSal: midSal
+        adc: adc
+        adcSal: adcSal
+        support: support
+        supportSal: supportSal
+        jungler: jungler
+        junglerSal: junglerSal
+        flex_1: flex_1
+        flex_1Sal: flex_1Sal
+        flex_2: flex_2
+        flex_2Sal: flex_2Sal
+        flex_3: flex_3
+        flex_3Sal: flex_3Sal
+
+    top = top
+    topSal = topSal
+
+    mid = mid
+    midSal = midSal
+
+    adc = adc
+    adcSal = adcSal
+
+    support = support
+    supportSal = supportSal
+
+    jungler = jungler
+    junglerSal = junglerSal
+
+    flex_1 = flex_1
+    flex_1Sal = flex_1Sal
+
+    flex_2 = flex_2
+    flex_2Sal = flex_2Sal
+
+    flex_3 = flex_3
+    flex_3Sal = flex_3Sal
+
+    clearFields = () ->
+        $("input[type=radio]").removeAttr('checked')
+
+    clearFields()
+
+    checkDuplicates = () ->
+        arr = [top, 
+        mid, 
+        adc, 
+        support, 
+        jungler, 
+        flex_1, 
+        flex_2, 
+        flex_3]
+        arr.unique()
+        true if arr.length = 8
+
+    checkPlayers = () ->
+        $("input[name='commit']").attr("disabled", false) if top? and
+        mid? and
+        adc? and
+        support? and
+        jungler? and
+        flex_1? and
+        flex_2? and
+        flex_3? and
+        salary >= 0 and
+        checkDuplicates() == true
+
+    salary = parseInt($("h2[name='salary']").text(), 10)
+
+    checkPlayers()
+
+    enableRows = (enable_pos) ->
+        alert "hello"
+
+    disableRows = (disable_pos) ->
+        if flex_1? and flex_2? and flex_3?
+            f1 = $('.player-select').find('[data-id="'+flex_1+'\"]')
+            f2 = $('.player-select').find('[data-id="'+flex_2+'\"]')
+            f3 = $('.player-select').find('[data-id="'+flex_3+'\"]')
 
-	top = top
-	topSal = topSal
+            switch disable_pos
+                when "top"
+                    t = $('.player-select').find('[data-id="'+top+'\"]')
+                    $('.lineup-top').find('.add-player-button').attr("disabled", true)
+                    $('.lineup-top').css backgroundColor: "red"
+                    $('.lineup-top').css opacity: 0.3
+                    t.parent().parent().parent().css backgroundColor: "white"
+                    t.parent().parent().parent().css opacity: 1.0
+                    t.find('.add-player-button').attr("disabled", false)
+
+
+            f1.parent().parent().parent().css backgroundColor: "white"
+            f1.parent().parent().parent().css opacity: 1.0
+            f1.find('.add-player-button').attr("disabled", false)
 
-	mid = mid
-	midSal = midSal
+            f2.parent().parent().parent().css backgroundColor: "white"
+            f2.parent().parent().parent().css opacity: 1.0
+            f2.find('.add-player-button').attr("disabled", false)
 
-	adc = adc
-	adcSal = adcSal
+            f3.parent().parent().parent().css backgroundColor: "white"
+            f3.parent().parent().parent().css opacity: 1.0
+            f3.find('.add-player-button').attr("disabled", false)
 
-	support = support
-	supportSal = supportSal
 
-	jungler = jungler
-	junglerSal = junglerSal
+    $(".position-select > li > button").click ->
+        pos = $(this).data('position-filter')
+        $('.position-select').animate { scrollTop: 0 }, 'fast'
 
-	flex_1 = flex_1
-	flex_1Sal = flex_1Sal
+        $(".player-select > tbody > tr").hide()
+        $(".position-select > li > button").css backgroundColor: '#273034'
+        $(".position-select > li").css backgroundColor: '#273034'
+        $(this).css backgroundColor: '#E95144'
+        $(this).parent().css backgroundColor: '#E95144'
 
-	flex_2 = flex_2
-	flex_2Sal = flex_2Sal
+        if pos == "all"
+            $(".player-select > tbody > tr").show()
+        else
+            p = "lineup-"+pos
+            $("."+p).show()
 
-	flex_3 = flex_3
-	flex_3Sal = flex_3Sal
+    false
 
-	clearFields = () ->
-		$("input[type=radio]").removeAttr('checked')
 
-	clearFields()
+    $(".add-player-button").click (evt) ->
+        player = $(this).parent().find('.player-name')
+        name = player.text()
+        id = player.data('id')
+        pos = player.data('position')
+        player_salary = player.data('salary')
+        lineup[pos] #Dynamic position var
+        lineup[(pos + "Sal").toString()] #Dynamic salary var
 
-	checkDuplicates = () ->
-		arr = [top, 
-		mid, 
-		adc, 
-		support, 
-		jungler, 
-		flex_1, 
-		flex_2, 
-		flex_3]
-		arr.unique()
-		true if arr.length = 8
+        # if $(this).text() == "+"
 
-	checkPlayers = () ->
-		$("input[name='commit']").attr("disabled", false) if top? and
-		mid? and
-		adc? and
-		support? and
-		jungler? and
-		flex_1? and
-		flex_2? and
-		flex_3? and
-		salary >= 0 and
-		checkDuplicates() == true
+        # else if $(this).text() == "-"
 
-	salary = parseInt($("h2[name='salary']").text(), 10)
+        #FOR LOOP THE FLEXES
+        #BREAK IF FLEX BECOMES FILLED
 
-	checkPlayers()
 
+        if $(this).text() == "+"
+            if (lineup[pos])?
+                if !lineup[("flex_1")]?
 
-	$(".position-select > li > button").click ->
-		pos = $(this).data('position-filter')
-		$('.position-select').animate { scrollTop: 0 }, 'fast'
+                    lineup[("flex_1Sal")] = player_salary
+                    salary -= lineup[("flex_1Sal").toString()]
 
-		$(".player-select > tbody > tr").hide()
-		$(".position-select > li > button").css backgroundColor: '#273034'
-		$(".position-select > li").css backgroundColor: '#273034'
-		$(this).css backgroundColor: '#E95144'
-		$(this).parent().css backgroundColor: '#E95144'
+                    lineup[("flex_1")] = id
 
-		if pos == "all"
-			$(".player-select > tbody > tr").show()
-		else
-			p = "lineup-"+pos
-			$("."+p).show()
+                    $(this).text("-")
 
-	false
+                    $(this).parent().parent().parent().css backgroundColor: 'white'
+                    $(this).parent().parent().parent().css opacity: 1.0
+                    $(".current-lineup-flex-1-player-name").text(name)
+                    $(".current-lineup-flex-1-player-name").attr("data-id", id)
+                    $(".current-lineup-flex-1-player-name").attr("data-salary", salary)
 
+                else if !lineup[("flex_2")]?
 
-	$(".player-select > tbody > tr").click (evt) ->
+                    lineup[("flex_2Sal")] = player_salary
+                    salary -= lineup[("flex_2Sal").toString()]
 
+                    lineup[("flex_2")] = id
 
-	false
+                    $(this).text("-")
 
-	$("input[name='lineup[top]']").change ->
+                    $(this).parent().parent().parent().css backgroundColor: 'white'
+                    $(this).parent().parent().parent().css opacity: 1.0
+                    $(".current-lineup-flex-2-player-name").text(name)
+                    $(".current-lineup-flex-2-player-name").attr("data-id", id)
+                    $(".current-lineup-flex-2-player-name").attr("data-salary", salary)
 
-		salary += topSal if topSal?
+                else if !lineup[("flex_3")]?
 
-		topSal = $(this).data('salary')
+                    lineup[("flex_3Sal")] = player_salary
+                    salary -= lineup[("flex_3Sal").toString()]
 
-		salary -= topSal
-		$("h2[name='salary']").text(salary)
+                    lineup[("flex_3")] = id
 
-		$("#lineup_flex_1_"+top).attr("disabled", false)
-		$("#lineup_flex_2_"+top).attr("disabled", false)
-		$("#lineup_flex_3_"+top).attr("disabled", false)
+                    $(this).text("-")
 
-		arr = $(this).attr('id').split "_"
-		id = arr.pop()
-		top = id
+                    $(this).parent().parent().parent().css backgroundColor: 'white'
+                    $(this).parent().parent().parent().css opacity: 1.0
+                    $(".current-lineup-flex-3-player-name").text(name)
+                    $(".current-lineup-flex-3-player-name").attr("data-id", id)
+                    $(".current-lineup-flex-3-player-name").attr("data-salary", salary)
+                    
+            else
 
-		$("#lineup_flex_1_"+top).attr("disabled", true)
-		$("#lineup_flex_2_"+top).attr("disabled", true)
-		$("#lineup_flex_3_"+top).attr("disabled", true)
+                lineup[(pos + "Sal").toString()] = player_salary
 
-		checkPlayers()
+                lineup[pos] = id
 
-	$("input[name='lineup[mid]']").change ->
+                $(this).text("-")
 
-		salary += midSal if midSal?
+                $(this).parent().parent().parent().css backgroundColor: 'white'
+                $(this).parent().parent().parent().css opacity: 1.0
 
-		midSal = $(this).data('salary')
+                $(".current-lineup-"+pos+"-player-name").text(name)
+                $(".current-lineup-"+pos+"-top-player-name").attr("data-id", id)
+                $(".current-lineup-"+pos+"-player-name").attr("data-salary", salary)
 
-		salary -= midSal
-		$("h2[name='salary']").text(salary)
-	
-		$("#lineup_flex_1_"+mid).attr("disabled", false)
-		$("#lineup_flex_2_"+mid).attr("disabled", false)
-		$("#lineup_flex_3_"+mid).attr("disabled", false)
 
-		arr = $(this).attr('id').split "_"
-		id = arr.pop()
-		mid = id
 
-		$("#lineup_flex_1_"+mid).attr("disabled", true)
-		$("#lineup_flex_2_"+mid).attr("disabled", true)
-		$("#lineup_flex_3_"+mid).attr("disabled", true)	
+        else if $(this).text() == "-"
+            switch id
+                when top
+                    salary += topSal if topSal?
+                    d_sal = null
 
-		checkPlayers()
 
-	$("input[name='lineup[adc]']").change ->
+                    $(this).parent().parent().parent().css backgroundColor: '#273034'
+                    $(this).parent().parent().parent().css opacity: 1.0
 
-		salary += adcSal if adcSal?
+                    d_pos = null
 
-		adcSal = $(this).data('salary')
+                    $(this).text("+")
+                    $(".current-lineup-top-player-name").empty()
+                    $(".current-lineup-top-player-name").attr("data-id", "")
+                    $(".current-lineup-top-player-name").attr("data-salary", "")
+                    
 
-		salary -= adcSal
-		$("h2[name='salary']").text(salary)
-	
-		$("#lineup_flex_1_"+adc).attr("disabled", false)
-		$("#lineup_flex_2_"+adc).attr("disabled", false)
-		$("#lineup_flex_3_"+adc).attr("disabled", false)
+                when flex_1
+                    salary += flex_1Sal if flex_1Sal?
+                    flex_1Sal = null
 
-		arr = $(this).attr('id').split "_"
-		id = arr.pop()
-		adc = id
+                    $(this).parent().parent().parent().css backgroundColor: '#273034'
+                    $(this).parent().parent().parent().css opacity: 1.0
 
-		$("#lineup_flex_1_"+adc).attr("disabled", true)
-		$("#lineup_flex_2_"+adc).attr("disabled", true)
-		$("#lineup_flex_3_"+adc).attr("disabled", true)
+                    flex_1 = null
 
-		checkPlayers()
+                    $(this).text("+")
+                    $(".current-lineup-flex-1-player-name").empty()
+                    $(".current-lineup-flex-1-player-name").attr("data-id", "")
+                    $(".current-lineup-flex-1-player-name").attr("data-salary", "")
 
-	$("input[name='lineup[support]']").change ->
+                when flex_2
+                    salary += flex_2Sal if flex_2Sal?
+                    flex_2Sal = null
 
-		salary += supportSal if supportSal?
+                    $(this).parent().parent().parent().css backgroundColor: '#273034'
+                    $(this).parent().parent().parent().css opacity: 1.0
 
-		supportSal = $(this).data('salary')
+                    flex_2 = null
 
-		salary -= supportSal
-		$("h2[name='salary']").text(salary)
-	
-		$("#lineup_flex_1_"+support).attr("disabled", false)
-		$("#lineup_flex_2_"+support).attr("disabled", false)
-		$("#lineup_flex_3_"+support).attr("disabled", false)
+                    $(this).text("+")
+                    $(".current-lineup-flex-2-player-name").empty()
+                    $(".current-lineup-flex-2-player-name").attr("data-id", "")
+                    $(".current-lineup-flex-2-player-name").attr("data-salary", "")
 
-		arr = $(this).attr('id').split "_"
-		id = arr.pop()
-		support = id
+                when flex_3
+                    salary += flex_3Sal if flex_3Sal?
+                    flex_3Sal = null
 
-		$("#lineup_flex_1_"+support).attr("disabled", true)
-		$("#lineup_flex_2_"+support).attr("disabled", true)
-		$("#lineup_flex_3_"+support).attr("disabled", true)
+                    $(this).parent().parent().parent().css backgroundColor: '#273034'
+                    $(this).parent().parent().parent().css opacity: 1.0
 
-		checkPlayers()
+                    flex_3 = null
 
-	$("input[name='lineup[jungler]']").change ->
+                    $(this).text("+")
+                    $(".current-lineup-flex-3-player-name").empty()
+                    $(".current-lineup-flex-3-player-name").attr("data-id", "")
+                    $(".current-lineup-flex-3-player-name").attr("data-salary", "")
 
-		salary += junglerSal if junglerSal?
 
-		junglerSal = $(this).data('salary')
 
-		salary -= junglerSal
-		$("h2[name='salary']").text(salary)
-	
-		$("#lineup_flex_1_"+jungler).attr("disabled", false)
-		$("#lineup_flex_2_"+jungler).attr("disabled", false)
-		$("#lineup_flex_3_"+jungler).attr("disabled", false)
 
-		arr = $(this).attr('id').split "_"
-		id = arr.pop()
-		jungler = id
 
-		$("#lineup_flex_1_"+jungler).attr("disabled", true)
-		$("#lineup_flex_2_"+jungler).attr("disabled", true)
-		$("#lineup_flex_3_"+jungler).attr("disabled", true)
 
-		checkPlayers()
 
+    $("input[name='lineup[top]']").change ->
 
-	$("input[name='lineup[flex_1]']").change ->
+        salary += topSal if topSal?
 
-		salary += flex_1Sal if flex_1Sal?
+        topSal = $(this).data('salary')
 
-		flex_1Sal = $(this).data('salary')
+        salary -= topSal
+        $("h2[name='salary']").text(salary)
 
-		salary -= flex_1Sal
-		$("h2[name='salary']").text(salary)
+        $("#lineup_flex_1_"+top).attr("disabled", false)
+        $("#lineup_flex_2_"+top).attr("disabled", false)
+        $("#lineup_flex_3_"+top).attr("disabled", false)
 
-		if document.getElementById("lineup_top_"+flex_1)?
-			$("#lineup_top_"+flex_1).attr("disabled", false)
-		else if document.getElementById("lineup_mid_"+flex_1)
-			$("#lineup_mid_"+flex_1).attr("disabled", false)
-		else if document.getElementById("lineup_adc_"+flex_1)
-			$("#lineup_adc_"+flex_1).attr("disabled", false)
-		else if document.getElementById("lineup_support_"+flex_1)
-			$("#lineup_support_"+flex_1).attr("disabled", false)
-		else if document.getElementById("lineup_jungler_"+flex_1)
-			$("#lineup_jungler_"+flex_1).attr("disabled", false)
+        arr = $(this).attr('id').split "_"
+        id = arr.pop()
+        top = id
 
-		$("#lineup_flex_2_"+flex_1).attr("disabled", false)
-		$("#lineup_flex_3_"+flex_1).attr("disabled", false)
+        $("#lineup_flex_1_"+top).attr("disabled", true)
+        $("#lineup_flex_2_"+top).attr("disabled", true)
+        $("#lineup_flex_3_"+top).attr("disabled", true)
 
-		arr = $(this).attr('id').split "_"
-		id = arr.pop()
-		flex_1 = id
+        checkPlayers()
 
-		$("#lineup_flex_2_"+flex_1).attr("disabled", true)
-		$("#lineup_flex_3_"+flex_1).attr("disabled", true)
+    $("input[name='lineup[mid]']").change ->
 
-		if document.getElementById("lineup_top_"+flex_1)?
-			$("#lineup_top_"+flex_1).attr("disabled", true)
-		else if document.getElementById("lineup_mid_"+flex_1)
-			$("#lineup_mid_"+flex_1).attr("disabled", true)
-		else if document.getElementById("lineup_adc_"+flex_1)
-			$("#lineup_adc_"+flex_1).attr("disabled", true)
-		else if document.getElementById("lineup_support_"+flex_1)
-			$("#lineup_support_"+flex_1).attr("disabled", true)
-		else if document.getElementById("lineup_jungler_"+flex_1)
-			$("#lineup_jungler_"+flex_1).attr("disabled", true)
+        salary += midSal if midSal?
 
-		checkPlayers()
+        midSal = $(this).data('salary')
 
+        salary -= midSal
+        $("h2[name='salary']").text(salary)
+    
+        $("#lineup_flex_1_"+mid).attr("disabled", false)
+        $("#lineup_flex_2_"+mid).attr("disabled", false)
+        $("#lineup_flex_3_"+mid).attr("disabled", false)
 
-	$("input[name='lineup[flex_2]']").change ->
+        arr = $(this).attr('id').split "_"
+        id = arr.pop()
+        mid = id
 
-		salary += flex_2Sal if flex_2Sal?
+        $("#lineup_flex_1_"+mid).attr("disabled", true)
+        $("#lineup_flex_2_"+mid).attr("disabled", true)
+        $("#lineup_flex_3_"+mid).attr("disabled", true) 
 
-		flex_2Sal = $(this).data('salary')
+        checkPlayers()
 
-		salary -= flex_2Sal
-		$("h2[name='salary']").text(salary)
+    $("input[name='lineup[adc]']").change ->
 
-		if document.getElementById("lineup_top_"+flex_2)?
-			$("#lineup_top_"+flex_2).attr("disabled", false)
-		else if document.getElementById("lineup_mid_"+flex_2)
-			$("#lineup_mid_"+flex_2).attr("disabled", false)
-		else if document.getElementById("lineup_adc_"+flex_2)
-			$("#lineup_adc_"+flex_2).attr("disabled", false)
-		else if document.getElementById("lineup_support_"+flex_2)
-			$("#lineup_support_"+flex_2).attr("disabled", false)
-		else if document.getElementById("lineup_jungler_"+flex_2)
-			$("#lineup_jungler_"+flex_2).attr("disabled", false)
+        salary += adcSal if adcSal?
 
-		$("#lineup_flex_1_"+flex_2).attr("disabled", false)
-		$("#lineup_flex_3_"+flex_2).attr("disabled", false)
+        adcSal = $(this).data('salary')
 
-		arr = $(this).attr('id').split "_"
-		id = arr.pop()
-		flex_2 = id
+        salary -= adcSal
+        $("h2[name='salary']").text(salary)
+    
+        $("#lineup_flex_1_"+adc).attr("disabled", false)
+        $("#lineup_flex_2_"+adc).attr("disabled", false)
+        $("#lineup_flex_3_"+adc).attr("disabled", false)
 
-		$("#lineup_flex_1_"+flex_2).attr("disabled", true)
-		$("#lineup_flex_3_"+flex_2).attr("disabled", true)
+        arr = $(this).attr('id').split "_"
+        id = arr.pop()
+        adc = id
 
-		if document.getElementById("lineup_top_"+flex_2)?
-			$("#lineup_top_"+flex_2).attr("disabled", true)
-		else if document.getElementById("lineup_mid_"+flex_2)
-			$("#lineup_mid_"+flex_2).attr("disabled", true)
-		else if document.getElementById("lineup_adc_"+flex_2)
-			$("#lineup_adc_"+flex_2).attr("disabled", true)
-		else if document.getElementById("lineup_support_"+flex_2)
-			$("#lineup_support_"+flex_2).attr("disabled", true)
-		else if document.getElementById("lineup_jungler_"+flex_2)
-			$("#lineup_jungler_"+flex_2).attr("disabled", true)
+        $("#lineup_flex_1_"+adc).attr("disabled", true)
+        $("#lineup_flex_2_"+adc).attr("disabled", true)
+        $("#lineup_flex_3_"+adc).attr("disabled", true)
 
-		checkPlayers()
+        checkPlayers()
 
-	$("input[name='lineup[flex_3]']").change ->
+    $("input[name='lineup[support]']").change ->
 
-		salary += flex_3Sal if flex_3Sal?
+        salary += supportSal if supportSal?
 
-		flex_3Sal = $(this).data('salary')
+        supportSal = $(this).data('salary')
 
-		salary -= flex_3Sal
-		$("h2[name='salary']").text(salary)
+        salary -= supportSal
+        $("h2[name='salary']").text(salary)
+    
+        $("#lineup_flex_1_"+support).attr("disabled", false)
+        $("#lineup_flex_2_"+support).attr("disabled", false)
+        $("#lineup_flex_3_"+support).attr("disabled", false)
 
-		if document.getElementById("lineup_top_"+flex_3)?
-			$("#lineup_top_"+flex_3).attr("disabled", false)
-		else if document.getElementById("lineup_mid_"+flex_3)
-			$("#lineup_mid_"+flex_3).attr("disabled", false)
-		else if document.getElementById("lineup_adc_"+flex_3)
-			$("#lineup_adc_"+flex_3).attr("disabled", false)
-		else if document.getElementById("lineup_support_"+flex_3)
-			$("#lineup_support_"+flex_3).attr("disabled", false)
-		else if document.getElementById("lineup_jungler_"+flex_3)
-			$("#lineup_jungler_"+flex_3).attr("disabled", false)
+        arr = $(this).attr('id').split "_"
+        id = arr.pop()
+        support = id
 
-		$("#lineup_flex_1_"+flex_3).attr("disabled", false)
-		$("#lineup_flex_2_"+flex_3).attr("disabled", false)
+        $("#lineup_flex_1_"+support).attr("disabled", true)
+        $("#lineup_flex_2_"+support).attr("disabled", true)
+        $("#lineup_flex_3_"+support).attr("disabled", true)
 
-		arr = $(this).attr('id').split "_"
-		id = arr.pop()
-		flex_3 = id
+        checkPlayers()
 
-		$("#lineup_flex_1_"+flex_3).attr("disabled", true)
-		$("#lineup_flex_2_"+flex_3).attr("disabled", true)
+    $("input[name='lineup[jungler]']").change ->
 
-		if document.getElementById("lineup_top_"+flex_3)?
-			$("#lineup_top_"+flex_3).attr("disabled", true)
-		else if document.getElementById("lineup_mid_"+flex_3)
-			$("#lineup_mid_"+flex_3).attr("disabled", true)
-		else if document.getElementById("lineup_adc_"+flex_3)
-			$("#lineup_adc_"+flex_3).attr("disabled", true)
-		else if document.getElementById("lineup_support_"+flex_3)
-			$("#lineup_support_"+flex_3).attr("disabled", true)
-		else if document.getElementById("lineup_jungler_"+flex_3)
-			$("#lineup_jungler_"+flex_3).attr("disabled", true)
+        salary += junglerSal if junglerSal?
 
-		checkPlayers()
+        junglerSal = $(this).data('salary')
+
+        salary -= junglerSal
+        $("h2[name='salary']").text(salary)
+    
+        $("#lineup_flex_1_"+jungler).attr("disabled", false)
+        $("#lineup_flex_2_"+jungler).attr("disabled", false)
+        $("#lineup_flex_3_"+jungler).attr("disabled", false)
+
+        arr = $(this).attr('id').split "_"
+        id = arr.pop()
+        jungler = id
+
+        $("#lineup_flex_1_"+jungler).attr("disabled", true)
+        $("#lineup_flex_2_"+jungler).attr("disabled", true)
+        $("#lineup_flex_3_"+jungler).attr("disabled", true)
+
+        checkPlayers()
+
+
+    $("input[name='lineup[flex_1]']").change ->
+
+        salary += flex_1Sal if flex_1Sal?
+
+        flex_1Sal = $(this).data('salary')
+
+        salary -= flex_1Sal
+        $("h2[name='salary']").text(salary)
+
+        if document.getElementById("lineup_top_"+flex_1)?
+            $("#lineup_top_"+flex_1).attr("disabled", false)
+        else if document.getElementById("lineup_mid_"+flex_1)
+            $("#lineup_mid_"+flex_1).attr("disabled", false)
+        else if document.getElementById("lineup_adc_"+flex_1)
+            $("#lineup_adc_"+flex_1).attr("disabled", false)
+        else if document.getElementById("lineup_support_"+flex_1)
+            $("#lineup_support_"+flex_1).attr("disabled", false)
+        else if document.getElementById("lineup_jungler_"+flex_1)
+            $("#lineup_jungler_"+flex_1).attr("disabled", false)
+
+        $("#lineup_flex_2_"+flex_1).attr("disabled", false)
+        $("#lineup_flex_3_"+flex_1).attr("disabled", false)
+
+        arr = $(this).attr('id').split "_"
+        id = arr.pop()
+        flex_1 = id
+
+        $("#lineup_flex_2_"+flex_1).attr("disabled", true)
+        $("#lineup_flex_3_"+flex_1).attr("disabled", true)
+
+        if document.getElementById("lineup_top_"+flex_1)?
+            $("#lineup_top_"+flex_1).attr("disabled", true)
+        else if document.getElementById("lineup_mid_"+flex_1)
+            $("#lineup_mid_"+flex_1).attr("disabled", true)
+        else if document.getElementById("lineup_adc_"+flex_1)
+            $("#lineup_adc_"+flex_1).attr("disabled", true)
+        else if document.getElementById("lineup_support_"+flex_1)
+            $("#lineup_support_"+flex_1).attr("disabled", true)
+        else if document.getElementById("lineup_jungler_"+flex_1)
+            $("#lineup_jungler_"+flex_1).attr("disabled", true)
+
+        checkPlayers()
+
+
+    $("input[name='lineup[flex_2]']").change ->
+
+        salary += flex_2Sal if flex_2Sal?
+
+        flex_2Sal = $(this).data('salary')
+
+        salary -= flex_2Sal
+        $("h2[name='salary']").text(salary)
+
+        if document.getElementById("lineup_top_"+flex_2)?
+            $("#lineup_top_"+flex_2).attr("disabled", false)
+        else if document.getElementById("lineup_mid_"+flex_2)
+            $("#lineup_mid_"+flex_2).attr("disabled", false)
+        else if document.getElementById("lineup_adc_"+flex_2)
+            $("#lineup_adc_"+flex_2).attr("disabled", false)
+        else if document.getElementById("lineup_support_"+flex_2)
+            $("#lineup_support_"+flex_2).attr("disabled", false)
+        else if document.getElementById("lineup_jungler_"+flex_2)
+            $("#lineup_jungler_"+flex_2).attr("disabled", false)
+
+        $("#lineup_flex_1_"+flex_2).attr("disabled", false)
+        $("#lineup_flex_3_"+flex_2).attr("disabled", false)
+
+        arr = $(this).attr('id').split "_"
+        id = arr.pop()
+        flex_2 = id
+
+        $("#lineup_flex_1_"+flex_2).attr("disabled", true)
+        $("#lineup_flex_3_"+flex_2).attr("disabled", true)
+
+        if document.getElementById("lineup_top_"+flex_2)?
+            $("#lineup_top_"+flex_2).attr("disabled", true)
+        else if document.getElementById("lineup_mid_"+flex_2)
+            $("#lineup_mid_"+flex_2).attr("disabled", true)
+        else if document.getElementById("lineup_adc_"+flex_2)
+            $("#lineup_adc_"+flex_2).attr("disabled", true)
+        else if document.getElementById("lineup_support_"+flex_2)
+            $("#lineup_support_"+flex_2).attr("disabled", true)
+        else if document.getElementById("lineup_jungler_"+flex_2)
+            $("#lineup_jungler_"+flex_2).attr("disabled", true)
+
+        checkPlayers()
+
+    $("input[name='lineup[flex_3]']").change ->
+
+        salary += flex_3Sal if flex_3Sal?
+
+        flex_3Sal = $(this).data('salary')
+
+        salary -= flex_3Sal
+        $("h2[name='salary']").text(salary)
+
+        if document.getElementById("lineup_top_"+flex_3)?
+            $("#lineup_top_"+flex_3).attr("disabled", false)
+        else if document.getElementById("lineup_mid_"+flex_3)
+            $("#lineup_mid_"+flex_3).attr("disabled", false)
+        else if document.getElementById("lineup_adc_"+flex_3)
+            $("#lineup_adc_"+flex_3).attr("disabled", false)
+        else if document.getElementById("lineup_support_"+flex_3)
+            $("#lineup_support_"+flex_3).attr("disabled", false)
+        else if document.getElementById("lineup_jungler_"+flex_3)
+            $("#lineup_jungler_"+flex_3).attr("disabled", false)
+
+        $("#lineup_flex_1_"+flex_3).attr("disabled", false)
+        $("#lineup_flex_2_"+flex_3).attr("disabled", false)
+
+        arr = $(this).attr('id').split "_"
+        id = arr.pop()
+        flex_3 = id
+
+        $("#lineup_flex_1_"+flex_3).attr("disabled", true)
+        $("#lineup_flex_2_"+flex_3).attr("disabled", true)
+
+        if document.getElementById("lineup_top_"+flex_3)?
+            $("#lineup_top_"+flex_3).attr("disabled", true)
+        else if document.getElementById("lineup_mid_"+flex_3)
+            $("#lineup_mid_"+flex_3).attr("disabled", true)
+        else if document.getElementById("lineup_adc_"+flex_3)
+            $("#lineup_adc_"+flex_3).attr("disabled", true)
+        else if document.getElementById("lineup_support_"+flex_3)
+            $("#lineup_support_"+flex_3).attr("disabled", true)
+        else if document.getElementById("lineup_jungler_"+flex_3)
+            $("#lineup_jungler_"+flex_3).attr("disabled", true)
+
+        checkPlayers()
 
 $(document).ready(ready)
 $(document).on('page:load', ready)

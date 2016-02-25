@@ -39,31 +39,112 @@
       </ul>
     </div>
     <div class="player-select-container">
-      <table class="player-select" cellpadding="0" border="0" align="center" cellspacing="0">
-        <% @players.each do |player| %>
-            <tr class=<%= "lineup-#{player.position}" %>>
+      <div class="new-player-selection-container">
+        <table class="player-select" cellpadding="0" border="0" align="center" cellspacing="0">
+          <% @players.each do |player| %>
+              <tr class=<%= "lineup-#{player.position}" %>>
 
-              <td>
-                <div class="player-info">
-                  <% case player.position 
-                     when "top" %>
-                  <span class="player-position">TOP</span>
-                  <% when "mid" %>
-                  <span class="player-position">MID</span>
-                  <% when 'adc' %>
-                  <span class="player-position">ADC</span>
-                  <% when 'support' %>                  
-                  <span class="player-position">SUP</span>
-                  <% when 'jungle' %>
-                  <span class="player-position">JNG</span>
-                  <% end %>
-                  <span class="player-name"><%= player.name %></span>
-                </div>
-              </td>
-            </tr>
+                <td>
+                  <div class="player-info">
+                    <% case player.position 
+                       when "top" %>
+                    <span class="player-position">TOP</span>
+                    <% when "mid" %>
+                    <span class="player-position">MID</span>
+                    <% when 'adc' %>
+                    <span class="player-position">ADC</span>
+                    <% when 'support' %>                  
+                    <span class="player-position">SUP</span>
+                    <% when 'jungle' %>
+                    <span class="player-position">JNG</span>
+                    <% end %>
+                    <span class="player-name" data-id="<%= player.id %>" data-position="<%= player.position %>" data-salary="<%= player.salary %>"><%= player.name %></span>
 
-        <% end %>
-      </table>
+                    <button type="button" class="add-player-button">+</button>
+                  </div>
+                </td>
+              </tr>
+
+          <% end %>
+        </table>
+      </div>
+  
+      <div class="current-lineup-container">
+        <table class="current-lineup" cellpadding="0" border="0" align="center" cellspacing="0">
+              <tr class=<%= "current-lineup-top" %>>
+                <td>
+                  <div class="current-lineup-player-info">
+                    <span class="current-lineup-player-position">TOP</span>
+                    <span class="current-lineup-top-player-name" data-id="0" data-position="top" data-salary=""></span>
+                    <button type="button" class="remove-player-button">-</button>
+                  </div>
+                </td>
+              </tr>
+              <tr class=<%= "current-lineup-mid" %>>
+                <td>
+                  <div class="current-lineup-player-info">
+                    <span class="current-lineup-player-position">MID</span>
+                    <span class="current-lineup-mid-player-name" data-id="0" data-position="mid" data-salary=""></span>
+                    <button type="button" class="remove-player-button">-</button>
+                  </div>
+                </td>
+              </tr>
+              <tr class=<%= "current-lineup-adc" %>>
+                <td>
+                  <div class="current-lineup-player-info">
+                    <span class="current-lineup-player-position">ADC</span>
+                    <span class="current-lineup-adc-player-name" data-id="0" data-position="adc" data-salary=""></span>
+                    <button type="button" class="remove-player-button">-</button>
+                  </div>
+                </td>
+              </tr>
+              <tr class=<%= "current-lineup-support" %>>
+                <td>
+                  <div class="current-lineup-player-info">
+                    <span class="current-lineup-player-position">SUP</span>
+                    <span class="current-lineup-support-player-name" data-id="0" data-position="support" data-salary=""></span>
+                    <button type="button" class="remove-player-button">-</button>
+                  </div>
+                </td>
+              </tr>
+              <tr class=<%= "current-lineup-jungle" %>>
+                <td>
+                  <div class="current-lineup-player-info">
+                    <span class="current-lineup-player-position">JNG</span>
+                    <span class="current-lineup-jungle-player-name" data-id="0" data-position="jungle" data-salary=""></span>
+                    <button type="button" class="remove-player-button">-</button>
+                  </div>
+                </td>
+              </tr>
+              <tr class=<%= "current-lineup-flex-1" %>>
+                <td>
+                  <div class="current-lineup-player-info">
+                    <span class="current-lineup-player-position">FLEX 1</span>
+                    <span class="current-lineup-flex-1-player-name" data-id="0" data-position="flex-1" data-salary=""></span>
+                    <button type="button" class="remove-player-button">-</button>
+                  </div>
+                </td>
+              </tr>
+              <tr class=<%= "current-lineup-flex-2" %>>
+                <td>
+                  <div class="current-lineup-player-info">
+                    <span class="current-lineup-player-position">FLEX 2</span>
+                    <span class="current-lineup-flex-2-player-name" data-id="0" data-position="flex-2" data-salary=""></span>
+                    <button type="button" class="remove-player-button">-</button>
+                  </div>
+                </td>
+              </tr>
+              <tr class=<%= "current-lineup-flex-3" %>>
+                <td>
+                  <div class="current-lineup-player-info">
+                    <span class="current-lineup-player-position">FLEX 3</span>
+                    <span class="current-lineup-flex-3-player-name" data-id="0" data-position="flex-3" data-salary=""></span>
+                    <button type="button" class="remove-player-button">-</button>
+                  </div>
+                </td>
+              </tr>
+        </table>
+      </div>
 
 
     </div>
