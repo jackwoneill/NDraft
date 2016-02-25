@@ -12,10 +12,10 @@
   <% end %>
 
   <div>
-    <h2 name="salary">60000</h2>
+    <h2 class="salary">60000</h2>
   </div>
 
-<h2>DONT USE THIS SHIT BELOW, ITS A W.I.P</h2>
+<h2>THIS PLAYER SELECT IS STILL A W.I.P, BE SURE LET ME KNOW IF YOU MANAGE TO BREAK IT</h2>
     <div class="position-select-container">
       <ul class="position-select">
         <li>
@@ -116,129 +116,22 @@
                   </div>
                 </td>
               </tr>
-              <tr class=<%= "current-lineup-flex-1" %>>
-                <td>
-                  <div class="current-lineup-player-info">
-                    <span class="current-lineup-player-position">FLEX 1</span>
-                    <span class="current-lineup-flex-1-player-name" data-id="0" data-position="flex-1" data-salary=""></span>
-                    <button type="button" class="remove-player-button">-</button>
-                  </div>
-                </td>
-              </tr>
-              <tr class=<%= "current-lineup-flex-2" %>>
-                <td>
-                  <div class="current-lineup-player-info">
-                    <span class="current-lineup-player-position">FLEX 2</span>
-                    <span class="current-lineup-flex-2-player-name" data-id="0" data-position="flex-2" data-salary=""></span>
-                    <button type="button" class="remove-player-button">-</button>
-                  </div>
-                </td>
-              </tr>
-              <tr class=<%= "current-lineup-flex-3" %>>
-                <td>
-                  <div class="current-lineup-player-info">
-                    <span class="current-lineup-player-position">FLEX 3</span>
-                    <span class="current-lineup-flex-3-player-name" data-id="0" data-position="flex-3" data-salary=""></span>
-                    <button type="button" class="remove-player-button">-</button>
-                  </div>
-                </td>
-              </tr>
+              <% for i in 1..3 %>
+                <tr class=<%= "current-lineup-flex_#{i}" %>>
+                  <td>
+                    <div class="current-lineup-player-info">
+                      <span class="current-lineup-player-position">FLEX <%= i %></span>
+                      <span class=<%= "current-lineup-flex_#{i}-player-name"  %> data-id="0" data-position=<%= "flex_#{i}" %> data-salary=""></span>
+                      <button type="button" class="remove-player-button">-</button>
+                    </div>
+                  </td>
+                </tr>
+              <% end %>
         </table>
       </div>
 
 
     </div>
-
-
-  <div class="field">
-    <h2>Top</h2>
-    <% @tops.each do |player| %>
-
-      <%= radio_button("lineup", "top", "#{player.id}", 'data-salary' => player.salary) %>
-
-      <%= player.name %> 
-      <%= content_tag(:span, player.salary, :class => "player_salary", :id => "salary[#{player.id}]") %>      
-      <br>
-
-    <% end %>
-  </div>
-
-  <div class="field">
-    <h2>Mid</h2>
-    <% @mids.each do |player| %>
-
-      <%= radio_button("lineup", "mid", "#{player.id}", 'data-salary' => player.salary) %>
-
-      <%= player.name %> <br>
-
-    <% end %>
-  </div>
-
-  <div class="field">
-    <h2>ADC</h2>
-    <% @adcs.each do |player| %>
-
-      <%= radio_button("lineup", "adc", "#{player.id}", 'data-salary' => player.salary) %>
-
-      <%= player.name %> <br>
-
-    <% end %>
-  </div>
-
-  <div class="field">
-    <h2>Support</h2>
-    <% @supports.each do |player| %>
-
-      <%= radio_button("lineup", "support", "#{player.id}", 'data-salary' => player.salary) %>
-
-      <%= player.name %> <br>
-
-    <% end %>
-  </div>
-
-  <div class="field">
-    <h2>Jungler</h2>
-    <% @junglers.each do |player| %>
-
-      <%= radio_button("lineup", "jungler", "#{player.id}", 'data-salary' => player.salary) %>
-
-      <%= player.name %> <br>
-
-    <% end %>
-  </div>
-
-  <div class="field">
-    <h2>Flex #1</h2>
-    <% @players.each do |player| %>
-
-      <%= radio_button("lineup", "flex_1", "#{player.id}", 'data-salary' => player.salary) %>
-
-      <%= player.name %> <br>
-
-    <% end %>
-  </div>
-
-  <div class="field">
-    <h2>Flex #2</h2>
-    <% @players.each do |player| %>
-
-      <%= radio_button("lineup", "flex_2", "#{player.id}", 'data-salary' => player.salary) %>
-
-      <%= player.name %> <br>
-
-    <% end %>
-  </div>
-
-  <div class="field">
-    <h2>Flex #3</h2>
-    <% @players.each do |player| %>
-
-      <%= radio_button("lineup", "flex_3", "#{player.id}", 'data-salary' => player.salary) %>
-
-      <%= player.name %> <br>
-
-    <% end %>
-  </div>
 
   <%= hidden_field_tag :contest_id, @lineup.contest_id %>
 
