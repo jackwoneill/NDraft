@@ -190,7 +190,6 @@ class LineupsController < ApplicationController
     players = players.uniq
 
     if players.length != 8
-      # DUPLICATE PLAYER EXISTS #
       redirect_to contests_path
       return
     end

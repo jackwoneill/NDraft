@@ -13,8 +13,6 @@ display: inline;
   border:none;
   font-size:1em;
   color:blue;
-  padding-top: 5px;
-  padding-bottom: 5px;
   float: left;
   display: inline-block;
   color: #AFBFC6;
@@ -27,34 +25,59 @@ display: inline;
 .position-select > li > button:hover {
   cursor: pointer; 
   cursor: hand;
+  background-color: #E95144;
+
 }
 
 .position-select{
-  width: 36%;
+  width: 55%;
   list-style-type: none;
   margin: 0;
   padding: 0;
-
+/*  padding-top: 5px;
+  padding-bottom: 5px;*/
   overflow: hidden;
-  background-color: #273034
 }
 
 .position-select > li {
-  padding-top: 5px;
-  padding-bottom: 5px;
+/*  padding-top: 5px;
+  padding-bottom: 5px;*/
   float: left;
+  background-color: #273034
+
 }
 
 .position-select > li > a {
   display: inline-block;
   color: white;
   text-align: center;
-  padding: 14px 16px;
   text-decoration: none;
+  background-color: #273034
+
+}
+.search-container {
+  background:none;
+  float: left;
+  display: inline-block;
+  text-align: center;
+  height: 44px;
 }
 
-.position-select > li > a:hover,
-.position-select > li:hover {
+#search {
+  width: 145px;
+  position: relative;
+  bottom:-22px;
+  padding-right: 10px;
+  font-size:1em;
+  overflow: hidden;
+  display: table-cell;
+  vertical-align: bottom;
+  float: left;
+  text-decoration: none;
+  outline:none;
+}
+
+.position-select > li > a:hover {
   background-color: #E95144;
 }
 
@@ -64,14 +87,12 @@ display: inline;
   width: 55%;
   height: 450px;
   overflow: auto;
-
 }
 
 .player-select-container {
   max-width: 100%;
   height: 450px;
   overflow: hidden;
-
 }
 
 .player-select {

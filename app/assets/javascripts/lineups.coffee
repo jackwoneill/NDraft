@@ -49,6 +49,13 @@ ready = ->
         salary >= 0 and
         checkDuplicates() == true
 
+    ###
+        ON PLAYER SELECT
+        IF LINEUP[PLAYER.POSITION] EXISTS AND
+            ALL FLEXES EXIST
+        CHANGE OPACITY OF ROWS IDENTIFIED BY PLAYER.POSITION
+    ###
+
     salary = parseInt($(".salary").text(), 10)
 
     checkPlayers()
@@ -68,7 +75,6 @@ ready = ->
             $(".current-lineup-flex_"+i+"-player-name").attr("data-id", id)
             $(".current-lineup-flex_"+i+"-player-name").attr("data-salary", salary)
 
-
             #UPDATE CSS
             $('.player-select').find('[data-id="'+id+'\"]').parent().parent().parent().css backgroundColor: 'white'
             $('.player-select').find('[data-id="'+id+'\"]').parent().parent().parent().css opacity: 1.0
@@ -86,7 +92,6 @@ ready = ->
             $('.player-select').find('[data-id="'+id+'\"]').parent().parent().parent().css backgroundColor: '#273034'
             $('.player-select').find('[data-id="'+id+'\"]').parent().parent().parent().css opacity: 1.0
 
-
             $('.player-select').find('[data-id="'+id+'\"]').parent().find(".add-player-button").text("+")
             $(".current-lineup-flex_"+i+"-player-name").empty()
             $(".current-lineup-flex_"+i+"-player-name").attr("data-id", "")
@@ -95,17 +100,26 @@ ready = ->
 
             return true
 
-    ###### SUBMIT HANDLER #####
+    $rows = $('.player-select tr')
+    $('#search').keyup ->
+      val = '^(?=.*\\b' + $.trim($(this).val()).split(/\s+/).join('\\b)(?=.*\\b') + ').*$'
+      reg = RegExp(val, 'i')
+      text = undefined
+      $rows.show().filter(->
+        text = $(this).text().replace(/\s+/g, ' ')
+        !reg.test(text)
+      ).hide()
+      return
+
+    ### SUBMIT HANDLER ###
     $('#new_lineup').submit (e) ->
-
-        ### stop form from submitting normally ###
-
-        e.preventDefault()
 
         cid = $("#contest_id").val()
 
-        ### Send the data using post and fire some callback ###
+        ### Stop form from submitting ###
+        e.preventDefault()
 
+        ### Send the data using post and redirect to contest###
         $.post '/lineups', 
             lineup:
                 top: lineup["top"],
@@ -120,10 +134,9 @@ ready = ->
         success:
             window.location.href = "/contests/"+ cid
 
-########################## BEGIN EVENT HANDLING #################################
+    ###BEGIN EVENT HANDLING ###
 
-
-    ####### BEGIN SELECT FILTER EVENT #######
+    ### BEGIN SELECT FILTER EVENT ###
     $(".position-select > li > button").click ->
         pos = $(this).data('position-filter')
         $('.position-select').animate { scrollTop: 0 }, 'fast'
@@ -140,10 +153,9 @@ ready = ->
             p = "lineup-"+pos
             $("."+p).show()
 
-    ####### END SELECT FILTER EVENT #######
+    ### END SELECT FILTER EVENT ####
 
-
-    ####### BEGIN ADD PLAYER EVENT ######
+    ### BEGIN ADD PLAYER EVENT ###
 
     $(".add-player-button").click (evt) ->
         player = $(this).parent().find('.player-name')
@@ -194,9 +206,8 @@ ready = ->
                     for i in [1..3]
                         break if handleRemoveFlex(i, id, player_salary, name) == true
 
-
         $(".salary").text(salary.toString())
-    ####### END ADD PLAYER EVENT #######
+    ### END ADD PLAYER EVENT ####
 
 $(document).ready(ready)
 $(document).on('page:load', ready)
