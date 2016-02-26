@@ -19,7 +19,7 @@ display: inline;
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
-  outline:none;
+  outline: #AFBFC6 solid thin;
 }
 
 .position-select > li > button:hover {
@@ -71,7 +71,6 @@ display: inline;
   font-size:1em;
   overflow: hidden;
   display: table-cell;
-  vertical-align: bottom;
   float: left;
   text-decoration: none;
   outline:none;
