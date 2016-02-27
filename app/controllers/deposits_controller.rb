@@ -40,8 +40,12 @@ class DepositsController < ApplicationController
           :currency => "USD" },
         :description => "creating a payment" } ] } )
 
-    @payment.create
-    # PayPal::SDK.configure({
+    if @payment.create
+      @payment.id     # Payment Id
+    else
+      @payment.error  # Error Hash
+    end   
+   # PayPal::SDK.configure({
     #   :mode => "sandbox",
     #   :client_id => "AUoxo6GUZgd97HRGOeZlskhpURkTgR3VEYcowjTjyxFbPf6BSwIdcQjBe_RkU4b8DtxJxT3B2bFaEp0b",
     #   :client_secret => "ENMJrALA4a0P9CysZBRiWn-aOkQn0DGw7pJQhYCcLPW9azzmVLF8N1eUsxvHWBBhooPh5KZFk-PnT2Mk"
