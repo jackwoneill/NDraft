@@ -20,6 +20,8 @@ class DepositsController < ApplicationController
   # GET /deposits/new
   def new
     @deposit = Deposit.new
+    puts("begin")
+
  
    PayPal::SDK.configure({
       :mode => "sandbox",
@@ -29,6 +31,7 @@ class DepositsController < ApplicationController
 
     # :return_url => "https://devtools-paypal.com/guide/pay_paypal/ruby?success=true",
     # :cancel_url => "https://devtools-paypal.com/guide/pay_paypal/ruby?cancel=true" 
+    puts("configured")
 
 
     @payment = PayPal::SDK::REST::Payment.new({
@@ -44,17 +47,20 @@ class DepositsController < ApplicationController
           :currency => "USD" },
         :description => "creating a payment" } ] } )
 
+    print("After new")
 
-    
+
+
     if @payment.create
       @payment.id     # Payment Id
     else
       @payment.error  # Error Hash
     end  
 
+    print("after create")
+
     #  @payment.create
 
-     print("hello")
 
 
   end
