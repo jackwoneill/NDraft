@@ -25,7 +25,10 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem 'devise'
 
-gem 'activemerchant'
+gem 'paypal-sdk-rest'
+gem 'paypal-sdk-permissions'
+
+
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'

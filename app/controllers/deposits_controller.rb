@@ -1,6 +1,6 @@
 class DepositsController < ApplicationController
   before_action :set_deposit, only: [:show, :edit, :update, :destroy]
-  before_filter :ensure_admin
+  before_filter :ensure_admin, except: :ipn
 
   # GET /deposits
   # GET /deposits.json
@@ -21,6 +21,11 @@ class DepositsController < ApplicationController
 
   # GET /deposits/1/edit
   def edit
+  end
+
+  def ipn
+    print("HELLO")
+
   end
 
   # POST /deposits

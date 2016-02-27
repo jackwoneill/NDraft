@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+
+  get 'deposits/ipn'
+
   resources :transactions
   resources :deposits
   resources :notifications
@@ -30,6 +33,7 @@ Rails.application.routes.draw do
   get 'players/:id/clearscore' => 'players#clearscore', :as => :clearscore
 
   get 'slates/:id/scores' => 'slates#scores'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
