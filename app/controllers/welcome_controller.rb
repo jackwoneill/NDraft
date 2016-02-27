@@ -1,10 +1,5 @@
 
-class WelcomeController < ApplicationController
-
-  require 'paypal-sdk-rest'
-  include PayPal::SDK::REST
-  skip_before_filter :authenticate_user!
-  
+class WelcomeController < ApplicationController  
   def index
     if user_signed_in?
       redirect_to contests_path
