@@ -45,6 +45,8 @@ class DepositsController < ApplicationController
 
      @payment.create
 
+     print("hello")
+
 
   end
 
