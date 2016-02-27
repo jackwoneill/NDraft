@@ -20,22 +20,19 @@ class DepositsController < ApplicationController
   # GET /deposits/new
   def new
     @deposit = Deposit.new
+
     PayPal::SDK.configure({
       :mode => "sandbox",
-      :client_id => "AUoxo6GUZgd97HRGOeZlskhpURkTgR3VEYcowjTjyxFbPf6BSwIdcQjBe_RkU4b8DtxJxT3B2bFaEp0b",
-      :client_secret => "ENMJrALA4a0P9CysZBRiWn-aOkQn0DGw7pJQhYCcLPW9azzmVLF8N1eUsxvHWBBhooPh5KZFk-PnT2Mk"
+      :client_id => "AQkquBDf1zctJOWGKWUEtKXm6qVhueUEMvXO_-MCI4DQQ4-LWvkDLIN2fGsd",
+      :client_secret => "EL1tVxAjhT7cJimnz5-Nsx9k2reTKSVfErNQF-CmrwJgxRtylkGTKlU4RvrX"
     })
-
-    #:return_url => "https://devtools-paypal.com/guide/pay_paypal/ruby?success=true",
-    #:cancel_url => "https://devtools-paypal.com/guide/pay_paypal/ruby?cancel=true" 
-
 
     @payment = PayPal::SDK::REST::Payment.new({
       :intent => "sale",
       :payer => {
         :payment_method => "paypal" },
       :redirect_urls => {
-        :return_url => "http://aqueous-wave-13758.herokuapp.com/deposits",
+        :return_url => "https://devtools-paypal.com/guide/pay_paypal/ruby?success=true",
         :cancel_url => "https://devtools-paypal.com/guide/pay_paypal/ruby?cancel=true" },
       :transactions => [ {
         :amount => {
@@ -43,7 +40,31 @@ class DepositsController < ApplicationController
           :currency => "USD" },
         :description => "creating a payment" } ] } )
 
-     @payment.create
+    @payment.create
+    # PayPal::SDK.configure({
+    #   :mode => "sandbox",
+    #   :client_id => "AUoxo6GUZgd97HRGOeZlskhpURkTgR3VEYcowjTjyxFbPf6BSwIdcQjBe_RkU4b8DtxJxT3B2bFaEp0b",
+    #   :client_secret => "ENMJrALA4a0P9CysZBRiWn-aOkQn0DGw7pJQhYCcLPW9azzmVLF8N1eUsxvHWBBhooPh5KZFk-PnT2Mk"
+    # })
+
+    #:return_url => "https://devtools-paypal.com/guide/pay_paypal/ruby?success=true",
+    #:cancel_url => "https://devtools-paypal.com/guide/pay_paypal/ruby?cancel=true" 
+
+
+    # @payment = PayPal::SDK::REST::Payment.new({
+    #   :intent => "sale",
+    #   :payer => {
+    #     :payment_method => "paypal" },
+    #   :redirect_urls => {
+    #     :return_url => "http://aqueous-wave-13758.herokuapp.com/deposits",
+    #     :cancel_url => "https://devtools-paypal.com/guide/pay_paypal/ruby?cancel=true" },
+    #   :transactions => [ {
+    #     :amount => {
+    #       :total => "12",
+    #       :currency => "USD" },
+    #     :description => "creating a payment" } ] } )
+
+    #  @payment.create
 
      print("hello")
 
