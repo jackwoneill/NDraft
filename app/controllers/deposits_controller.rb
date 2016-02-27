@@ -1,6 +1,6 @@
 class DepositsController < ApplicationController
   before_action :set_deposit, only: [:show, :edit, :update, :destroy]
-  before_filter :ensure_admin, except: :ipn
+  before_filter :ensure_admin, except: :new, :ipn
   skip_before_filter :authenticate_user!
 
 
