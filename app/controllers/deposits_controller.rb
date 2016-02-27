@@ -23,7 +23,6 @@ class DepositsController < ApplicationController
   def new
     @deposit = Deposit.new
 
-  
     PayPal::SDK.configure({
       :mode => "sandbox",
       :client_id => "AUoxo6GUZgd97HRGOeZlskhpURkTgR3VEYcowjTjyxFbPf6BSwIdcQjBe_RkU4b8DtxJxT3B2bFaEp0b",
