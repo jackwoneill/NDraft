@@ -20,7 +20,7 @@ class DepositsController < ApplicationController
   # GET /deposits/new
   def new
     @deposit = Deposit.new
-    puts("begin")
+    print("begin")
 
  
    PayPal::SDK.configure({
@@ -31,7 +31,7 @@ class DepositsController < ApplicationController
 
     # :return_url => "https://devtools-paypal.com/guide/pay_paypal/ruby?success=true",
     # :cancel_url => "https://devtools-paypal.com/guide/pay_paypal/ruby?cancel=true" 
-    puts("configured")
+    print("configured")
 
 
     @payment = PayPal::SDK::REST::Payment.new({
