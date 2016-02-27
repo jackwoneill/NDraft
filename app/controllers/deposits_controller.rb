@@ -27,8 +27,8 @@ class DepositsController < ApplicationController
       :client_secret => "ENMJrALA4a0P9CysZBRiWn-aOkQn0DGw7pJQhYCcLPW9azzmVLF8N1eUsxvHWBBhooPh5KZFk-PnT2Mk"
     })
 
-    :return_url => "https://devtools-paypal.com/guide/pay_paypal/ruby?success=true",
-    :cancel_url => "https://devtools-paypal.com/guide/pay_paypal/ruby?cancel=true" 
+    # :return_url => "https://devtools-paypal.com/guide/pay_paypal/ruby?success=true",
+    # :cancel_url => "https://devtools-paypal.com/guide/pay_paypal/ruby?cancel=true" 
 
 
     @payment = PayPal::SDK::REST::Payment.new({
