@@ -1,9 +1,11 @@
 class DepositsController < ApplicationController
   require 'paypal-sdk-rest'
+  require 'json'
   include PayPal::SDK::REST
+
   before_action :set_deposit, only: [:show, :edit, :update, :destroy]
   before_filter :ensure_admin, except: [:new, :ipn]
-  skip_before_filter :authenticate_user!
+  skip_before_filter :authenticate_user!, only: :ipn
 
   # GET /deposits
   # GET /deposits.json
@@ -20,8 +22,6 @@ class DepositsController < ApplicationController
   # GET /deposits/new
   def new
     @deposit = Deposit.new
-    print("begin")
-
  
    PayPal::SDK.configure({
       :mode => "sandbox",
@@ -31,7 +31,6 @@ class DepositsController < ApplicationController
 
     # :return_url => "https://devtools-paypal.com/guide/pay_paypal/ruby?success=true",
     # :cancel_url => "https://devtools-paypal.com/guide/pay_paypal/ruby?cancel=true" 
-    print("configured")
 
 
     @payment = PayPal::SDK::REST::Payment.new({
@@ -47,21 +46,23 @@ class DepositsController < ApplicationController
           :currency => "USD" },
         :description => "creating a payment" } ] } )
 
-    print("After new")
 
 
 
     if @payment.create
-      @payment.id     # Payment Id
+      print(@payment.id)     # Payment Id
     else
       @payment.error  # Error Hash
     end  
 
-    print("after create")
+    @deposit.payment_id = @payment.id
+    @deposit.user_id = current_user.id
+    @deposit.completed = false
 
-    #  @payment.create
-
-
+    #links = JSON.parse @payment.links
+    print("1234")
+    print @payment.links[1].href
+    redirect_to @payment.links[1].href
 
   end
 
