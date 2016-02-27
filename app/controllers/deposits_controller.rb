@@ -22,8 +22,9 @@ class DepositsController < ApplicationController
   # GET /deposits/new
   def new
     @deposit = Deposit.new
- 
-   PayPal::SDK.configure({
+
+  
+    PayPal::SDK.configure({
       :mode => "sandbox",
       :client_id => "AUoxo6GUZgd97HRGOeZlskhpURkTgR3VEYcowjTjyxFbPf6BSwIdcQjBe_RkU4b8DtxJxT3B2bFaEp0b",
       :client_secret => "ENMJrALA4a0P9CysZBRiWn-aOkQn0DGw7pJQhYCcLPW9azzmVLF8N1eUsxvHWBBhooPh5KZFk-PnT2Mk"
@@ -38,7 +39,7 @@ class DepositsController < ApplicationController
       :payer => {
         :payment_method => "paypal" },
       :redirect_urls => {
-        :return_url => "http://aqueous-wave-13758.herokuapp.com/deposits",
+        :return_url => "http://aqueous-wave-13758.herokuapp.com/ipn",
         :cancel_url => "https://devtools-paypal.com/guide/pay_paypal/ruby?cancel=true" },
       :transactions => [ {
         :amount => {
@@ -63,6 +64,10 @@ class DepositsController < ApplicationController
     print("1234")
     print @payment.links[1].href
     redirect_to @payment.links[1].href
+
+  end
+
+  def new
 
   end
 
