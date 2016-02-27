@@ -38,7 +38,7 @@ class DepositsController < ApplicationController
       :payer => {
         :payment_method => "paypal" },
       :redirect_urls => {
-        :return_url => "http://aqueous-wave-13758.herokuapp.com/ipn",
+        :return_url => "https://aqueous-wave-13758.herokuapp.com/ipn",
         :cancel_url => "https://devtools-paypal.com/guide/pay_paypal/ruby?cancel=true" },
       :transactions => [ {
         :amount => {
@@ -52,6 +52,7 @@ class DepositsController < ApplicationController
     if @payment.create
       print(@payment.id)     # Payment Id
     else
+      "BOYOHBOY"
       @payment.error  # Error Hash
     end  
 
@@ -63,6 +64,9 @@ class DepositsController < ApplicationController
     print("1234")
     print @payment.links[1].href
     redirect_to @payment.links[1].href
+
+    redirect_to contests_path
+
 
   end
 
