@@ -83,8 +83,8 @@ class DepositsController < ApplicationController
     puts "yzy"
 
     if @payment.execute( :payer_id => "6XTHDTMHW9ZN4" )
-      deposit.completed = true
-      deposit.save
+      # deposit.completed = true
+      # deposit.save
       redirect_to contests_path
     end
 
