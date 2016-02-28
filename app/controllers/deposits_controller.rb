@@ -82,6 +82,7 @@ class DepositsController < ApplicationController
 
     if @payment.execute( :payer_id => "#{p_payer_id}" )
       print("ay we made it")
+      redirect_to contests_path and return
     else
       @payment.error
     end
