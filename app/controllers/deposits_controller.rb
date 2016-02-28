@@ -53,7 +53,6 @@ class DepositsController < ApplicationController
       @deposit.user_id = current_user.id
       @deposit.completed = false
       @deposit.save
-      print(@deposit)
 
       redirect_to @payment.links[1].href
            # Payment Id
