@@ -67,8 +67,7 @@ class DepositsController < ApplicationController
   end
 
   def verify
-    puts(params)
-    puts("hello")
+    puts "hello"
     pay_id = params[:paymentId]
     payer_id = params[:PayerID]
 
@@ -76,7 +75,6 @@ class DepositsController < ApplicationController
     @payment = PayPal::SDK::REST::Payment.new({
       :payment_id => "#{pay_id}"})
 
-    puts @payment
 
     if @payment.execute( :payer_id => "#{payer_id}" )
       deposit.completed = true
