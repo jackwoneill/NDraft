@@ -54,8 +54,7 @@ class DepositsController < ApplicationController
       @deposit.completed = false
       @deposit.save
 
-      redirect_to @payment.links[1].href
-           # Payment Id
+      redirect_to @payment.links[1].href and return
     else
       @payment.error  # Error Hash
     end  
@@ -79,7 +78,6 @@ class DepositsController < ApplicationController
       :payment_id => "#{pay_id}"})
 
     puts "lool"
-    puts @payment 
     puts "yzy"
 
     if @payment.execute( :payer_id => "#{p_payer_id}" )
