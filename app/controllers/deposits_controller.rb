@@ -68,8 +68,10 @@ class DepositsController < ApplicationController
 
   def verify
     puts "hello"
+    puts "try 2"
     pay_id = params[:paymentId]
     payer_id = params[:PayerID]
+    puts "preDepo"
 
     deposit = Deposit.where(payment_id: pay_id).where(user_id: current_user.id).where(completed: false)
     puts "outchea"
