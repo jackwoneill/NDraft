@@ -75,7 +75,7 @@ class DepositsController < ApplicationController
     #deposit = Deposit.where(payment_id: pay_id).where(user_id: current_user.id).where(completed: false)
     #puts deposit.id
     @payment = PayPal::SDK::REST::Payment.new({
-      :payment_id => "#{pay_id}"})
+      :paymentId => "#{pay_id}"})
 
     puts "lool"
     puts "yzy"
