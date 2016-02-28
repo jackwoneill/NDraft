@@ -67,20 +67,15 @@ class DepositsController < ApplicationController
   end
 
   def verify
-    puts "hello"
-    puts "try 2"
     pay_id = params[:paymentId]
     payer_id = params[:PayerID]
-    puts "preDepo"
 
     deposit = Deposit.where(payment_id: pay_id).where(user_id: current_user.id).where(completed: false)
-    puts "outchea"
+    puts deposit
     @payment = PayPal::SDK::REST::Payment.new({
       :payment_id => "#{pay_id}"})
 
-    puts "we made it here"
-    if @payment.execute( :payer_id => "#{payer_id}" )
-      puts "somehow to here"
+    if @payment.execute( :payer_id => "6XTHDTMHW9ZN4" )
       deposit.completed = true
       deposit.save
       redirect_to contests_path
