@@ -38,7 +38,7 @@ class DepositsController < ApplicationController
       :payer => {
         :payment_method => "paypal" },
       :redirect_urls => {
-        :return_url => "http://aqueous-wave-13758.herokuapp.com/success",
+        :return_url => "http://aqueous-wave-13758.herokuapp.com/deposits/success",
         :cancel_url => "https://devtools-paypal.com/guide/pay_paypal/ruby?cancel=true" },
       :transactions => [ {
         :amount => {
