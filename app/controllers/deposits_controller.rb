@@ -4,7 +4,7 @@ class DepositsController < ApplicationController
   include PayPal::SDK::REST
 
   before_action :set_deposit, only: [:show, :edit, :update, :destroy]
-  before_filter :ensure_admin, except: [:new, :ipn]
+  before_filter :ensure_admin, except: [:new, :success]
   skip_before_filter :authenticate_user!, only: :ipn
 
   # GET /deposits
@@ -22,8 +22,6 @@ class DepositsController < ApplicationController
   # GET /deposits/new
   def new
     @deposit = Deposit.new
-    print "BOYOHBOY"
-
 
     PayPal::SDK.configure({
       :mode => "sandbox",
@@ -40,7 +38,7 @@ class DepositsController < ApplicationController
       :payer => {
         :payment_method => "paypal" },
       :redirect_urls => {
-        :return_url => "http://aqueous-wave-13758.herokuapp.com/ipn",
+        :return_url => "http://aqueous-wave-13758.herokuapp.com/success",
         :cancel_url => "https://devtools-paypal.com/guide/pay_paypal/ruby?cancel=true" },
       :transactions => [ {
         :amount => {
@@ -50,23 +48,22 @@ class DepositsController < ApplicationController
 
 
 
-    print(@payment)
+    puts(@payment)
 
     if @payment.create
-      print(@payment.id)     # Payment Id
+      @deposit.payment_id = @payment.id
+      @deposit.user_id = current_user.id
+      @deposit.completed = false
+      @deposit.save
+      print(@deposit)
+
+      redirect_to @payment.links[1].href
+           # Payment Id
     else
       @payment.error  # Error Hash
     end  
 
-    @deposit.payment_id = @payment.id
-    @deposit.user_id = current_user.id
-    @deposit.completed = false
-    @deposit.save
 
-    #links = JSON.parse @payment.links
-    print("1234")
-    print @payment.links[1].href
-    redirect_to @payment.links[1].href
 
 
   end
@@ -78,6 +75,7 @@ class DepositsController < ApplicationController
   def success
     pay_id = params[:paymentId]
     payer_id = params[:PayerID]
+
 
     deposit = Deposit.where(payment_id: pay_id).where(user_id: current_user.id).where(completed: false)
     @payment = PayPal::SDK::REST::Payment.new({
