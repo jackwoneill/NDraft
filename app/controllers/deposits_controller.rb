@@ -67,6 +67,8 @@ class DepositsController < ApplicationController
   end
 
   def verify
+    puts(params)
+    puts("hello")
     pay_id = params[:paymentId]
     payer_id = params[:PayerID]
 
