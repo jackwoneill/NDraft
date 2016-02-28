@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
 
-  get 'deposits/success'
+  get 'deposits/process'
 
   resources :transactions
   resources :deposits

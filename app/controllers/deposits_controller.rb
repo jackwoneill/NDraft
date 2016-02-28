@@ -48,8 +48,6 @@ class DepositsController < ApplicationController
 
 
 
-    puts(@payment)
-
     if @payment.create
       @deposit.payment_id = @payment.id
       @deposit.user_id = current_user.id
@@ -72,7 +70,7 @@ class DepositsController < ApplicationController
   def edit
   end
 
-  def success
+  def process
     pay_id = params[:paymentId]
     payer_id = params[:PayerID]
 
@@ -80,6 +78,9 @@ class DepositsController < ApplicationController
     deposit = Deposit.where(payment_id: pay_id).where(user_id: current_user.id).where(completed: false)
     @payment = PayPal::SDK::REST::Payment.new({
       :payment_id => "#{pay_id}"})
+
+    puts @payment
+
     if @payment.execute( :payer_id => "#{payer_id}" )
       deposit.completed = true
       deposit.save
