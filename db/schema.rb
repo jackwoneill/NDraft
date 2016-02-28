@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160227224529) do
+ActiveRecord::Schema.define(version: 20160228041522) do
 
   create_table "balances", force: :cascade do |t|
     t.integer  "user_id"

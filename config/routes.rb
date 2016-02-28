@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
 
-  get 'deposits/ipn'
+  get 'deposits/success'
 
   resources :transactions
   resources :deposits
