@@ -21,37 +21,7 @@ class WelcomeController < ApplicationController
   #   # => Request[post]: https://svcs.sandbox.paypal.com/Permissions/RequestPermissions
   #   # => Response[200]: OK, Duration: 1.296s
   #   response.token
-  #   @payment = Payment.new({
-  #     :intent => "sale",
-  #     :payer => {
-  #       :payment_method => "credit_card",
-  #       :funding_instruments => [{
-  #         :credit_card => {
-  #           :type => "visa",
-  #           :number => "4567516310777851",
-  #           :expire_month => "11",
-  #           :expire_year => "2018",
-  #           :cvv2 => "874",
-  #           :first_name => "Joe",
-  #           :last_name => "Shopper",
-  #           :billing_address => {
-  #             :line1 => "52 N Main ST",
-  #             :city => "Johnstown",
-  #             :state => "OH",
-  #             :postal_code => "43210",
-  #             :country_code => "US" }}}]},
-  #     :transactions => [{
-  #       :item_list => {
-  #         :items => [{
-  #           :name => "item",
-  #           :sku => "item",
-  #           :price => "1",
-  #           :currency => "USD",
-  #           :quantity => 1 }]},
-  #       :amount => {
-  #         :total => "1.00",
-  #         :currency => "USD" },
-  #       :description => "This is the payment transaction description." }]})
+
 
   end
 end

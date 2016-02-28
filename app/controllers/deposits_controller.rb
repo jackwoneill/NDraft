@@ -22,6 +22,8 @@ class DepositsController < ApplicationController
   # GET /deposits/new
   def new
     @deposit = Deposit.new
+    print "BOYOHBOY"
+
 
     PayPal::SDK.configure({
       :mode => "sandbox",
@@ -52,7 +54,6 @@ class DepositsController < ApplicationController
     if @payment.create
       print(@payment.id)     # Payment Id
     else
-      "BOYOHBOY"
       @payment.error  # Error Hash
     end  
 
@@ -65,12 +66,6 @@ class DepositsController < ApplicationController
     print @payment.links[1].href
     redirect_to @payment.links[1].href
 
-    redirect_to contests_path
-
-
-  end
-
-  def new
 
   end
 
