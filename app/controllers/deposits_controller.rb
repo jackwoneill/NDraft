@@ -82,6 +82,8 @@ class DepositsController < ApplicationController
     puts @payment 
     puts "yzy"
 
+    
+
     if @payment.execute( :payer_id => "#{p_payer_id}" )
       print("ay we made it")
     else

@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
 
-  get 'deposits/verify'
+  get 'deposits/verify#'
 
   resources :transactions
   resources :deposits
