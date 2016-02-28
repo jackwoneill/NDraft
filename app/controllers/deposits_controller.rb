@@ -60,9 +60,6 @@ class DepositsController < ApplicationController
       @payment.error  # Error Hash
     end  
 
-
-
-
   end
 
   # GET /deposits/1/edit
@@ -70,21 +67,7 @@ class DepositsController < ApplicationController
   end
 
   def process
-    pay_id = params[:paymentId]
-    payer_id = params[:PayerID]
 
-
-    deposit = Deposit.where(payment_id: pay_id).where(user_id: current_user.id).where(completed: false)
-    @payment = PayPal::SDK::REST::Payment.new({
-      :payment_id => "#{pay_id}"})
-
-    puts @payment
-
-    if @payment.execute( :payer_id => "#{payer_id}" )
-      deposit.completed = true
-      deposit.save
-      redirect_to contests_path
-    end
 
   end
 
