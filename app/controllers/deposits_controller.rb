@@ -85,7 +85,7 @@ class DepositsController < ApplicationController
     @payment.execute( :payer_id => "#{p_payer_id}" )
       # deposit.completed = true
       # deposit.save
-    puts "a"
+    print("a")
 
   end
 
