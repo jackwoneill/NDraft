@@ -69,7 +69,7 @@ class DepositsController < ApplicationController
   def verify
     print("mool")
     pay_id = params[:paymentId]
-    payer_id = params[:PayerID]
+    p_payer_id = params[:PayerID]
     print("pay_id=#{pay_id}")
     print("payer_id=#{payer_id}")
 
@@ -82,9 +82,10 @@ class DepositsController < ApplicationController
     puts @payment 
     puts "yzy"
 
-    @payment.execute( :payer_id => "#{payer_id}" )
+    @payment.execute( :payer_id => "#{p_payer_id}" )
       # deposit.completed = true
       # deposit.save
+    puts "a"
 
   end
 
