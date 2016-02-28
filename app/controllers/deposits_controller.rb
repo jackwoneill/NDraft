@@ -71,7 +71,7 @@ class DepositsController < ApplicationController
     pay_id = params[:paymentId]
     p_payer_id = params[:PayerID]
     print("pay_id=#{pay_id}")
-    print("payer_id=#{payer_id}")
+    print("payer_id=#{p_payer_id}")
 
     #deposit = Deposit.where(payment_id: pay_id).where(user_id: current_user.id).where(completed: false)
     #puts deposit.id
