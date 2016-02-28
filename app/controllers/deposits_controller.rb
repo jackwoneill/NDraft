@@ -73,7 +73,10 @@ class DepositsController < ApplicationController
     deposit = Deposit.where(payment_id: pay_id).where(user_id: current_user.id).where(completed: false)
     puts deposit
     @payment = PayPal::SDK::REST::Payment.new({
-      :payment_id => "#{pay_id}"})
+      :payment_id => "#{pay_id.to}"})
+
+    puts @payment 
+    puts "here"
 
     if @payment.execute( :payer_id => "6XTHDTMHW9ZN4" )
       deposit.completed = true
