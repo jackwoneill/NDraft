@@ -4,7 +4,7 @@ class DepositsController < ApplicationController
   include PayPal::SDK::REST
 
   before_action :set_deposit, only: [:show, :edit, :update, :destroy]
-  before_filter :ensure_admin, except: [:new]
+  before_filter :ensure_admin, except: [:new, :create]
   skip_before_filter :authenticate_user!, only: [:verify, :webhookIPN]
 
   # GET /deposits
@@ -66,17 +66,14 @@ class DepositsController < ApplicationController
         :payment_method => "paypal" },
       :redirect_urls => {
         :return_url => "http://aqueous-wave-13758.herokuapp.com/deposits/verify",
-        :cancel_url => "http://aqueous-wave-13758.herokuapp.com/deposits/cancel" },
+        :cancel_url => "http://wooster.edu" },
       :transactions => [ {
         :amount => {
           :total => "#{@deposit.amount}",
           :currency => "USD" },
         :description => "creating a payment" } ] } )
 
-    puts "yellow"
-
     if @payment.create
-      puts "reda"
       @deposit.payment_id = @payment.id
       @deposit.user_id = current_user.id
       @deposit.completed = false
