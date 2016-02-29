@@ -22,6 +22,46 @@ class DepositsController < ApplicationController
   # GET /deposits/new
   def new
     @deposit = Deposit.new
+  end
+
+  def handle
+
+
+  end
+
+  # GET /deposits/1/edit
+  def edit
+  end
+
+  def verify
+    #Change to use ipn and not execute payment in here
+    #Create ipn that does the payment execution after webhook
+    #Create a verify that takes the payment id and checks if it has been executed("state:executed -> See paypal for other states")
+    #In ipn grab paypal transaction information and ensure deposit amount is same as when it was created
+    #In verify maybe just do a bunch of checks against system to ensure everything good
+    #Or just use verify as a confirmation page?
+    pay_id = params[:paymentId]
+    p_payer_id = params[:PayerID]
+    print("pay_id=#{pay_id}")
+    print("payer_id=#{p_payer_id}")
+
+    #deposit = Deposit.where(payment_id: pay_id).where(user_id: current_user.id).where(completed: false)
+    #puts deposit.id
+    @payment = PayPal::SDK::REST::Payment.find(pay_id)
+
+    if @payment.execute( :payer_id => "#{p_payer_id}" )
+      puts @payment.transactions[0].amount.total
+      redirect_to contests_path and return
+    else
+      @payment.error
+    end
+  end
+
+  # POST /deposits
+  # POST /deposits.json
+  def create
+    @deposit = Deposit.new(deposit_params)
+    #@deposit.user_id = current_user.id
 
     PayPal::SDK.configure({
       :mode => "sandbox",
@@ -39,16 +79,17 @@ class DepositsController < ApplicationController
         :payment_method => "paypal" },
       :redirect_urls => {
         :return_url => "http://aqueous-wave-13758.herokuapp.com/deposits/verify",
-        :cancel_url => "https://devtools-paypal.com/guide/pay_paypal/ruby?cancel=true" },
+        :cancel_url => "http://aqueous-wave-13758.herokuapp.com/deposits/cancel" },
       :transactions => [ {
         :amount => {
-          :total => "12",
+          :total => "#{@deposit.amount}",
           :currency => "USD" },
         :description => "creating a payment" } ] } )
 
-
+    puts "yellow"
 
     if @payment.create
+      puts "reda"
       @deposit.payment_id = @payment.id
       @deposit.user_id = current_user.id
       @deposit.completed = false
@@ -57,56 +98,28 @@ class DepositsController < ApplicationController
       redirect_to @payment.links[1].href and return
     else
       @payment.error  # Error Hash
+      redirect_to new_deposit_path
     end  
-
   end
 
-  # GET /deposits/1/edit
-  def edit
-  end
+  def webhookIPN
+    # pay_id = params[:paymentId]
+    # p_payer_id = params[:PayerID]
+    # print("pay_id=#{pay_id}")
+    # print("payer_id=#{p_payer_id}")
 
-  def verify
-    print("mool")
-    pay_id = params[:paymentId]
-    p_payer_id = params[:PayerID]
-    print("pay_id=#{pay_id}")
-    print("payer_id=#{p_payer_id}")
+    # #deposit = Deposit.where(payment_id: pay_id).where(user_id: current_user.id).where(completed: false)
+    # #puts deposit.id
+    # @payment = PayPal::SDK::REST::Payment.find({
+    #   :id => "#{pay_id}"})
 
-    #deposit = Deposit.where(payment_id: pay_id).where(user_id: current_user.id).where(completed: false)
-    #puts deposit.id
-    @payment = PayPal::SDK::REST::Payment.new({
-      :id => "#{pay_id}"})
+    # if @payment.execute( :payer_id => "#{p_payer_id}" )
+    #   puts @payment.transactions[0].amount.total
+    #   redirect_to contests_path and return
+    # else
+    #   @payment.error
+    # end
 
-    puts "lool"
-    puts "yzy"
-
-    if @payment.execute( :payer_id => "#{p_payer_id}" )
-      print("ay we made it")
-      redirect_to contests_path and return
-    else
-      @payment.error
-    end
-      # deposit.completed = true
-      # deposit.save
-    print("a")
-
-  end
-
-  # POST /deposits
-  # POST /deposits.json
-  def create
-    @deposit = Deposit.new(deposit_params)
-    @deposit.user_id = current_user.id
-
-    respond_to do |format|
-      if @deposit.save
-        format.html { redirect_to @deposit, notice: 'Deposit was successfully created.' }
-        format.json { render :show, status: :created, location: @deposit }
-      else
-        format.html { render :new }
-        format.json { render json: @deposit.errors, status: :unprocessable_entity }
-      end
-    end
   end
 
   # PATCH/PUT /deposits/1
