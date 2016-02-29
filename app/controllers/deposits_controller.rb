@@ -99,6 +99,8 @@ class DepositsController < ApplicationController
     #deposit = Deposit.where(payment_id: pay_id).where(user_id: current_user.id).where(completed: false)
     #puts deposit.id
     @payment = PayPal::SDK::REST::Payment.find(pay_id)
+    puts @payment.state
+    puts "STATE PRIOR"
     @deposit = Deposit.where(payment_id: @payment.id)
     if @deposit.completed == false
       if @payment.execute( :payer_id => "#{p_payer_id}" )
