@@ -99,12 +99,9 @@ class DepositsController < ApplicationController
     #deposit = Deposit.where(payment_id: pay_id).where(user_id: current_user.id).where(completed: false)
     #puts deposit.id
     @payment = PayPal::SDK::REST::Payment.find(pay_id)
-
-    if @payment.execute( :payer_id => "#{p_payer_id}" )
-      @deposit = Deposit.where(payment_id: @payment.id)
-
-      if @deposit.completed == false
-
+    @deposit = Deposit.where(payment_id: @payment.id)
+    if @deposit.completed == false
+      if @payment.execute( :payer_id => "#{p_payer_id}" )
         user = User.find(@deposit.user_id)
         user.balance += @payment.transactions[0].amount.total
         user.save
@@ -117,12 +114,10 @@ class DepositsController < ApplicationController
         @deposit.save
 
         puts @payment.transactions[0].amount.total
+      else
+        @payment.error
       end
-
-    else
-      @payment.error
     end
-
   end
 
   # PATCH/PUT /deposits/1
