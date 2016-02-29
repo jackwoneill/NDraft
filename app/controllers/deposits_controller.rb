@@ -40,21 +40,8 @@ class DepositsController < ApplicationController
     #In ipn grab paypal transaction information and ensure deposit amount is same as when it was created
     #In verify maybe just do a bunch of checks against system to ensure everything good
     #Or just use verify as a confirmation page?
-    pay_id = params[:paymentId]
-    p_payer_id = params[:PayerID]
-    print("pay_id=#{pay_id}")
-    print("payer_id=#{p_payer_id}")
+    redirect_to contests_path
 
-    #deposit = Deposit.where(payment_id: pay_id).where(user_id: current_user.id).where(completed: false)
-    #puts deposit.id
-    @payment = PayPal::SDK::REST::Payment.find(pay_id)
-
-    if @payment.execute( :payer_id => "#{p_payer_id}" )
-      puts @payment.transactions[0].amount.total
-      redirect_to contests_path and return
-    else
-      @payment.error
-    end
   end
 
   # POST /deposits
@@ -103,22 +90,38 @@ class DepositsController < ApplicationController
   end
 
   def webhookIPN
-    # pay_id = params[:paymentId]
-    # p_payer_id = params[:PayerID]
-    # print("pay_id=#{pay_id}")
-    # print("payer_id=#{p_payer_id}")
+    pay_id = params[:paymentId]
+    p_payer_id = params[:PayerID]
+    print("pay_id=#{pay_id}")
+    print("payer_id=#{p_payer_id}")
 
-    # #deposit = Deposit.where(payment_id: pay_id).where(user_id: current_user.id).where(completed: false)
-    # #puts deposit.id
-    # @payment = PayPal::SDK::REST::Payment.find({
-    #   :id => "#{pay_id}"})
 
-    # if @payment.execute( :payer_id => "#{p_payer_id}" )
-    #   puts @payment.transactions[0].amount.total
-    #   redirect_to contests_path and return
-    # else
-    #   @payment.error
-    # end
+    #deposit = Deposit.where(payment_id: pay_id).where(user_id: current_user.id).where(completed: false)
+    #puts deposit.id
+    @payment = PayPal::SDK::REST::Payment.find(pay_id)
+
+    if @payment.execute( :payer_id => "#{p_payer_id}" )
+      @deposit = Deposit.where(payment_id: @payment.id)
+
+      if @deposit.completed == false
+
+        user = User.find(@deposit.user_id)
+        user.balance += @payment.transactions[0].amount.total
+        user.save
+
+        balance = Balance.where(user_id: @deposit.user_id).first
+        balance.amount += @payment.transactions[0].amount.total
+        balance.save
+       
+        @deposit.completed = true
+        @deposit.save
+
+        puts @payment.transactions[0].amount.total
+      end
+
+    else
+      @payment.error
+    end
 
   end
 
