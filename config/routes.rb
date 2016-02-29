@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
 
   get 'deposits/verify'
+  post 'deposits/webhookIPN'
 
   resources :transactions
   resources :deposits
