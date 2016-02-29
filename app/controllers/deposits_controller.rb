@@ -4,8 +4,8 @@ class DepositsController < ApplicationController
   include PayPal::SDK::REST
 
   before_action :set_deposit, only: [:show, :edit, :update, :destroy]
-  before_filter :ensure_admin, except: [:new, :verify]
-  skip_before_filter :authenticate_user!, only: :verify
+  before_filter :ensure_admin, except: [:new, :verify, :webhookIPN]
+  skip_before_filter :authenticate_user!, only: [:verify, :webhookIPN]
 
   # GET /deposits
   # GET /deposits.json
