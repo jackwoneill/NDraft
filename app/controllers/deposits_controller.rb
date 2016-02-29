@@ -95,7 +95,6 @@ class DepositsController < ApplicationController
     print("pay_id=#{pay_id}")
     print("payer_id=#{p_payer_id}")
 
-
     #deposit = Deposit.where(payment_id: pay_id).where(user_id: current_user.id).where(completed: false)
     #puts deposit.id
     @payment = PayPal::SDK::REST::Payment.find(pay_id)
