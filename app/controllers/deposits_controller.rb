@@ -6,6 +6,8 @@ class DepositsController < ApplicationController
   before_action :set_deposit, only: [:show, :edit, :update, :destroy]
   before_filter :ensure_admin, except: [:new, :create]
   skip_before_filter :authenticate_user!, only: [:verify, :webhookIPN]
+  skip_before_filter :verify_authenticity_token, only: :webhookIPN
+
 
   # GET /deposits
   # GET /deposits.json
