@@ -58,12 +58,12 @@ class DepositsController < ApplicationController
     @deposit = Deposit.new(deposit_params)
     #@deposit.user_id = current_user.id
 
-    # PayPal::SDK.configure({
-    #   :mode => "sandbox",
-    #   :client_id => "AUoxo6GUZgd97HRGOeZlskhpURkTgR3VEYcowjTjyxFbPf6BSwIdcQjBe_RkU4b8DtxJxT3B2bFaEp0b",
-    #   :client_secret => "ENMJrALA4a0P9CysZBRiWn-aOkQn0DGw7pJQhYCcLPW9azzmVLF8N1eUsxvHWBBhooPh5KZFk-PnT2Mk"
-    # })
-    PayPal::SDK::Core::Config.load('spec/config/paypal.yml',  ENV['RACK_ENV'] || 'development')
+    PayPal::SDK.configure({
+      :mode => "sandbox",
+      :client_id => "AbX1ZA9XsdUGnVRNDJwvyzURE9BLbmDAuM1DxExjvJDEgAVdNMHZXUP_IOnGnZVqOL6_s0PlQ2yBSy7p",
+      :client_secret => "ECTW0SNazTtQPF7pO7jB0v8xLOQhPv6wWZXGaTDyQr0sIwQUAlqCrsuQB-NqFjT2DC6p0TwmoZj4N3n-"
+    })
+    #PayPal::SDK::Core::Config.load('spec/config/paypal.yml',  ENV['RACK_ENV'] || 'development')
 
 
     # :return_url => "https://devtools-paypal.com/guide/pay_paypal/ruby?success=true",
