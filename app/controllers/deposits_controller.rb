@@ -24,6 +24,10 @@ class DepositsController < ApplicationController
   # GET /deposits/new
   def new
     @deposit = Deposit.new
+    payment_history = Payment.all
+    payment_history.each do |p|
+      print p
+    end
   end
 
   def handle
