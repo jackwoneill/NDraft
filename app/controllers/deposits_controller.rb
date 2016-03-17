@@ -39,7 +39,7 @@ class DepositsController < ApplicationController
   # Retrieve the payment object by calling the
   # `find` method
   # on the Payment class by passing Payment ID
-    @payment = Payment.where(user_id: current_user.id).first
+    @payment = Deposit.where(user_id: current_user.id).first
     print @payment
 
     #Change to use ipn and not execute payment in here
