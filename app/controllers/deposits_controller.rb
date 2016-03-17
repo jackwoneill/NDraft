@@ -88,35 +88,34 @@ class DepositsController < ApplicationController
   end
 
   def webhookIPN
-    redirect_to new_deposit_path
-    # pay_id = params[:paymentId]
-    # p_payer_id = params[:PayerID]
-    # print("pay_id=#{pay_id}")
-    # print("payer_id=#{p_payer_id}")
+    pay_id = params[:paymentId]
+    p_payer_id = params[:PayerID]
+    print("pay_id=#{pay_id}")
+    print("payer_id=#{p_payer_id}")
 
-    # #puts deposit.id
-    # @payment = PayPal::SDK::REST::Payment.find(pay_id)
-    # puts @payment.state
-    # puts "STATE PRIOR"
-    # @deposit = Deposit.where(payment_id: @payment.id)
-    # if @deposit.completed == false
-    #   if @payment.execute( :payer_id => "#{p_payer_id}" )
-    #     user = User.find(@deposit.user_id)
-    #     user.balance += @payment.transactions[0].amount.total
-    #     user.save
+    #puts deposit.id
+    @payment = PayPal::SDK::REST::Payment.find(pay_id)
+    puts @payment.state
+    puts "STATE PRIOR"
+    @deposit = Deposit.where(payment_id: @payment.id)
+    if @deposit.completed == false
+      if @payment.execute( :payer_id => "#{p_payer_id}" )
+        user = User.find(@deposit.user_id)
+        user.balance += @payment.transactions[0].amount.total
+        user.save
 
-    #     balance = Balance.where(user_id: @deposit.user_id).first
-    #     balance.amount += @payment.transactions[0].amount.total
-    #     balance.save
+        balance = Balance.where(user_id: @deposit.user_id).first
+        balance.amount += @payment.transactions[0].amount.total
+        balance.save
        
-    #     @deposit.completed = true
-    #     @deposit.save
+        @deposit.completed = true
+        @deposit.save
 
-    #     puts @payment.transactions[0].amount.total
-    #   else
-    #     @payment.error
-    #   end
-    # end
+        puts @payment.transactions[0].amount.total
+      else
+        @payment.error
+      end
+    end
   end
 
   # PATCH/PUT /deposits/1
