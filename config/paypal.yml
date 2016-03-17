@@ -1,20 +1,20 @@
 test: &default
 
   # Credentials for REST APIs
-  client_id: AUoxo6GUZgd97HRGOeZlskhpURkTgR3VEYcowjTjyxFbPf6BSwIdcQjBe_RkU4b8DtxJxT3B2bFaEp0b
-  client_secret: ENMJrALA4a0P9CysZBRiWn-aOkQn0DGw7pJQhYCcLPW9azzmVLF8N1eUsxvHWBBhooPh5KZFk-PnT2Mk
+  client_id: AeJRFkf7fOku-oTnDolAyi9xU6lrzMPu37iWxRB3vWDsPJLOL9js-Ck-IOYHtBaJ7A3qSq3S4MY2c3Ig
+  client_secret: EJn1u5nQgrTkicI0j32Im11tyz727jmNuA1CYgTiQa3pt3zJdk9q-63nmI4hz7Vzs3uxOe6xMeHMthnv
 
   # Mode can be 'live' or 'sandbox'
   mode: sandbox
 
   # Credentials for Classic APIs
-  app_id: APP-80W284485P519543T
-  username: jb-us-seller_api1.paypal.com
-  password: WX4WTU3S8MY44S7F
-  signature: AFcWxV21C7fd0v3bYYYRCpSSRl31A7yDhhsPUU2XhtMoZXsWHFxu-RWy
-  # # With Certificate
-  # cert_path: "config/cert_key.pem"
-  sandbox_email_address: Platform.sdk.seller@gmail.com
+  # app_id: APP-80W284485P519543T
+  # username: jb-us-seller_api1.paypal.com
+  # password: WX4WTU3S8MY44S7F
+  # signature: AFcWxV21C7fd0v3bYYYRCpSSRl31A7yDhhsPUU2XhtMoZXsWHFxu-RWy
+  # # # With Certificate
+  # # cert_path: "config/cert_key.pem"
+  # sandbox_email_address: Platform.sdk.seller@gmail.com
 
   # # IP Address
   # ip_address: 127.0.0.1
