@@ -36,6 +36,12 @@ class DepositsController < ApplicationController
   end
 
   def verify
+  # Retrieve the payment object by calling the
+  # `find` method
+  # on the Payment class by passing Payment ID
+    @payment = Payment.where(user_id: current_user.id).first
+    print @payment
+
     #Change to use ipn and not execute payment in here
     #Create ipn that does the payment execution after webhook
     #Create a verify that takes the payment id and checks if it has been executed("state:executed -> See paypal for other states")
