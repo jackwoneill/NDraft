@@ -100,6 +100,7 @@ ready = ->
 
             return true
 
+    ### SEARCH PLAYERS ###
     $rows = $('.player-select tr')
     $('#search').keyup ->
       val = '^(?=.*\\b' + $.trim($(this).val()).split(/\s+/).join('\\b)(?=.*\\b') + ').*$'
@@ -110,6 +111,7 @@ ready = ->
         !reg.test(text)
       ).hide()
       return
+    ### END SEARCH ###
 
     ### SUBMIT HANDLER ###
     $('#new_lineup').submit (e) ->
@@ -133,6 +135,7 @@ ready = ->
             contest_id: cid
         success:
             window.location.href = "/contests/"+ cid
+    ### END SUBMIT HANDLER ###
 
     ###BEGIN EVENT HANDLING ###
 
@@ -208,6 +211,10 @@ ready = ->
 
         $(".salary").text(salary.toString())
     ### END ADD PLAYER EVENT ####
+
+    ### BEGIN REMOVE PLAYER FROM CURR LINE ###
+
+    ### END REMOVE PLAYER FROM CURR LINE ###
 
 $(document).ready(ready)
 $(document).on('page:load', ready)
