@@ -35,7 +35,7 @@ class DepositsController < ApplicationController
   end
 
   def verify
-    deposit = Deposit.where(user_id: current_user.id).where(completed: false).where(payment_id: params[:paymentId])
+    deposit = Deposit.where(user_id: current_user.id).where(completed: false).where(payment_id: params[:paymentId]).take
     @payment = PayPal::SDK::REST::Payment.find(params[:paymentId])
     if @payment.execute( :payer_id => "#{params[:payerId]}" )
       #PAYMENT WILL ONLY EXECUTE IF IT IS APPROVED ON PAYPALS END
