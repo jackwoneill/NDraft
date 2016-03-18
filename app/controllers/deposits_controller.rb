@@ -78,47 +78,40 @@ class DepositsController < ApplicationController
       :client_id => "AbX1ZA9XsdUGnVRNDJwvyzURE9BLbmDAuM1DxExjvJDEgAVdNMHZXUP_IOnGnZVqOL6_s0PlQ2yBSy7p",
       :client_secret => "ECTW0SNazTtQPF7pO7jB0v8xLOQhPv6wWZXGaTDyQr0sIwQUAlqCrsuQB-NqFjT2DC6p0TwmoZj4N3n-"
     })
-    web_profile = PayPal::SDK::REST::WebProfile.find("XP-3W7L-S5BX-ETUY-J8W2")
-    if web_profile.delete
-      @payment = PayPal::SDK::REST::Payment.new({
-          :intent => "sale",
-          "experience_profile_id": "XP-QXNH-VK3M-M48R-BD7N",
+    @payment = PayPal::SDK::REST::Payment.new({
+        :intent => "sale",
+        "experience_profile_id": "XP-QXNH-VK3M-M48R-BD7N",
 
-          :payer => {
-            :payment_method => "paypal" },
-          :redirect_urls => {
-            :return_url => "http://dfsesports.herokuapp.com/deposits/verify",
-            :cancel_url => "http://dfsesports.herokuapp.com/deposits/new" },
-          :transactions => [ {
-            :item_list => { 
-              :items => [{
-                :name => "$#{@deposit.amount} Deposit",
-                :sku => "10001",
-                :price => "#{@deposit.amount}",
-                :currency => "USD",
-                :quantity => 1 } ] },
-            :amount => {
-              :total => "#{@deposit.amount}",
-              :currency => "USD" },
-            :description => "creating a payment" } ] } )
+        :payer => {
+          :payment_method => "paypal" },
+        :redirect_urls => {
+          :return_url => "http://dfsesports.herokuapp.com/deposits/verify",
+          :cancel_url => "http://dfsesports.herokuapp.com/deposits/new" },
+        :transactions => [ {
+          :item_list => { 
+            :items => [{
+              :name => "$#{@deposit.amount} Deposit",
+              :sku => "10001",
+              :price => "#{@deposit.amount}",
+              :currency => "USD",
+              :quantity => 1 } ] },
+          :amount => {
+            :total => "#{@deposit.amount}",
+            :currency => "USD" },
+          :description => "creating a payment" } ] } )
 
-      if @payment.create
-        @deposit.payment_id = @payment.id
-        @deposit.user_id = current_user.id
-        @deposit.completed = false
+    if @payment.create
+      @deposit.payment_id = @payment.id
+      @deposit.user_id = current_user.id
+      @deposit.completed = false
 
-        @deposit.save
+      @deposit.save
 
-        redirect_to @payment.links[1].href and return
-      else
-        @payment.error  # Error Hash
-        redirect_to new_deposit_path
-      end  
-
-      print("Web Profile[%s] created successfully" % (web_profile.id))
+      redirect_to @payment.links[1].href and return
     else
-      print "error"
-    end
+      @payment.error  # Error Hash
+      redirect_to new_deposit_path
+    end  
 
 
   end
