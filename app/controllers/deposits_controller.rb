@@ -39,6 +39,7 @@ class DepositsController < ApplicationController
   def verify
     deposit = Deposit.where(user_id: current_user.id).where(completed: false).where(payment_id: params[:paymentId])
     @payment = PayPal::SDK::REST::Payment.find(params[:paymentId])
+    @payment.execute( :payer_id => "#{params[:payer_id]}")
     #@payment.execute( :payer_id => "M8QH3DSTB4WX4" ) # GET PAYMENT INFO FROM DATABASE
   # Retrieve the payment object by calling the
   # `find` method
