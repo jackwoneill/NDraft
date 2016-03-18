@@ -34,10 +34,17 @@ class DepositsController < ApplicationController
     deposit = Deposit.where(user_id: current_user.id).where(completed: false).where(payment_id: params[:paymentId]).first
     if !deposit.nil?
       @payment = PayPal::SDK::REST::Payment.find("#{deposit.payment_id}")
-
+      print "lool"
+      print "#{(@payment.transactions[0].amount.total).to_f}"
       #ENSURE AMOUNt PAID WAS AMOUNT CLAIMED TO BE DEPOSITED
-      if (@payment.transactions[0].amount.total == deposit.amount)
+
+
+
+      #STRING FLOAT COMPARISON HERE, PRINT IT JUST TO BE SURE THO
+      if ((@payment.transactions[0].amount.total).to_f == deposit.amount) #LIKELY DIFFERENCE IN STRING->FLOAT COMPARISON
+        print "in hur"
         if @payment.execute( :payer_id => "#{params[:PayerID]}" )
+          "print executed"
           #PAYMENT WILL ONLY EXECUTE IF IT IS APPROVED ON PAYPALS END
           deposit.completed = true
           current_user.balance += deposit.amount
@@ -67,9 +74,28 @@ class DepositsController < ApplicationController
       :client_id => "AbX1ZA9XsdUGnVRNDJwvyzURE9BLbmDAuM1DxExjvJDEgAVdNMHZXUP_IOnGnZVqOL6_s0PlQ2yBSy7p",
       :client_secret => "ECTW0SNazTtQPF7pO7jB0v8xLOQhPv6wWZXGaTDyQr0sIwQUAlqCrsuQB-NqFjT2DC6p0TwmoZj4N3n-"
     })
+
+    # web_prof = PayPal::SDK::REST::WebProfile.new({
+    #   "name": "BattleDraft",
+    #   "presentation": {
+    #       "brand_name": "BattleDraft",
+    #       "logo_image": "http://s17.postimg.org/he1udwv7z/pepe2.png",
+    #       "locale_code": "US"
+    #   },
+    #   "input_fields": {
+    #       "allow_note": false,
+    #       "no_shipping": 1,
+    #       "address_override": 1
+    #   },
+    #   "flow_config": {
+    #       "landing_page_type": "billing",
+    #   }
+    # })
+    # web_prof.create
+
     @payment = PayPal::SDK::REST::Payment.new({
         :intent => "sale",
-        "experience_profile_id": "XP-QXNH-VK3M-M48R-BD7N",
+        "experience_profile_id": "XP-RNK5-HFBU-6X9Q-WL5X",
         :payer => {
           :payment_method => "paypal" },
         :redirect_urls => {
