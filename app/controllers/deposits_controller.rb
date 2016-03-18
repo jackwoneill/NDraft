@@ -32,38 +32,27 @@ class DepositsController < ApplicationController
 
   def verify
     deposit = Deposit.where(user_id: current_user.id).where(completed: false).where(payment_id: params[:paymentId]).first
-    @payment = PayPal::SDK::REST::Payment.find("#{deposit.payment_id}")
+    if !deposit.nil?
+      @payment = PayPal::SDK::REST::Payment.find("#{deposit.payment_id}")
 
-    #ENSURE AMOUNt PAID WAS AMOUNT CLAIMED TO BE DEPOSITED
-    if (@payment.amount == deposit.amount)
-      if @payment.execute( :payer_id => "#{params[:PayerID]}" )
-        #PAYMENT WILL ONLY EXECUTE IF IT IS APPROVED ON PAYPALS END
-        deposit.completed = true
-        current_user.balance += deposit.amount
-        bal = Balance.where(user_id: current_user.id).take
-        bal.amount += deposit.amount
+      #ENSURE AMOUNt PAID WAS AMOUNT CLAIMED TO BE DEPOSITED
+      if (@payment.transactions[0].amount.total == deposit.amount)
+        if @payment.execute( :payer_id => "#{params[:PayerID]}" )
+          #PAYMENT WILL ONLY EXECUTE IF IT IS APPROVED ON PAYPALS END
+          deposit.completed = true
+          current_user.balance += deposit.amount
+          bal = Balance.where(user_id: current_user.id).take
+          bal.amount += deposit.amount
 
-        deposit.save
-        current_user.save
-        bal.save
+          deposit.save
+          current_user.save
+          bal.save
 
-        redirect_to contests_path and return
+          redirect_to contests_path and return
+        end
+        
       end
-      
     end
-    
-
-    #@payment.execute( :payer_id => "M8QH3DSTB4WX4" ) # GET PAYMENT INFO FROM DATABASE
-  # Retrieve the payment object by calling the
-  # `find` method
-  # on the Payment class by passing Payment ID
-
-    #Change to use ipn and not execute payment in here
-    #Create ipn that does the payment execution after webhook
-    #Create a verify that takes the payment id and checks if it has been executed("state:executed -> See paypal for other states")
-    #In ipn grab paypal transaction information and ensure deposit amount is same as when it was created
-    #In verify maybe just do a bunch of checks against system to ensure everything good
-    #Or just use verify as a confirmation page?
 
   end
 
@@ -81,7 +70,6 @@ class DepositsController < ApplicationController
     @payment = PayPal::SDK::REST::Payment.new({
         :intent => "sale",
         "experience_profile_id": "XP-QXNH-VK3M-M48R-BD7N",
-
         :payer => {
           :payment_method => "paypal" },
         :redirect_urls => {
