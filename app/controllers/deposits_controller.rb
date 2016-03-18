@@ -24,10 +24,7 @@ class DepositsController < ApplicationController
   # GET /deposits/new
   def new
     @deposit = Deposit.new
-    payment_history =  PayPal::SDK::REST::Payment.all
-    payment_history.each do |p|
-      print p
-    end
+
   end
 
   def handle
@@ -40,11 +37,12 @@ class DepositsController < ApplicationController
   end
 
   def verify
+    deposit = Deposit.where(user_id: current_user.id).where(completed: false).where(payment_id: params[:payment_id])
+    @payment = PayPal::SDK::REST::Payment.find(params[:payment_id])
+    #@payment.execute( :payer_id => "M8QH3DSTB4WX4" ) # GET PAYMENT INFO FROM DATABASE
   # Retrieve the payment object by calling the
   # `find` method
   # on the Payment class by passing Payment ID
-    @payment = Deposit.where(user_id: current_user.id).first
-    print @payment
 
     #Change to use ipn and not execute payment in here
     #Create ipn that does the payment execution after webhook
@@ -67,6 +65,8 @@ class DepositsController < ApplicationController
       :client_id => "AbX1ZA9XsdUGnVRNDJwvyzURE9BLbmDAuM1DxExjvJDEgAVdNMHZXUP_IOnGnZVqOL6_s0PlQ2yBSy7p",
       :client_secret => "ECTW0SNazTtQPF7pO7jB0v8xLOQhPv6wWZXGaTDyQr0sIwQUAlqCrsuQB-NqFjT2DC6p0TwmoZj4N3n-"
     })
+    payment_history =  PayPal::SDK::REST::Payment.all
+    print payment_history
     #PayPal::SDK::Core::Config.load('spec/config/paypal.yml',  ENV['RACK_ENV'] || 'development')
 
 
@@ -87,6 +87,7 @@ class DepositsController < ApplicationController
         :description => "creating a payment" } ] } )
 
     if @payment.create
+      print @payment     # Payment Id
       @deposit.payment_id = @payment.id
       @deposit.user_id = current_user.id
       @deposit.completed = false
