@@ -39,7 +39,10 @@ class DepositsController < ApplicationController
   def verify
     deposit = Deposit.where(user_id: current_user.id).where(completed: false).where(payment_id: params[:paymentId])
     @payment = PayPal::SDK::REST::Payment.find(params[:paymentId])
-    @payment.execute( :payer_id => "#{params[:payer_id]}")
+    if @payment.execute( :payer_id => "#{params[:payerId]}")
+      redirect_to contests_path
+    end
+
     #@payment.execute( :payer_id => "M8QH3DSTB4WX4" ) # GET PAYMENT INFO FROM DATABASE
   # Retrieve the payment object by calling the
   # `find` method
@@ -51,7 +54,6 @@ class DepositsController < ApplicationController
     #In ipn grab paypal transaction information and ensure deposit amount is same as when it was created
     #In verify maybe just do a bunch of checks against system to ensure everything good
     #Or just use verify as a confirmation page?
-    redirect_to contests_path
 
   end
 
@@ -67,19 +69,13 @@ class DepositsController < ApplicationController
       :client_secret => "ECTW0SNazTtQPF7pO7jB0v8xLOQhPv6wWZXGaTDyQr0sIwQUAlqCrsuQB-NqFjT2DC6p0TwmoZj4N3n-"
     })
 
-    #PayPal::SDK::Core::Config.load('spec/config/paypal.yml',  ENV['RACK_ENV'] || 'development')
-
-
-    # :return_url => "https://devtools-paypal.com/guide/pay_paypal/ruby?success=true",
-    # :cancel_url => "https://devtools-paypal.com/guide/pay_paypal/ruby?cancel=true" 
-
     @payment = PayPal::SDK::REST::Payment.new({
       :intent => "sale",
       :payer => {
         :payment_method => "paypal" },
       :redirect_urls => {
         :return_url => "http://dfsesports.herokuapp.com/deposits/verify",
-        :cancel_url => "http://wooster.edu" },
+        :cancel_url => "http://dfsesports.herokuapp.com/deposits/new" },
       :transactions => [ {
         :amount => {
           :total => "#{@deposit.amount}",
@@ -87,6 +83,7 @@ class DepositsController < ApplicationController
         :description => "creating a payment" } ] } )
 
     if @payment.create
+      print @payment
       @deposit.payment_id = @payment.id
       @deposit.user_id = current_user.id
       @deposit.completed = false
