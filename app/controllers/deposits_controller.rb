@@ -5,8 +5,6 @@ class DepositsController < ApplicationController
 
   before_action :set_deposit, only: [:show, :edit, :update, :destroy]
   #before_filter :ensure_admin, except: [:new, :create]
-  skip_before_filter :authenticate_user!, only: [:verify, :webhookIPN, :confirm_balance?]
-  skip_before_filter :verify_authenticity_token, only: [:webhookIPN, :confirm_balance?]
 
 
   # GET /deposits
@@ -37,10 +35,25 @@ class DepositsController < ApplicationController
   end
 
   def verify
-    deposit = Deposit.where(user_id: current_user.id).where(completed: false).where(payment_id: params[:paymentId])
-    @payment = PayPal::SDK::REST::Payment.find(params[:paymentId])
-    if @payment.execute( :payer_id => "#{params[:payerId]}")
-      redirect_to contests_path
+    deposit = Deposit.where(user_id: current_user.id).where(completed: false).where(payment_id: params[:paymentId]).where(token: params[:token])
+    if !deposit.empty?
+      @payment = PayPal::SDK::REST::Payment.find(params[:paymentId])
+      if @payment.execute( :payer_id => "#{params[:payerId]}" )
+        deposit.completed = true
+        current_user.balance += deposit.amount
+        bal = Balance.where(user_id: current_user.id).take
+        bal += deposit.amount
+
+        deposit.save
+        current_user.save
+        bal.save
+
+        redirect_to contests_path and return
+
+        #POTENTIALLY DEPOSIT COMPLETED PATH
+
+      end
+
     end
 
     #@payment.execute( :payer_id => "M8QH3DSTB4WX4" ) # GET PAYMENT INFO FROM DATABASE
@@ -87,6 +100,8 @@ class DepositsController < ApplicationController
       @deposit.payment_id = @payment.id
       @deposit.user_id = current_user.id
       @deposit.completed = false
+      @deposit.token = @payment.token
+
       @deposit.save
 
       redirect_to @payment.links[1].href and return
