@@ -65,8 +65,7 @@ class DepositsController < ApplicationController
       :client_id => "AbX1ZA9XsdUGnVRNDJwvyzURE9BLbmDAuM1DxExjvJDEgAVdNMHZXUP_IOnGnZVqOL6_s0PlQ2yBSy7p",
       :client_secret => "ECTW0SNazTtQPF7pO7jB0v8xLOQhPv6wWZXGaTDyQr0sIwQUAlqCrsuQB-NqFjT2DC6p0TwmoZj4N3n-"
     })
-    payment_history =  PayPal::SDK::REST::Payment.all
-    print payment_history
+
     #PayPal::SDK::Core::Config.load('spec/config/paypal.yml',  ENV['RACK_ENV'] || 'development')
 
 
@@ -87,7 +86,6 @@ class DepositsController < ApplicationController
         :description => "creating a payment" } ] } )
 
     if @payment.create
-      print @payment     # Payment Id
       @deposit.payment_id = @payment.id
       @deposit.user_id = current_user.id
       @deposit.completed = false
