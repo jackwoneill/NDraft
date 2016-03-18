@@ -35,10 +35,10 @@ class DepositsController < ApplicationController
   end
 
   def verify
-    deposit = Deposit.where(user_id: current_user.id).where(completed: false).where(payment_id: params[:paymentId]).where(token: params[:token])
-    if !deposit.empty?
+    deposit = Deposit.where(user_id: current_user.id).where(completed: false).where(payment_id: params[:paymentId])
       @payment = PayPal::SDK::REST::Payment.find(params[:paymentId])
       if @payment.execute( :payer_id => "#{params[:payerId]}" )
+        #PAYMENT WILL ONLY EXECUTE IF IT IS APPROVED ON PAYPALS END
         deposit.completed = true
         current_user.balance += deposit.amount
         bal = Balance.where(user_id: current_user.id).take
@@ -49,8 +49,6 @@ class DepositsController < ApplicationController
         bal.save
 
         redirect_to contests_path and return
-
-        #POTENTIALLY DEPOSIT COMPLETED PATH
 
       end
 
@@ -96,11 +94,9 @@ class DepositsController < ApplicationController
         :description => "creating a payment" } ] } )
 
     if @payment.create
-      print @payment
       @deposit.payment_id = @payment.id
       @deposit.user_id = current_user.id
       @deposit.completed = false
-      @deposit.token = @payment.token
 
       @deposit.save
 
