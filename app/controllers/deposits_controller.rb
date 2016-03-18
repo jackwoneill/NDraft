@@ -3,8 +3,9 @@ class DepositsController < ApplicationController
   require 'json'
   include PayPal::SDK::REST
 
+
   before_action :set_deposit, only: [:show, :edit, :update, :destroy]
-  #before_filter :ensure_admin, except: [:new, :create]
+  before_filter :ensure_admin, only: [:index, :show]
 
 
   # GET /deposits
@@ -25,32 +26,32 @@ class DepositsController < ApplicationController
 
   end
 
-  def handle
-
-
-  end
-
   # GET /deposits/1/edit
-  def edit
-  end
+  # def edit
+  # end
 
   def verify
     deposit = Deposit.where(user_id: current_user.id).where(completed: false).where(payment_id: params[:paymentId]).first
     @payment = PayPal::SDK::REST::Payment.find("#{deposit.payment_id}")
-    if @payment.execute( :payer_id => "#{params[:PayerID]}" )
-      #PAYMENT WILL ONLY EXECUTE IF IT IS APPROVED ON PAYPALS END
-      deposit.completed = true
-      current_user.balance += deposit.amount
-      bal = Balance.where(user_id: current_user.id).take
-      bal.amount += deposit.amount
 
-      deposit.save
-      current_user.save
-      bal.save
+    #ENSURE AMOUNt PAID WAS AMOUNT CLAIMED TO BE DEPOSITED
+    if (@payment.amount == deposit.amount)
+      if @payment.execute( :payer_id => "#{params[:PayerID]}" )
+        #PAYMENT WILL ONLY EXECUTE IF IT IS APPROVED ON PAYPALS END
+        deposit.completed = true
+        current_user.balance += deposit.amount
+        bal = Balance.where(user_id: current_user.id).take
+        bal.amount += deposit.amount
 
-      redirect_to contests_path and return
+        deposit.save
+        current_user.save
+        bal.save
 
+        redirect_to contests_path and return
+      end
+      
     end
+    
 
     #@payment.execute( :payer_id => "M8QH3DSTB4WX4" ) # GET PAYMENT INFO FROM DATABASE
   # Retrieve the payment object by calling the
@@ -77,32 +78,49 @@ class DepositsController < ApplicationController
       :client_id => "AbX1ZA9XsdUGnVRNDJwvyzURE9BLbmDAuM1DxExjvJDEgAVdNMHZXUP_IOnGnZVqOL6_s0PlQ2yBSy7p",
       :client_secret => "ECTW0SNazTtQPF7pO7jB0v8xLOQhPv6wWZXGaTDyQr0sIwQUAlqCrsuQB-NqFjT2DC6p0TwmoZj4N3n-"
     })
+    web_profile = PayPal::SDK::REST::WebProfile.find("XP-3W7L-S5BX-ETUY-J8W2")
+    if web_profile.delete
+      @payment = PayPal::SDK::REST::Payment.new({
+          :intent => "sale",
+          "experience_profile_id": "XP-QXNH-VK3M-M48R-BD7N",
 
-    @payment = PayPal::SDK::REST::Payment.new({
-      :intent => "sale",
-      :payer => {
-        :payment_method => "paypal" },
-      :redirect_urls => {
-        :return_url => "http://dfsesports.herokuapp.com/deposits/verify",
-        :cancel_url => "http://dfsesports.herokuapp.com/deposits/new" },
-      :transactions => [ {
-        :amount => {
-          :total => "#{@deposit.amount}",
-          :currency => "USD" },
-        :description => "creating a payment" } ] } )
+          :payer => {
+            :payment_method => "paypal" },
+          :redirect_urls => {
+            :return_url => "http://dfsesports.herokuapp.com/deposits/verify",
+            :cancel_url => "http://dfsesports.herokuapp.com/deposits/new" },
+          :transactions => [ {
+            :item_list => { 
+              :items => [{
+                :name => "$#{@deposit.amount} Deposit",
+                :sku => "10001",
+                :price => "#{@deposit.amount}",
+                :currency => "USD",
+                :quantity => 1 } ] },
+            :amount => {
+              :total => "#{@deposit.amount}",
+              :currency => "USD" },
+            :description => "creating a payment" } ] } )
 
-    if @payment.create
-      @deposit.payment_id = @payment.id
-      @deposit.user_id = current_user.id
-      @deposit.completed = false
+      if @payment.create
+        @deposit.payment_id = @payment.id
+        @deposit.user_id = current_user.id
+        @deposit.completed = false
 
-      @deposit.save
+        @deposit.save
 
-      redirect_to @payment.links[1].href and return
+        redirect_to @payment.links[1].href and return
+      else
+        @payment.error  # Error Hash
+        redirect_to new_deposit_path
+      end  
+
+      print("Web Profile[%s] created successfully" % (web_profile.id))
     else
-      @payment.error  # Error Hash
-      redirect_to new_deposit_path
-    end  
+      print "error"
+    end
+
+
   end
 
   def webhookIPN
