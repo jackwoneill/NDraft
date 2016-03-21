@@ -5,14 +5,14 @@ class LineupsController < ApplicationController
   # GET /lineups
   # GET /lineups.json
   def index
-    redirect_to contests_path
-    @lineups = Lineup.all
+    redirect_to contests_path and return
+    #@lineups = Lineup.all
   end
 
   # GET /lineups/1
   # GET /lineups/1.json
   def show
-    @contest = Contest.find(params[:contest_id])
+    redirect_to contests_path and return
   end
 
   # GET /lineups/new
@@ -22,26 +22,22 @@ class LineupsController < ApplicationController
     @contest = Contest.find(params[:contest_id])
 
     @lineup.contest_id = params[:contest_id]
+    @lineup.game = @contest.game
 
     @slate = Slate.find(@contest.slate_id)
 
     if @contest.curr_size == @contest.max_size
-      redirect_to contests_path
+      redirect_to contests_path and return
     end
 
     if @slate.start_time < Time.now
-      redirect_to contests_path
+      redirect_to contests_path and return
     end
 
-
     @games = Game.where(slate_id: @contest.slate_id)
+
     teams = Array.new
     players = Array.new
-    tops = Array.new
-    mids = Array.new
-    supports = Array.new
-    adcs = Array.new
-    junglers = Array.new
 
     @games.each do |game|
       teams.append(Team.find(game.team_1))
@@ -55,27 +51,37 @@ class LineupsController < ApplicationController
     @players = players.uniq
     @teams = teams.uniq
 
-    players.each do |player|
-      if player.position == "top"
-        tops.append(player)
-      elsif player.position == "mid"
-        mids.append(player)
-      elsif player.position == "adc"
-        adcs.append(player)
-      elsif player.position == "support"
-        supports.append(player)
-      elsif player.position == "jungle"
-        junglers.append(player)
-                           
+    #IF LINEUP IS FOR A LEAGUE SLATE
+    if @lineup.game == 1
+
+      tops = Array.new
+      mids = Array.new
+      supports = Array.new
+      adcs = Array.new
+      junglers = Array.new
+
+      players.each do |player|
+        if player.position == "1"
+          tops.append(player)
+        elsif player.position == "2"
+          mids.append(player)
+        elsif player.position == "3"
+          adcs.append(player)
+        elsif player.position == "4"
+          supports.append(player)
+        elsif player.position == "5"
+          junglers.append(player)
+                             
+        end
       end
+
+      @tops = tops
+      @mids = mids
+      @adcs = adcs
+      @supports = supports
+      @junglers = junglers
+
     end
-
-    @tops = tops
-    @mids = mids
-    @adcs = adcs
-    @supports = supports
-    @junglers = junglers
-
 
   end
 
@@ -92,11 +98,7 @@ class LineupsController < ApplicationController
     @games = Game.where(slate_id: @contest.slate_id)
     teams = Array.new
     players = Array.new
-    tops = Array.new
-    mids = Array.new
-    supports = Array.new
-    adcs = Array.new
-    junglers = Array.new
+
 
     @games.each do |game|
       teams.append(Team.find(game.team_1))
@@ -110,26 +112,37 @@ class LineupsController < ApplicationController
     @players = players.uniq
     @teams = teams.uniq
 
-    players.each do |player|
-      if player.position == "top"
-        tops.append(player)
-      elsif player.position == "mid"
-        mids.append(player)
-      elsif player.position == "adc"
-        adcs.append(player)
-      elsif player.position == "support"
-        supports.append(player)
-      elsif player.position == "jungle"
-        junglers.append(player)
-                           
-      end
-    end
+    #IF IT IS A LEAGUE SLATE
+    if @lineup.game == 1
 
-    @tops = tops
-    @mids = mids
-    @adcs = adcs
-    @supports = supports
-    @junglers = junglers
+      tops = Array.new
+      mids = Array.new
+      supports = Array.new
+      adcs = Array.new
+      junglers = Array.new
+
+      players.each do |player|
+        if player.position == "1"
+          tops.append(player)
+        elsif player.position == "2"
+          mids.append(player)
+        elsif player.position == "3"
+          adcs.append(player)
+        elsif player.position == "4"
+          supports.append(player)
+        elsif player.position == "5"
+          junglers.append(player)
+                             
+        end
+      end
+
+      @tops = tops
+      @mids = mids
+      @adcs = adcs
+      @supports = supports
+      @junglers = junglers
+
+    end
   end
 
   # POST /lineups
@@ -140,25 +153,17 @@ class LineupsController < ApplicationController
     @slate = Slate.find(@contest.slate_id)
 
     if current_user.balance < @contest.fee
-      redirect_to contests_path
-      return
+      redirect_to contests_path and return
     end
 
     if @contest.curr_size == @contest.max_size
-      redirect_to contests_path
-      return
+      redirect_to contests_path and return
     end
 
     if @slate.start_time < Time.now
-      redirect_to contests_path
-      return
+      redirect_to contests_path and return
     end
 
-    '''
-      contest.slate_id
-      players each
-      player on team in slate 
-    '''
     ### BEGIN CHECKING PLAYER VALIDITY ###
 
     games = Array.new
@@ -168,7 +173,6 @@ class LineupsController < ApplicationController
     players = Array.new
     totSalary = 0
 
-
     games.each do |game|
       team1 = Team.find(game.team_1)
       team2 = Team.find(game.team_2)
@@ -177,16 +181,17 @@ class LineupsController < ApplicationController
     end
 
     ### BEGING CHECK FOR DUPLICATE PLAYERS ###
-    top = Player.find(@lineup.top)
-    mid = Player.find(@lineup.mid)
-    adc = Player.find(@lineup.adc)
-    support = Player.find(@lineup.support)
-    jungler = Player.find(@lineup.jungler)
-    flex_1 = Player.find(@lineup.flex_1)
-    flex_2 = Player.find(@lineup.flex_2)
-    flex_3 = Player.find(@lineup.flex_3)
 
-    players += [top.id, mid.id, adc.id, support.id, jungler.id, flex_1.id, flex_2.id, flex_3.id]
+    player_1 = Player.find(@lineup.player_1)
+    player_2 = Player.find(@lineup.player_2)
+    player_3 = Player.find(@lineup.player_3)
+    player_4 = Player.find(@lineup.player_4)
+    player_5 = Player.find(@lineup.player_5)
+    player_6 = Player.find(@lineup.player_6)
+    player_7 = Player.find(@lineup.player_7)
+    player_8 = Player.find(@lineup.player_8)
+
+    players += [player_1.id, player_2.id, player_3.id, player_4.id, player_5.id, player_6.id, player_7.id, player_8.id]
     players = players.uniq
 
     if players.length != 8
@@ -196,6 +201,7 @@ class LineupsController < ApplicationController
 
     players.each do |player|
       totSalary += Player.find(player).salary
+      print "TOT SAL = #{totSalary}"
     end
 
     if totSalary > 60000
@@ -203,23 +209,23 @@ class LineupsController < ApplicationController
       return
     end
 
-    # ENSURE PLAYERS ARE PLAYING IN GAME IN SLATE #
-    if !team_ids.include? top.team_id
-      redirect_to contests_path
-    elsif !team_ids.include? mid.team_id
-      redirect_to contests_path
-    elsif !team_ids.include? adc.team_id
-      redirect_to contests_path
-    elsif !team_ids.include? support.team_id
-      redirect_to contests_path
-    elsif !team_ids.include? jungler.team_id
-      redirect_to contests_path
-    elsif !team_ids.include? flex_1.team_id
-      redirect_to contests_path
-    elsif !team_ids.include? flex_2.team_id
-      redirect_to contests_path
-    elsif !team_ids.include? flex_3.team_id
-      redirect_to contests_path
+    #ENSURE PLAYERS ARE PLAYING IN GAME IN SLATE #
+    if !team_ids.include? player_1.team_id
+      redirect_to contests_path and return
+    elsif !team_ids.include? player_2.team_id
+      redirect_to contests_path and return
+    elsif !team_ids.include? player_3.team_id
+      redirect_to contests_path and return
+    elsif !team_ids.include? player_4.team_id
+      redirect_to contests_path and return
+    elsif !team_ids.include? player_5.team_id
+      redirect_to contests_path and return
+    elsif !team_ids.include? player_6.team_id
+      redirect_to contests_path and return
+    elsif !team_ids.include? player_7.team_id
+      redirect_to contests_path and return
+    elsif !team_ids.include? player_8.team_id
+      redirect_to contests_path and return
     end
 
     @lineup.contest_id = params[:contest_id]
@@ -232,7 +238,7 @@ class LineupsController < ApplicationController
       bal.save
       current_user.save
 
-      deduct_amount = ((@contest.fee) * -1.0)
+      deduct_amount = ((@contest.fee) * -1.00)
 
       entryTrans = Transaction.new(user_id: current_user.id, amount: deduct_amount, description: "Contest Entry: Contest ID: #{@contest.id} ")
       entryTrans.save
@@ -315,6 +321,6 @@ class LineupsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def lineup_params
-      params.require(:lineup).permit(:top, :mid, :adc, :support, :jungler, :flex_1, :flex_2, :flex_3, :user_id, :contest_id)
+      params.require(:lineup).permit(:player_1, :player_2, :player_3, :player_4, :player_5, :player_6, :player_7, :player_8, :user_id, :contest_id, :game)
     end
 end

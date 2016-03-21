@@ -1,25 +1,27 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  top: 1
-  mid: 1
-  adc: 1
-  support: 1
-  jungler: 1
-  flex_1: 1
-  flex_2: 1
-  flex_3: 1
-  user_id: 1
   contest_id: 1
+  user_id: 1
+  total_score: 1
+  player_1: 1
+  player_2: 1
+  player_3: 1
+  player_4: 1
+  player_5: 1
+  player_6: 1
+  player_7: 1
+  player_8: 1
 
 two:
-  top: 1
-  mid: 1
-  adc: 1
-  support: 1
-  jungler: 1
-  flex_1: 1
-  flex_2: 1
-  flex_3: 1
-  user_id: 1
   contest_id: 1
+  user_id: 1
+  total_score: 1
+  player_1: 1
+  player_2: 1
+  player_3: 1
+  player_4: 1
+  player_5: 1
+  player_6: 1
+  player_7: 1
+  player_8: 1

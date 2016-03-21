@@ -22,19 +22,19 @@
           <button type="button" data-position-filter="all">All</button>
         </li>
         <li>
-          <button type="button" data-position-filter="top">TOP</button>
+          <button type="button" data-position-filter="1">TOP</button>
         </li>
         <li>
-          <button type="button" data-position-filter="mid">MID</button>
+          <button type="button" data-position-filter="2">MID</button>
         </li>
         <li>
-          <button type="button" data-position-filter="adc">ADC</button>
+          <button type="button" data-position-filter="3">ADC</button>
         </li>
         <li>
-          <button type="button" data-position-filter="support">SUP</button>
+          <button type="button" data-position-filter="4">SUP</button>
         </li>
         <li>
-          <button type="button" data-position-filter="jungle">JNG</button>
+          <button type="button" data-position-filter="5">JNG</button>
         </li>
         <li>
           <div class="search-container">
@@ -52,15 +52,15 @@
                 <td>
                   <div class="player-info">
                     <% case player.position 
-                       when "top" %>
+                       when "1" %>
                     <span class="player-position">TOP</span>
-                    <% when "mid" %>
+                    <% when "2" %>
                     <span class="player-position">MID</span>
-                    <% when 'adc' %>
+                    <% when '3' %>
                     <span class="player-position">ADC</span>
-                    <% when 'support' %>                  
+                    <% when '4' %>                  
                     <span class="player-position">SUP</span>
-                    <% when 'jungle' %>
+                    <% when '5' %>
                     <span class="player-position">JNG</span>
                     <% end %>
                     <span class="player-name" data-id="<%= player.id %>" data-position="<%= player.position %>" data-salary="<%= player.salary %>"><%= player.name %></span>
@@ -76,57 +76,57 @@
   
       <div class="current-lineup-container">
         <table class="current-lineup" cellpadding="0" border="0" align="center" cellspacing="0">
-              <tr class=<%= "current-lineup-top" %>>
+              <tr class=<%= "current-lineup-1" %>>
                 <td>
                   <div class="current-lineup-player-info">
                     <span class="current-lineup-player-position">TOP</span>
-                    <span class="current-lineup-player-name" data-id="0" data-position="top" data-salary=""></span>
+                    <span class="current-lineup-1-player-name" data-id="0" data-position="1" data-salary=""></span>
                     <button type="button" class="remove-player-button">-</button>
                   </div>
                 </td>
               </tr>
-              <tr class=<%= "current-lineup-mid" %>>
+              <tr class=<%= "current-lineup-2" %>>
                 <td>
                   <div class="current-lineup-player-info">
                     <span class="current-lineup-player-position">MID</span>
-                    <span class="current-lineup-player-name" data-id="0" data-position="mid" data-salary=""></span>
+                    <span class="current-lineup-2-player-name" data-id="0" data-position="2" data-salary=""></span>
                     <button type="button" class="remove-player-button">-</button>
                   </div>
                 </td>
               </tr>
-              <tr class=<%= "current-lineup-adc" %>>
+              <tr class=<%= "current-lineup-3" %>>
                 <td>
                   <div class="current-lineup-player-info">
                     <span class="current-lineup-player-position">ADC</span>
-                    <span class="current-lineup-player-name" data-id="0" data-position="adc" data-salary=""></span>
+                    <span class="current-lineup-3-player-name" data-id="0" data-position="3" data-salary=""></span>
                     <button type="button" class="remove-player-button">-</button>
                   </div>
                 </td>
               </tr>
-              <tr class=<%= "current-lineup-support" %>>
+              <tr class=<%= "current-lineup-4" %>>
                 <td>
                   <div class="current-lineup-player-info">
                     <span class="current-lineup-player-position">SUP</span>
-                    <span class="current-lineup-player-name" data-id="0" data-position="support" data-salary=""></span>
+                    <span class="current-lineup-4-player-name" data-id="0" data-position="4" data-salary=""></span>
                     <button type="button" class="remove-player-button">-</button>
                   </div>
                 </td>
               </tr>
-              <tr class=<%= "current-lineup-jungle" %>>
+              <tr class=<%= "current-lineup-5" %>>
                 <td>
                   <div class="current-lineup-player-info">
                     <span class="current-lineup-player-position">JNG</span>
-                    <span class="current-lineup-player-name" data-id="0" data-position="jungle" data-salary=""></span>
+                    <span class="current-lineup-5-player-name" data-id="0" data-position="5" data-salary=""></span>
                     <button type="button" class="remove-player-button">-</button>
                   </div>
                 </td>
               </tr>
               <% for i in 1..3 %>
-                <tr class=<%= "current-lineup-flex_#{i}" %>>
+                <tr class=<%= "current-lineup-#{5 + i}" %>>
                   <td>
                     <div class="current-lineup-player-info">
                       <span class="current-lineup-player-position">FLEX <%= i %></span>
-                      <span class=<%= "current-lineup-flex_#{i}-player-name"  %> data-id="0" data-position=<%= "flex_#{i}" %> data-salary=""></span>
+                      <span class=<%= "current-lineup-player_#{5 + i}-player-name"  %> data-id="0" data-position=<%= "#{5 + i}" %> data-salary=""></span>
                       <button type="button" class="remove-player-button">-</button>
                     </div>
                   </td>

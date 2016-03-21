@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160318021050) do
+ActiveRecord::Schema.define(version: 20160319031625) do
 
   create_table "balances", force: :cascade do |t|
     t.integer  "user_id"
@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(version: 20160318021050) do
     t.integer  "payment_structure"
     t.boolean  "paid_out"
     t.datetime "start_time"
+    t.integer  "game"
   end
 
   create_table "deposits", force: :cascade do |t|
@@ -51,22 +52,24 @@ ActiveRecord::Schema.define(version: 20160318021050) do
     t.datetime "updated_at", null: false
     t.datetime "start_time"
     t.integer  "slate_id"
+    t.integer  "game_type"
   end
 
   create_table "lineups", force: :cascade do |t|
-    t.integer  "top"
-    t.integer  "mid"
-    t.integer  "adc"
-    t.integer  "support"
-    t.integer  "jungler"
-    t.integer  "flex_1"
-    t.integer  "flex_2"
-    t.integer  "flex_3"
-    t.integer  "user_id"
     t.integer  "contest_id"
+    t.integer  "user_id"
+    t.integer  "total_score"
+    t.integer  "player_1"
+    t.integer  "player_2"
+    t.integer  "player_3"
+    t.integer  "player_4"
+    t.integer  "player_5"
+    t.integer  "player_6"
+    t.integer  "player_7"
+    t.integer  "player_8"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.float    "total_score"
+    t.integer  "game"
   end
 
   create_table "notifications", force: :cascade do |t|
@@ -92,6 +95,7 @@ ActiveRecord::Schema.define(version: 20160318021050) do
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "game"
   end
 
   create_table "stream_links", force: :cascade do |t|
@@ -107,6 +111,7 @@ ActiveRecord::Schema.define(version: 20160318021050) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "league"
+    t.integer  "game"
   end
 
   create_table "transactions", force: :cascade do |t|

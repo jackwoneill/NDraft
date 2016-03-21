@@ -28,6 +28,7 @@ class GamesController < ApplicationController
   # POST /games.json
   def create
     @game = Game.new(game_params)
+    @game.game_type = (Slate.find(@game.slate_id)).game
     slate = Slate.find(@game.slate_id)
     @game.start_time = slate.start_time
 
@@ -74,6 +75,6 @@ class GamesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def game_params
-      params.require(:game).permit(:team_1, :team_2, :start_time, :slate_id)
+      params.require(:game).permit(:team_1, :team_2, :start_time, :slate_id, :game_type)
     end
 end

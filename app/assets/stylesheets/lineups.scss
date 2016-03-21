@@ -144,7 +144,7 @@ display: inline;
   width: 20px;
 }
 
-.player-select > tbody > tr > td > .player-info > .add-player-button{
+.player-select > tbody > tr > td > .player-info > .add-player-button, .remove-player-button{
   cursor: pointer; 
   cursor: hand;
 } 

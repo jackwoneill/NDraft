@@ -86,14 +86,10 @@ class ContestsController < ApplicationController
   # GET /contests/1
   # GET /contests/1.json
   def show
+
     @games = Game.where(slate_id: @contest.slate_id)
     teams = Array.new
     players = Array.new
-    tops = Array.new
-    mids = Array.new
-    supports = Array.new
-    adcs = Array.new
-    junglers = Array.new
 
     @games.each do |game|
       teams.append(Team.find(game.team_1))
@@ -107,26 +103,38 @@ class ContestsController < ApplicationController
     @players = players.uniq
     @teams = teams.uniq
 
-    players.each do |player|
-      if player.position == "top"
-        tops.append(player)
-      elsif player.position == "mid"
-        mids.append(player)
-      elsif player.position == "adc"
-        adcs.append(player)
-      elsif player.position == "support"
-        supports.append(player)
-      elsif player.position == "jungle"
-        junglers.append(player)
-                           
+    if @lineup.game == 1
+
+      tops = Array.new
+      mids = Array.new
+      supports = Array.new
+      adcs = Array.new
+      junglers = Array.new
+
+    #THROW A SWITCH ON THE POSITION NOW"
+      players.each do |player|
+        if player.position == "1"
+          tops.append(player)
+        elsif player.position == "2"
+          mids.append(player)
+        elsif player.position == "3"
+          adcs.append(player)
+        elsif player.position == "4"
+          supports.append(player)
+        elsif player.position == "5"
+          junglers.append(player)
+                             
+        end
       end
+
+      @tops = tops
+      @mids = mids
+      @adcs = adcs
+      @supports = supports
+      @junglers = junglers
+
     end
 
-    @tops = tops
-    @mids = mids
-    @adcs = adcs
-    @supports = supports
-    @junglers = junglers
 
     if @contest.start_time < Time.now
       @lineups = Lineup.where(contest_id: @contest.id)
@@ -226,6 +234,6 @@ class ContestsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def contest_params
-      params.require(:contest).permit(:title, :fee, :start_time, :max_size, :curr_size, :prize_pool, :slate_id, :payment_structure)
+      params.require(:contest).permit(:title, :fee, :start_time, :max_size, :curr_size, :prize_pool, :slate_id, :payment_structure, :game)
     end
 end

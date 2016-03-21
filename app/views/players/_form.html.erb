@@ -31,9 +31,10 @@
 
   <div class="field">
     <%= f.label :position %><br>
-    <% @positions.each do |position| %>
-      <%= radio_button("player", "position", "#{position}") %>
-      <%= position %>
+    <p>PUT TOP IF NOT A LEAGUE PLAYER</p>
+    <% for i in 1..5 %>
+      <%= radio_button("player", "position", "#{i}") %>
+      <%= @positions[i-1] %>
     <% end %>
   </div>
 
