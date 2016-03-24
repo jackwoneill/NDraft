@@ -20,8 +20,12 @@
  }
 
 @font-face {
-  font-family: myFirstFont;
+  font-family: Work-Sans-Regular;
   src: url(/siteassets/Work_Sans/WorkSans-Regular.ttf);
+}
+@font-face {
+  font-family: Work-Sans-Bold;
+  src: url(/siteassets/Work_Sans/WorkSans-Bold.ttf);
 }
 
 
@@ -78,7 +82,7 @@
 
 .green-button, .green-button:visited {
   border: none;
-  font-family: myFirstFont;
+  font-family: Work-Sans-Regular;
   font-size: 15px;
   cursor: pointer;
   height: 60px;
