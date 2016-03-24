@@ -103,7 +103,7 @@ class ContestsController < ApplicationController
     @players = players.uniq
     @teams = teams.uniq
 
-    if @lineup.game == 1
+    if @contest.game == 1
 
       tops = Array.new
       mids = Array.new

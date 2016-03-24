@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160319031625) do
+ActiveRecord::Schema.define(version: 20160323024734) do
 
   create_table "balances", force: :cascade do |t|
     t.integer  "user_id"
@@ -118,8 +118,9 @@ ActiveRecord::Schema.define(version: 20160319031625) do
     t.float    "amount"
     t.integer  "user_id"
     t.string   "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.float    "current_balance"
   end
 
   create_table "users", force: :cascade do |t|
@@ -139,6 +140,14 @@ ActiveRecord::Schema.define(version: 20160319031625) do
     t.float    "balance"
     t.float    "total_winnings"
     t.string   "display_name",           default: "", null: false
+  end
+
+  create_table "withdrawals", force: :cascade do |t|
+    t.integer  "user_id"
+    t.float    "amount"
+    t.boolean  "completed"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

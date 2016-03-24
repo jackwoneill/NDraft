@@ -1,18 +1,21 @@
 Rails.application.routes.draw do
 
-
   get 'deposits/verify'
   get 'deposits/webhookIPN'
 
-  resources :transactions
-  resources :deposits
-  resources :notifications
+  get '/terms' => 'welcome#terms', as: :terms
+  get '/accounterror' => 'welcome#account_error', as: :account_error
+
   get 'contests/upcoming'
   get 'contests/live'
   get 'contests/completed'
   get 'contests/pay5050'
 
   devise_for :users
+  resources :withdrawals
+  resources :transactions
+  resources :deposits
+  resources :notifications
   resources :stream_links, path: :watch
   resources :admin
   resources :notifications
@@ -27,6 +30,7 @@ Rails.application.routes.draw do
     end
   end
   root 'welcome#index'
+
  
 
   get 'slates/:id/payout' => 'slates#payout'

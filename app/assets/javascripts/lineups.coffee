@@ -64,6 +64,8 @@ ready = ->
         if (!lineup[("player_" + (5 + i)).toString()]?) 
             lineup[("player_" + (5 + i) + "Sal").toString()] = player_salary
             salary -= player_salary
+            lineupRow = $(".player-info").find("[data-id='" + id + "']")
+
 
             #SET VARIABLE VALUE EQUAL TO ID
             lineup[("player_" + (5 + i)).toString()] = id
@@ -76,31 +78,36 @@ ready = ->
             $(".current-lineup-player_" + (5 + i) + "-player-name").attr("data-salary", salary)
 
             #UPDATE CSS
-            $('.player-select').find('[data-id="'+id+'\"]').parent().parent().parent().css backgroundColor: 'white'
-            $('.player-select').find('[data-id="'+id+'\"]').parent().parent().parent().css opacity: 1.0
+            lineupRow.parent().parent().parent().css backgroundColor: 'white'
+            lineupRow.parent().parent().parent().css opacity: 1.0
 
 
             checkPlayers()
+            $(".salary").text(salary.toString())
+
 
             return true
 
     handleRemoveFlex = (i, id, player_salary, name) ->
         if lineup[("player_" + (5 + i)).toString()] == id
             salary += lineup[("player_" + (5 + i) + "Sal").toString()]
-            alert lineup[("player_" + (5 + i) + "Sal").toString()]
+            lineupRow = $(".player-info").find("[data-id='" + id + "']")
+
 
             lineup[("player_" + (5 + i)).toString()] = null
             lineup[("player_" + (5 + i) + "Sal").toString()] = null
 
 
-            $('.player-select').find('[data-id="'+id+'\"]').parent().parent().parent().css backgroundColor: '#273034'
-            $('.player-select').find('[data-id="'+id+'\"]').parent().parent().parent().css opacity: 1.0
+            lineupRow.parent().parent().parent().css backgroundColor: '#273034'
+            lineupRow.parent().parent().parent().css opacity: 1.0
 
             $('.player-select').find('[data-id="'+id+'\"]').parent().find(".add-player-button").text("+")
             $(".current-lineup-player_" + (5 + i) + "-player-name").empty()
             $(".current-lineup-player_" + (5 + i) + "-player-name").attr("data-id", "")
             $(".current-lineup-player_" + (5 + i) + "-player-name").attr("data-salary", "")
             checkPlayers()
+
+            $(".salary").text(salary.toString())
 
             return true
 
@@ -170,8 +177,8 @@ ready = ->
         id = player.data('id')
         pos = player.data('position')
         player_salary = player.data('salary')
-        lineup[pos] #Dynamic position var
-        lineup[(pos + "Sal").toString()] #Dynamic salary var
+        lineup["player_" + pos] #Dynamic position var
+        lineup["player_" + (pos + "Sal").toString()] #Dynamic salary var
 
         if $(this).text() == "+"
             if (lineup["player_" + pos])?
@@ -210,7 +217,6 @@ ready = ->
                     $(this).parent().parent().parent().css backgroundColor: '#273034'
                     $(this).parent().parent().parent().css opacity: 1.0
 
-
                     checkPlayers()
                 else 
                     for i in [1..3]
@@ -228,32 +234,32 @@ ready = ->
             id = player.data('id')
             pos = player.data('position')
             player_salary = player.data('salary')
-            lineup["player_" + pos] #Dynamic position var
-            lineup[("player_" + pos + "Sal").toString()] #Dynamic salary var
-            alert pos
 
+            if pos > 5
+                for i in [1..3]
+                    return if handleRemoveFlex(i, id, player_salary, name) == true
 
             switch id
                 when lineup["player_" + pos]
+                    lineupRow = $(".player-info").find("[data-id='" + id + "']")
 
                     salary += lineup[("player_" + pos + "Sal").toString()]
 
-                    lineup["player_" + pos] = null
-                    lineup[("player_" + "Sal").toString()] = null
+                    lineup["player_" + pos] = null 
+                    lineup[("player_" + pos + "Sal").toString()] = null
 
-                    $(".current-lineup-"+pos+"-player-name").empty()
-                    $(".current-lineup-"+pos+"-player-name").attr("data-id", "")
-                    $(".current-lineup-"+pos+"-player-name").attr("data-salary", "")
+                    $(".current-lineup-" + pos + "-player-name").empty() ##THIS LINE
+                    $(".current-lineup-" + pos + "-player-name").attr("data-id", "")
+                    $(".current-lineup-" + pos + "-player-name").attr("data-salary", "")
 
-                    $(".lineup-" + pos).css backgroundColor: '#273034'
-                    $(".lineup-" + pos).css opacity: 1.0
+                    lineupRow.parent().parent().parent().css  backgroundColor: '#273034'
+                    lineupRow.parent().parent().parent().css  opacity: 1.0
 
-                    $(".lineup-" + pos).find("button").text("+")
+                    lineupRow.parent().find("button").text("+")
 
                     checkPlayers()
-                else 
-                    for i in [1..3]
-                        break if handleRemoveFlex(i, id, player_salary, name) == true
+                else
+                    
 
         $(".salary").text(salary.toString())
 

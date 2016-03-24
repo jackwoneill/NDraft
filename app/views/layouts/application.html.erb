@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<html>
 <head>
   <title>DfsEsport</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
@@ -8,29 +7,41 @@
 </head>
 <body>
 <% if user_signed_in? %>
-	Signed in as <%= current_user.display_name %> <%= link_to "Sign out", destroy_user_session_path,:method => 'delete' %>
-	<br><br>
-	<ul class="nav-bar">
-		<li><%= link_to 'Lobby', contests_path %></li>
-		<li><%= link_to 'Upcoming Contests', contests_upcoming_path %></li>
-		<li><%= link_to 'Live Contests', contests_live_path %></li>
-		<li><%= link_to 'Watch', stream_links_path %></li>
-		<% if current_user.permissions == 2 %>
-			<li><%= link_to 'Admin Panel', admin_index_path %></li>
-		<% end %>
 
-		<li name="deposit"><%= link_to 'Withdraw', new_deposit_path %></li>
-		<li name="deposit"><%= link_to 'Deposit', new_deposit_path %></li>
+	<div class="top">
+		<ul class="nav-bar">
+			<li><%= link_to 'Lobby', contests_path %></li>
+			<li><%= link_to 'Upcoming Contests', contests_upcoming_path %></li>
+			<li><%= link_to 'Live Contests', contests_live_path %></li>
+			<li><%= link_to 'Watch', stream_links_path %></li>
+			<% if current_user.permissions == 2 %>
+				<li><%= link_to 'Admin Panel', admin_index_path %></li>
+			<% end %>
 
-		<li name="deposit"><span>Current Balance: <%= "$#{number_with_precision(current_user.balance, precision: 2)}" %></span></li> 
-	</ul>
+			<li>
+				<%= link_to "Sign out #{current_user.display_name}", destroy_user_session_path, :method => 'delete' %>
+			</li>
+
+			<li name="deposit"><%= link_to 'Withdraw', new_withdrawal_path %></li>
+			<li name="deposit"><%= link_to 'Deposit', new_deposit_path %></li>
+
+			<li name="deposit"><span>Current Balance: <%= "$#{number_with_precision(current_user.balance, precision: 2)}" %></span></li> 
+		</ul>
+
+	</div>
+
+	<div class="left">
+	    LEFT
+	</div>
+
+	<div class="main">
+		<%= yield %>
+	</div>
+
 <% else %>
-	<ul class="nav-bar">
-		<li><%= link_to "Login", new_user_session_path %></li> 
-		<li><%= link_to "Sign Up", new_user_registration_path %></li>
-	</ul>
+	<%= yield %>
+
 <% end %>
-<%= yield %>
+
 
 </body>
-</html>

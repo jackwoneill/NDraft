@@ -67,6 +67,18 @@ class DepositsController < ApplicationController
   # POST /deposits.json
   def create
     @deposit = Deposit.new(deposit_params)
+
+    if @deposit.amount < 5
+
+      redirect_to :back, notice: "Sorry! Unfortunately we can't accept deposits of less than $5.00" and return
+    
+    end
+
+    if @deposit.amount < 1000
+
+      redirect_to :back, notice: "Sorry! Unfortunately we can't accept increments of greater than $1000.00" and return
+    
+    end
     #@deposit.user_id = current_user.id
 
     PayPal::SDK.configure({

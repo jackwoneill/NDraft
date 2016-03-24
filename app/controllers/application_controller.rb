@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:display_name, :email, :password, :password_confirmation) }
+    devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:display_name, :email, :password, :password_confirmation, :terms) }
   end
 
   def confirm_balance?
@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
       if current_user.balance == Balance.where(user_id: current_user.id).take.amount
         return true
       end
-      sign_out_and_redirect(current_user)
+      redirect_to account_error_path(error: "CB1ABIV9")
     end
   end
 
@@ -25,17 +25,17 @@ class ApplicationController < ActionController::Base
 
   def calcTotalScore(lineup)
 
-    top = Player.find(lineup.top)
-    mid = Player.find(lineup.mid)
-    adc = Player.find(lineup.adc)
-    support = Player.find(lineup.support)
-    jungler = Player.find(lineup.jungler)
-    flex_1 = Player.find(lineup.flex_1)
-    flex_2 = Player.find(lineup.flex_2)
-    flex_3 = Player.find(lineup.flex_3)
+    player_1 = Player.find(lineup.player_1)
+    player_2 = Player.find(lineup.player_2)
+    player_3 = Player.find(lineup.player_3)
+    player_4 = Player.find(lineup.player_4)
+    player_5 = Player.find(lineup.player_5)
+    player_6 = Player.find(lineup.player_6)
+    player_7 = Player.find(lineup.player_7)
+    player_8 = Player.find(lineup.player_8)
 
-    total_score = top.live_score + mid.live_score + adc.live_score + support.live_score + jungler.live_score
-    total_score = total_score + flex_1.live_score + flex_2.live_score + flex_3.live_score
+    total_score = player_1.live_score + player_2.live_score + player_3.live_score + player_4.live_score + player_5.live_score
+    total_score = total_score + player_6.live_score + player_7.live_score + player_8.live_score
 
     lineup.total_score = total_score
     lineup.save
@@ -45,6 +45,7 @@ class ApplicationController < ActionController::Base
   def checkTotalWinnings
     if current_user.total_winnings >= 600
       print("600")
+      #redirect_to give me your ssn path
     end
   end
 

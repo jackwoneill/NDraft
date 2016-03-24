@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+<% if current_user.permissions == 2 %>
+<%= "Supposed Bal = #{@supposedBal}" %>
+<table>
+	<th>Amount</th>
+	<th>Description</th>
+
+	<% @transactions.each do |t| %>
+		<tr>
+			<td><%= t.amount %></td>
+			<td><%= t.description %></td>
+		</tr>
+	<% end %>
+
+<% end %>
+
+
+<%= link_to 'Edit', edit_withdrawal_path(@withdrawal) %> |
+<%= link_to 'Back', withdrawals_path %>

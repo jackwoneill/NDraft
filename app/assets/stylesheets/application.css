@@ -13,14 +13,39 @@
  *= require_tree .
  *= require_self
  */
+ *,
+ *:before,
+ *:after {
+  box-sizing: border-box;
+ }
+
+@font-face {
+  font-family: myFirstFont;
+  src: url(/siteassets/Work_Sans/WorkSans-Regular.ttf);
+}
+
+
+.top {
+  position:absolute;
+  left:0; right:0; top:0;
+  height: 92px;
+  background-color: #273034;
+}
+.left {
+  position:absolute;
+  left:0; top:92px; bottom: 0;
+  width: 178px;
+  background-color: #273034;
+
+}
+.main {
+  position: absolute;
+  left:178px; top:92px; right:0; bottom:0;
+}
+
 .nav-bar{
   list-style-type: none;
-  margin: 0;
-  padding: 0;
-  padding-top: 5px;
-  padding-bottom: 5px;
   overflow: hidden;
-  background-color: #273034
 }
 
 .nav-bar > li {
@@ -35,18 +60,44 @@
   text-decoration: none;
 }
 
-.nav-bar > li > a:hover {
+.top > .nav-bar > li > a:hover {
   background-color: #E95144;
 }
 
-li[name="deposit"] {
+.top > .nav-bar > li[name="deposit"] {
   float: right;
 }
 
-li[name="deposit"] > span {
+.top > .nav-bar > li[name="deposit"] > span {
   display: inline-block;
   color: white;
   text-align: center;
-  padding: 14px 16px;
+  padding: 25px 25px;
   text-decoration: none;
+}
+
+.trans-button, .trans-button:visited {
+
+  font-family: myFirstFont;
+  display: inline-block;
+  width: 200px;
+  padding: 8px;
+  color: #fff;
+  border: 1px solid #fff;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  letter-spacing: 3px;
+  font-size: 15px;
+
+  -webkit-transition: all 0.3s ease-out;  /* Saf3.2+, Chrome */
+   -moz-transition: all 0.3s ease-out;  /* FF4+ */
+    -ms-transition: all 0.3s ease-out;  /* IE10 */
+     -o-transition: all 0.3s ease-out;  /* Opera 10.5+ */
+        transition: all 0.3s ease-out;
+  }
+.trans-button:hover,
+.trans-button:active {
+  background-color: #fff;
+  color: #000;
 }

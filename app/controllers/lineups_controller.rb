@@ -205,7 +205,7 @@ class LineupsController < ApplicationController
     end
 
     if totSalary > 60000
-      redirect_to contests_path
+      redirect_to :back, notice: "Total salary cannot exceed $60,000"
       return
     end
 
@@ -231,26 +231,30 @@ class LineupsController < ApplicationController
     @lineup.contest_id = params[:contest_id]
     @lineup.user_id = current_user.id
 
-    if @lineup.save 
-      current_user.balance -= @contest.fee
-      bal = Balance.where(user_id: current_user.id).take
-      bal.amount -= @contest.fee
-      bal.save
-      current_user.save
+    # if @lineup.save 
 
-      deduct_amount = ((@contest.fee) * -1.00)
+    # end
 
-      entryTrans = Transaction.new(user_id: current_user.id, amount: deduct_amount, description: "Contest Entry: Contest ID: #{@contest.id} ")
-      entryTrans.save
-    end
 
-    @contest.curr_size += 1
-    @contest.save
 
     #can before_save go here?
 
     respond_to do |format|
       if @lineup.save 
+        current_user.balance -= @contest.fee
+        bal = Balance.where(user_id: current_user.id).take
+        bal.amount -= @contest.fee
+        bal.save
+        current_user.save
+
+        deduct_amount = ((@contest.fee) * -1.00)
+
+        entryTrans = Transaction.new(user_id: current_user.id, amount: deduct_amount, description: "Contest Entry: Contest ID: #{@contest.id}", current_balance: current_user.balance )
+        entryTrans.save
+
+        @contest.curr_size += 1
+        @contest.save
+
         format.html { redirect_to @contest, notice: 'Lineup was successfully created.' }
         format.json { render :show, status: :created, location: @lineup }
       else
@@ -299,7 +303,7 @@ class LineupsController < ApplicationController
     returnUser.balance += @contest.fee
     returnUser.save
 
-    refundTrans = Transaction.new(user_id: @lineup.user_id, amount: @contest.fee, description: "Entry Canceled: Contest ID: #{@contest.id} ")
+    refundTrans = Transaction.new(user_id: @lineup.user_id, amount: @contest.fee, description: "Entry Canceled: Contest ID: #{@contest.id}", current_balance: current_user.balance)
     refundTrans.save
 
     @contest.curr_size -= 1

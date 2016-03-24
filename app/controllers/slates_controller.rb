@@ -165,7 +165,7 @@ end
         returnUser.balance += @contest.fee
         returnUser.save
 
-        refundTrans = Transaction.new(user_id: l.user_id, amount: @contest.fee, description: "Contest Refund: Contest ID: #{@contest.id} ")
+        refundTrans = Transaction.new(user_id: l.user_id, amount: @contest.fee, description: "Contest Refund: Contest ID: #{@contest.id}", current_balance: returnUser.balance )
         refundTrans.save
       end
       return
@@ -207,7 +207,7 @@ end
       cutoffBalance.amount += ((1.8 * @contest.fee)/cutoffCount)
       cutoffBalance.save
 
-      payTrans = Transaction.new(user_id: cl.user_id, amount: ((1.8 * @contest.fee)/cutoffCount), description: "Contest Payout: Contest ID: #{@contest.id}")
+      payTrans = Transaction.new(user_id: cl.user_id, amount: ((1.8 * @contest.fee)/cutoffCount), description: "Contest Payout: Contest ID: #{@contest.id}", current_balance: cutoffUser.balance)
       payTrans.save
 
     end
@@ -228,7 +228,7 @@ end
         payBalance.amount += (1.8 * @contest.fee)
         payBalance.save
 
-        payTrans = Transaction.new(user_id: line.user_id, amount: ((1.8 * @contest.fee)), description: "Contest Payout: Contest ID: #{@contest.id} ")
+        payTrans = Transaction.new(user_id: line.user_id, amount: ((1.8 * @contest.fee)), description: "Contest Payout: Contest ID: #{@contest.id}", current_balanc: payUser.balance)
         payTrans.save
 
       end
@@ -256,7 +256,7 @@ end
         returnUser.balance += @contest.fee
         returnUser.save
 
-        refundTrans = Transaction.new(user_id: l.user_id, amount: @contest.fee, description: "Contest Refund: Contest ID: #{@contest.id} ")
+        refundTrans = Transaction.new(user_id: l.user_id, amount: @contest.fee, description: "Contest Refund: Contest ID: #{@contest.id}", current_balance: returnUser.balance)
         refundTrans.save
       end
       return
@@ -298,7 +298,7 @@ end
       cutoffBalance.amount += ((2 * @contest.fee)/cutoffCount)
       cutoffBalance.save
 
-      payTrans = Transaction.new(user_id: cl.user_id, amount: ((2 * @contest.fee)/cutoffCount), description: "Contest Payout: Contest ID: #{@contest.id}")
+      payTrans = Transaction.new(user_id: cl.user_id, amount: ((2 * @contest.fee)/cutoffCount), description: "Contest Payout: Contest ID: #{@contest.id}", current_balance: cutoffUser.balance)
       payTrans.save
 
     end
@@ -319,7 +319,7 @@ end
         payBalance.amount += (2 * @contest.fee)
         payBalance.save
 
-        payTrans = Transaction.new(user_id: line.user_id, amount: ((2 * @contest.fee)), description: "Contest Payout: Contest ID: #{@contest.id} ")
+        payTrans = Transaction.new(user_id: line.user_id, amount: ((2 * @contest.fee)), description: "Contest Payout: Contest ID: #{@contest.id}", current_balance: payUser.balance)
         payTrans.save
 
       end
