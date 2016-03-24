@@ -10,6 +10,7 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
+ *= require normalize-rails
  *= require_tree .
  *= require_self
  */
@@ -111,22 +112,10 @@
 }
 
 .green-button:active {
-  border-color: #17954c;
-  color: #17954c;
+  border-color: #fff;
+  color: #fff;
 }
 
-/*.green-button:hover:after {
-    background: #000;
-    content: "";
-    display: block;
-    height: 100%;
-    left: 0;
-    opacity: 0.2;
-    position: absolute;
-    top: 0;
-    width: 100%;
-
-}*/
 .green-button:hover {
     background: transparent;
     border: 2px solid #fff;

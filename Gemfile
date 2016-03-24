@@ -26,6 +26,8 @@ gem 'devise'
 gem 'paypal-sdk-rest'
 gem 'paypal-sdk-permissions'
 
+gem 'normalize-rails'
+
 
 
 # Use ActiveModel has_secure_password

@@ -81,6 +81,7 @@ GEM
     multi_json (1.11.2)
     nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
+    normalize-rails (3.0.3)
     orm_adapter (0.5.0)
     paypal-sdk-core (0.3.4)
       multi_json (~> 1.0)
@@ -172,6 +173,7 @@ DEPENDENCIES
   devise
   jbuilder (~> 2.0)
   jquery-rails
+  normalize-rails
   paypal-sdk-permissions
   paypal-sdk-rest
   pg (= 0.18.4)

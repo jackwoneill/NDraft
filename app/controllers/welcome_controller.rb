@@ -15,5 +15,6 @@ class WelcomeController < ApplicationController
   def account_error
     @error = params[:error]
   end
+  
 
 end

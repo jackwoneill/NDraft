@@ -11,12 +11,51 @@
 		</div>
 		<div class="button-container">
 			<div class="login-button-container">
-				<a class="green-button" name="login-button" href="<%= new_user_session_path%>">LOGIN</a>
+				<a class="green-button" id="login-button" href="#">LOGIN</a>
 			</div>
 			<div class="signup-button-container">
 				<a class="green-button" href="<%= new_user_registration_path %>">SIGN UP</a>
 			</div>
 		</div>
+
+		<!-- The Modal -->
+		<div id="myModal" class="modal">
+
+		  <!-- Modal content -->
+			<div class="modal-content">
+				<span class="close">x</span>
+				<div class="login-content">
+				    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+					    <div class="field">
+					    	<%= f.label :email %><br />
+					    	<%= f.email_field :email, autofocus: true %>
+					    </div>
+
+					    <div class="field">
+					        <%= f.label :password %><br />
+					        <%= f.password_field :password, autocomplete: "off" %>
+					    </div>
+
+					    <% if devise_mapping.rememberable? -%>
+					        <div class="field">
+					          <%= f.check_box :remember_me %>
+					          <%= f.label :remember_me %>
+					        </div>
+					    <% end -%>
+
+					    <div class="actions">
+					        <%= f.submit "Log in" %>
+					    </div>
+			    	<% end %>
+				</div>
+			</div>
+<!-- 			</div>
+
+				<p>Some text in the Modal..</p>
+			</div> -->
+		</div>
+
 	</div>
 </div>
+
 
