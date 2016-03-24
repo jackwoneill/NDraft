@@ -178,17 +178,22 @@ input:-webkit-autofill {
     font-size: 24px;
     height: 23%;
     width: 100%;
-    background-color: #5cb85c;
+    background-color: #28d;
     color: white;
     text-align: center;
     line-height: 70px;
-
-
 }
 .submit-link:hover {
   cursor: pointer;
-  background: #4cae4c
+  background: #17c
 }
+.forgot, .forgot:visited{
+  display: inline-block;
+  outline: none;
+  text-decoration: none;
+}
+
+
 
 .modal-header {
     padding: 2px 16px;

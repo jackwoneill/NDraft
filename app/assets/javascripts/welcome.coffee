@@ -1,6 +1,7 @@
 ready = ->
   # Get the modal
-  modal = document.getElementById('myModal')
+  login_modal = document.getElementById('login-modal')
+  modal = null
   # Get the button that opens the modal
   btn = document.getElementById('login-button')
   # Get the <span> element that closes the modal
@@ -8,6 +9,7 @@ ready = ->
   # When the user clicks on the button, open the modal 
 
   $("#login-button").click ->
+    modal = login_modal
     modal.style.display = 'block'
     return
 
@@ -29,6 +31,6 @@ ready = ->
   $('.submit-link').click ->
     $('#new_user').submit()
     false
-    
+
 $(document).ready(ready)
 $(document).on('page:load', ready)
