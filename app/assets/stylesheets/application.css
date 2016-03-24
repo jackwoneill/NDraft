@@ -81,8 +81,10 @@
   font-family: myFirstFont;
   font-size: 15;
   cursor: pointer;
-  padding: 15px 80px;
-  display: inline-block;
+  height: 60px;
+  width: 240px;
+/*  padding: 15px 80px;
+*/  display: inline-block;
   margin: 15px 30px;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -92,11 +94,13 @@
   -webkit-transition: all 0.3s;
   -moz-transition: all 0.3s;
   transition: all 0.3s;
-  border-radius: 50px;
+  border-radius: 35px;
   border: 3px solid #fff;
   color: #fff;
   background: #24b662;
   text-decoration: none;
+  text-align: center;
+  line-height: 55px;
 
 
   overflow: hidden;
