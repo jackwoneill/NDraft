@@ -56,8 +56,7 @@
 .modal-content {
     background-color: #fff;
     margin: 15% auto; /* 15% from the top and centered */
-    padding: 20px;
-    width: 40%; /* Could be more or less, depending on screen size */
+    width: 30%; /* Could be more or less, depending on screen size */
     height: 60%;
 }
 
@@ -65,6 +64,7 @@
 .close {
     color: #aaa;
     float: right;
+    text-align: right;
     font-size: 28px;
     font-weight: bold;
 }
@@ -77,7 +77,7 @@
 }
 
 .new_user-content {
-    width: 30%;
+    width: 20%;
     position: fixed;
     top: 62%;
     left: 50%;
@@ -87,33 +87,10 @@
 input:-webkit-autofill {
     -webkit-box-shadow: 0 0 0px 1000px white inset;
 }
-/**
- * 01/28/2016
- * This pen is years old, and watching at the code after all
- * those years made me fall from my chair, so I:
- * - changed all IDs to classes
- * - converted all units to pixels and em units
- * - changed all global elements to classes or children of
- *   .new_user
- * - cleaned the syntax to be more consistent
- * - added a lot of spaces that I so hard tried to avoid
- *   a few years ago
- *   (because it's cool to not use them)
- * - and probably something else that I can't remember anymore
- *
- * I sticked to the same philosophy, meaning:
- * - the design is almost the same
- * - only pure HTML and CSS
- * - no frameworks, preprocessors or resets
- */
-
-/* 'Open Sans' font from Google Fonts */
-@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700);
-
 
 
 .new_user {
-  width: 400px;
+  width: 300px;
   margin: 16px auto;
   font-size: 16px;
 }
@@ -176,7 +153,7 @@ input:-webkit-autofill {
 /* Text fields' focus effect */
 .new_user input[type="email"]:focus,
 .new_user input[type="password"]:focus {
-  border-color: #888;
+    border: 1px solid #6ec06e;
 }
 
 .new_user input[type="submit"] {
@@ -193,4 +170,37 @@ input:-webkit-autofill {
 /* Buttons' focus effect */
 .new_user input[type="submit"]:focus {
   border-color: #05a;
+}
+.submit-link, .submit-link:visited {
+    display: inline-block;
+    outline: none;
+    text-decoration: none;
+    font-size: 24px;
+    height: 23%;
+    width: 100%;
+    background-color: #5cb85c;
+    color: white;
+    text-align: center;
+    line-height: 70px;
+
+
+}
+.submit-link:hover {
+  cursor: pointer;
+  background: #4cae4c
+}
+
+.modal-header {
+    padding: 2px 16px;
+    background-color: #fff;
+    color: black;
+}
+.modal-header > h2 {
+  text-align: left;
+}
+hr {
+    border: 0;
+    height: 1px;
+    background-image: linear-gradient(to right, rgba(255,255,255,1), rgba(0,0,0,1), rgba(255,255,255,1));
+
 }

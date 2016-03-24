@@ -4,7 +4,7 @@ ready = ->
   # Get the button that opens the modal
   btn = document.getElementById('login-button')
   # Get the <span> element that closes the modal
-  span = document.getElementsByClassName('close')[0]
+  close = document.getElementsByClassName('close')[0]
   # When the user clicks on the button, open the modal 
 
   $("#login-button").click ->
@@ -13,7 +13,7 @@ ready = ->
 
   # When the user clicks on <span> (x), close the modal
 
-  span.onclick = ->
+  close.onclick = ->
     modal.style.display = 'none'
     return
 
@@ -26,5 +26,9 @@ ready = ->
 
   # ---
 
+  $('.submit-link').click ->
+    $('#new_user').submit()
+    false
+    
 $(document).ready(ready)
 $(document).on('page:load', ready)
