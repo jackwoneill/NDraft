@@ -79,10 +79,11 @@
 .trans-button, .trans-button:visited {
 
   font-family: myFirstFont;
+  background: #fff;
   display: inline-block;
   width: 200px;
   padding: 8px;
-  color: #fff;
+  color: #000;
   border: 2px solid #fff;
   text-align: center;
   text-decoration: none;
