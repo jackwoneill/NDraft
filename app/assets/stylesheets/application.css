@@ -79,7 +79,7 @@
 .green-button, .green-button:visited {
   border: none;
   font-family: myFirstFont;
-  font-size: 15;
+  font-size: 15px;
   cursor: pointer;
   height: 60px;
   width: 240px;
@@ -87,7 +87,7 @@
 */  display: inline-block;
   margin: 15px 30px;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 3px;
   font-weight: 700;
   outline: none;
   position: relative;
@@ -95,8 +95,8 @@
   -moz-transition: all 0.3s;
   transition: all 0.3s;
   border-radius: 35px;
-  border: 3px solid #fff;
-  color: #fff;
+/*  border: 3px solid #fff;
+*/  color: #fff;
   background: #24b662;
   text-decoration: none;
   text-align: center;
@@ -111,8 +111,17 @@
   color: #17954c;
 }
 
-.green-button:hover {
-  background: transparent;
+.green-button:hover:after {
+    background: #000;
+    content: "";
+    display: block;
+    height: 100%;
+    left: 0;
+    opacity: 0.2;
+    position: absolute;
+    top: 0;
+    width: 100%;
+
 }
 
 
