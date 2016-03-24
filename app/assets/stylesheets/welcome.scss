@@ -11,7 +11,16 @@
   width: 100%;
   height: 100%;
 }
-
+.description-container {
+    position: fixed;
+    top: 60%;
+    left: 50%;
+    /* bring your own prefixes */
+    transform: translate(-50%, -60%);
+}
+.description-container > h3 {
+  color: #fff;
+}
 .button-container {
     position: fixed;
     top: 70%;
