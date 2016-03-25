@@ -6,18 +6,19 @@ ready = ->
   btn = document.getElementById('login-button')
   # Get the <span> element that closes the modal
   close = document.getElementsByClassName('close')[0]
+  email = document.getElementById('user_email')
+  password = document.getElementById('user_password')
   # When the user clicks on the button, open the modal 
 
   $("#login-button").click ->
     modal = login_modal
     modal.style.display = 'block'
-    return
+    return false
 
   # When the user clicks on <span> (x), close the modal
-
-  close.onclick = ->
-    modal.style.display = 'none'
-    return
+  # close.onclick = (e) ->
+  #   modal.style.display = 'none'
+  #   return
 
   # When the user clicks anywhere outside of the modal, close it
 
@@ -28,9 +29,30 @@ ready = ->
 
   # ---
 
-  $('.submit-link').click ->
-    $('#new_user').submit()
-    false
+
+
+
+
+$(document).ready ->
+  $.ajaxSetup headers: 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+
+
+
+  #form id
+  $('#new_user').bind('ajax:success', (evt, data, status, xhr) ->
+    #function called on status: 200 (for ex.)
+    console.log 'success'
+    window.location.href = "/contests"
+    return
+  ).bind 'ajax:error', (evt, xhr, status, error) ->
+    #function called on status: 401 or 500 (for ex.)
+    #UPDATE A NOTICE THING IN MODAL TO SAY INVALID PASSWORD}}
+    $("#notice").text("Invalid Email/Password Combination")
+    console.log xhr.responseText
+    console.log "LMAO"
+    return
+  return
+
 
 $(document).ready(ready)
 $(document).on('page:load', ready)

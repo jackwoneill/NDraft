@@ -11,7 +11,10 @@ Rails.application.routes.draw do
   get 'contests/completed'
   get 'contests/pay5050'
 
-  devise_for :users
+
+  devise_for :users, controllers: {
+  sessions: 'user/sessions'
+}
   resources :withdrawals
   resources :transactions
   resources :deposits

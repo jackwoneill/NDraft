@@ -21,12 +21,12 @@
 		  <!-- Modal content -->
 			<div class="modal-content">
 				<div class="modal-header">
-			   		<span class="close">×</span>
-					<h2>Log in</h2>
+					<span>Sign in</span>
 					<hr>
 				</div>
 				<div class="login-content">
-				    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+					<span id="notice"></span>
+				    <%= form_for resource, url: session_path(:user), remote: true do |f| %>
 					    <div class="field">
 					    	<%= f.label :email %><br />
 					    	<%= f.email_field :email, autofocus: true %>
@@ -36,13 +36,22 @@
 					        <%= f.label :password %><br />
 					        <%= f.password_field :password, autocomplete: "off" %>
 					    </div>
+
+					    <div class="field">
+          					<label id="remember_me_label"><input type="checkbox" name="user[remember_me]" id="user_remember_me"/>Remember me</label>
+					    </div>
 					    
 						<a class="forgot" href="new_user_password_path">Forgot your password?</a>
+
+						<div class="actions">
+       						<%= f.submit "Log in", class: "hidden", id: "submit-form" %>
+     					</div>
 			    	<% end %>
 
-				</div>
 
-				<a class="submit-link" href="#{}">Log In</a>
+			    	<label for="submit-form" class="submit-link">Log In</label>
+
+				</div>
 
 			</div>
 
