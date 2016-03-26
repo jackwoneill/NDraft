@@ -101,7 +101,7 @@
   border-radius: 15px;
   border: 2px solid transparent;
   color: #fff;
-  background: #24b662;
+  background: #fc4349;
   text-decoration: none;
   text-align: center;
   line-height: 57px;
@@ -111,13 +111,14 @@
 }
 
 .green-button:active {
-  border-color: #fff;
-  color: #fff;
+  border-color: #fc4349;
+  color: #fc4349;
 }
 
 .green-button:hover {
     background: transparent;
-    border: 2px solid #fff;
+    border: 2px solid #fc4349;
+    color: #fc4349
 
 
 }

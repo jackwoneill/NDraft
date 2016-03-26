@@ -16,7 +16,7 @@ display: inline;
   float: left;
   display: inline-block;
   color: #AFBFC6;
-  background-color: #273034;
+  background-color: #F8F8FF;
 
   text-align: center;
   padding: 14px 16px;
@@ -53,7 +53,7 @@ display: inline;
   color: white;
   text-align: center;
   text-decoration: none;
-  background-color: #273034
+  background-color: #F8F8FF
 
 }
 .search-container {
@@ -82,7 +82,7 @@ display: inline;
 
 .new-player-selection-container {
   float: left;
-  background-color: #273034;
+  background-color: #F8F8FF;
   width: 55%;
   height: 450px;
   overflow: auto;
@@ -101,7 +101,7 @@ display: inline;
 }
 
 .player-select > tbody > tr { 
-  background-color: #273034; 
+  background-color: #F8F8FF; 
   width: 100%;
   height: 45px;
 }
@@ -168,7 +168,7 @@ display: inline;
 }
 
 .current-lineup > tbody > tr { 
-  background-color: #273034; 
+  background-color: #F8F8FF; 
   width: 100%;
   height: 75px;
 }
