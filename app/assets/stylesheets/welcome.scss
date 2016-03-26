@@ -16,6 +16,7 @@
     position: fixed;
     top: 55%;
     left: 50%;
+    -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -55%);
 }
 .description-container > h3 {
@@ -24,11 +25,12 @@
   text-align: center;
 }
 .button-container {
-    position: fixed;
-    top: 70%;
-    left: 50%;
-    /* bring your own prefixes */
-    transform: translate(-50%, -70%);
+  position: fixed;
+  top: 70%;
+  left: 50%;
+  /* bring your own prefixes */
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -70%);
 }
 .login-button-container {
   float: left;
@@ -91,9 +93,9 @@ input:-webkit-autofill {
 }
 
 .modal-header {
-      border: 1px solid white;
-    -webkit-border-top-left-radius: 15px 20px; 
-    -webkit-border-top-right-radius: 15px 20px;
+  border: 1px solid white;
+  -webkit-border-top-left-radius: 15px 20px; 
+  -webkit-border-top-right-radius: 15px 20px;
 }
 
 .new_user {
@@ -249,7 +251,13 @@ hr {
     padding-left: 20px;
     text-indent: -15px;
 }
-
+.notice-container {
+  text-align: center;
+  width: 300px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
 #notice {
-
+  color: black;
 }

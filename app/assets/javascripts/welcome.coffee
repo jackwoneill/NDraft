@@ -13,6 +13,7 @@ ready = ->
   $("#login-button").click ->
     modal = login_modal
     modal.style.display = 'block'
+    $("#notice").text("")
     return false
 
   # When the user clicks on <span> (x), close the modal
@@ -36,7 +37,8 @@ ready = ->
 $(document).ready ->
   $.ajaxSetup headers: 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
 
-
+  $('#new_user').submit ->
+    $('#notice').text("")
 
   #form id
   $('#new_user').bind('ajax:success', (evt, data, status, xhr) ->
@@ -48,8 +50,6 @@ $(document).ready ->
     #function called on status: 401 or 500 (for ex.)
     #UPDATE A NOTICE THING IN MODAL TO SAY INVALID PASSWORD}}
     $("#notice").text("Invalid Email/Password Combination")
-    console.log xhr.responseText
-    console.log "LMAO"
     return
   return
 

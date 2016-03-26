@@ -25,7 +25,10 @@
 					<hr>
 				</div>
 				<div class="login-content">
-					<span id="notice"></span>
+					<div class="notice-container">
+						<span id="notice"></span>
+					</div>
+					
 				    <%= form_for resource, url: session_path(:user), remote: true do |f| %>
 					    <div class="field">
 					    	<%= f.label :email %><br />
