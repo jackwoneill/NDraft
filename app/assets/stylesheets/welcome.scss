@@ -16,11 +16,22 @@
   width: 100%;
   height: 100%;
   /*background: #fff url(/siteassets/images/katowice-bg.jpg) no-repeat center center fixed;*/
-  background-image:  url(/siteassets/images/nova3.png);
+  background-image:  url(/siteassets/images/ndhero3.png);
   background-repeat: no-repeat;
 
   background-size: contain;
 }
+
+.img-container {
+  position: fixed;
+  top: 25%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -55%);
+  background-repeat: no-repeat;
+
+  background-size: contain;
+  }
 
 .description-container {
     position: fixed;
