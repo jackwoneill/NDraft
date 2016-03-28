@@ -1,5 +1,7 @@
 <div class="landing-main">
-	<div class="landing-hero"></div>
+	<div class="landing-hero">
+		<img src="/siteassets/images/ndhero.jpg" class="bg-img" alt="" />
+	</div>
 
 	<div class="page-content">
 		
@@ -16,7 +18,7 @@
 				<a class="green-button" id="login-button" href="#">LOGIN</a>
 			</div>
 			<div class="signup-button-container">
-				<a class="green-button" href="<%= new_user_registration_path %>">SIGN UP</a>
+				<a class="green-button" id="signup-button" href="<%= new_user_registration_path %>">SIGN UP</a>
 			</div>
 		</div>
 
@@ -24,7 +26,7 @@
 		<div id="login-modal" class="modal">
 
 		  <!-- Modal content -->
-			<div class="modal-content">
+			<div class="login-modal-content">
 				<div class="modal-header">
 					<span>Sign in</span>
 					<hr>
@@ -55,6 +57,72 @@
        						<%= f.submit "Log in", class: "hidden", id: "submit-form" %>
      					</div>
 			    	<% end %>
+
+
+			    	<label for="submit-form" class="submit-link">Log In</label>
+
+				</div>
+
+			</div>
+
+<!-- 			</div>
+
+				<p>Some text in the Modal..</p>
+			</div> -->
+		</div>
+
+		<div id="signup-modal" class="modal">
+
+		  <!-- Modal content -->
+			<div class="signup-modal-content">
+				<div class="modal-header">
+					<span>Sign in</span>
+					<hr>
+				</div>
+				<div class="signup-content">
+					<div class="notice-container">
+						<span id="notice"></span>
+					</div>
+
+				    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+						<%= devise_error_messages! %>
+
+						<div class="field">
+							<%= f.label :display_name %><br />
+							<%= f.text_field :display_name, autofocus: true %>
+						</div>
+
+						<div class="field">
+							<%= f.label :email %><br />
+							<%= f.email_field :email%>
+						</div>
+
+						<div class="field">
+							<%= f.label :password %>
+							<% if @minimum_password_length %>
+								<em>(<%= @minimum_password_length %> characters minimum)</em>
+							<% end %><br />
+							<%= f.password_field :password, autocomplete: "off" %>
+						</div>
+
+						<div class="field">
+							<%= f.label :password_confirmation %><br />
+							<%= f.password_field :password_confirmation, autocomplete: "off" %>
+						</div>
+
+						<div class="field">
+							<%= f.check_box :terms %>
+
+							<%= f.label :terms do  %>
+								<%= "I have read and agree to the #{link_to("Terms of Use", terms_path)} and confirm that I am at least 18 years of age.".html_safe %>
+							<% end %>
+						</div>
+
+						<div class="actions">
+							<%= f.submit "Sign up" %>
+						</div>
+					<% end %>
+
 
 
 			    	<label for="submit-form" class="submit-link">Log In</label>

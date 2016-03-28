@@ -2,6 +2,7 @@ ready = ->
 
   # Get the modal
   login_modal = document.getElementById('login-modal')
+  signup_modal = document.getElementById('signup-modal')
   modal = null
   # Get the button that opens the modal
   btn = document.getElementById('login-button')
@@ -19,6 +20,12 @@ ready = ->
   
   $("#login-button").click ->
     modal = login_modal
+    modal.style.display = 'block'
+    $("#notice").text("")
+    return false
+
+  $("#signup-button").click ->
+    modal = signup_modal
     modal.style.display = 'block'
     $("#notice").text("")
     return false
@@ -44,9 +51,6 @@ ready = ->
 
 
 $(document).ready ->
-
-
-
 
   $.ajaxSetup headers: 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
 
