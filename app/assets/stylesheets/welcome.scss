@@ -191,11 +191,11 @@ input:-webkit-autofill {
 /* Text fields' focus effect */
 .new_user input[type="email"]:focus,
 .new_user input[type="password"]:focus {
-    border: 1px solid #e98011;
+    border: 1px solid #4AD9D9;
 }
 
 .new_user input[type="submit"] {
-  background: #EF8D24;
+  background: #F5A503;
   border-color: transparent;
   color: #fff;
   cursor: pointer;
@@ -217,7 +217,7 @@ input:-webkit-autofill {
   font-size: 24px;
   height: 20%;
   width: 100%;
-  background-color: #EF8D24;
+  background-color: #F5A503;
   color: white;
   text-align: center;
   line-height: 70px;
@@ -225,7 +225,7 @@ input:-webkit-autofill {
   -webkit-border-bottom-right-radius: 20px 20px;
 }
 .submit-link:hover {
-  background: #e98011;
+  background: #36B1BF;
   cursor: pointer;
 }
 
@@ -234,12 +234,12 @@ input:-webkit-autofill {
   outline: none;
   text-decoration: none;
   background-color: #fff;
-  color: #EF8D24;
+  color: #4AD9D9;
 }
 
 .forgot:hover {
   background: #fff;
-  color: #e95c11;
+  color: #36B1BF;
   cursor: pointer;
 }
 
@@ -257,7 +257,7 @@ input:-webkit-autofill {
 hr {
     border: 0;
     height: 1px;
-    background-image: linear-gradient(to right, rgba(255,255,255,1), #e95c11, rgba(255,255,255,1));
+    background-image: linear-gradient(to right, rgba(255,255,255,1), #4AD9D9, rgba(255,255,255,1));
 
 }
 .hidden {

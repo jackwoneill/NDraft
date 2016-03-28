@@ -1,4 +1,5 @@
 ready = ->
+
   # Get the modal
   login_modal = document.getElementById('login-modal')
   modal = null
@@ -8,13 +9,25 @@ ready = ->
   close = document.getElementsByClassName('close')[0]
   email = document.getElementById('user_email')
   password = document.getElementById('user_password')
-  # When the user clicks on the button, open the modal 
+  # When the user clicks on the button, open the modal
 
+  #THIS MAKES IT SO THE STYLE IS RESET ON PAGE LOAD, KEEP
+  modal = login_modal
+  modal.style.display = 'none' 
+  modal = null
+  #END BLOCK
+  
   $("#login-button").click ->
     modal = login_modal
     modal.style.display = 'block'
     $("#notice").text("")
     return false
+
+  window.onclick = (event) ->
+    if event.target == modal
+      modal.style.display = 'none'
+    return
+    
 
   # When the user clicks on <span> (x), close the modal
   # close.onclick = (e) ->
@@ -23,10 +36,6 @@ ready = ->
 
   # When the user clicks anywhere outside of the modal, close it
 
-  window.onclick = (event) ->
-    if event.target == modal
-      modal.style.display = 'none'
-    return
 
   # ---
 
@@ -35,6 +44,10 @@ ready = ->
 
 
 $(document).ready ->
+
+
+
+
   $.ajaxSetup headers: 'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
 
   $('#new_user').submit ->
