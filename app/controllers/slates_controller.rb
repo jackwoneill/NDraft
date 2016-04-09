@@ -37,9 +37,6 @@ class SlatesController < ApplicationController
         c.paid_out = true
         c.save
       end
-
-
-        
   
     end
     redirect_to contests_path

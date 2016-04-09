@@ -158,8 +158,8 @@ ready = ->
         $(".player-select > tbody > tr").hide()
         $(".position-select > li > button").css backgroundColor: '#273034'
         $(".position-select > li").css backgroundColor: '#273034'
-        $(this).css backgroundColor: '#E95144'
-        $(this).parent().css backgroundColor: '#E95144'
+        $(this).css backgroundColor: '#F2385A'
+        $(this).parent().css backgroundColor: '#F2385A'
 
         if pos == "all"
             $(".player-select > tbody > tr").show()
@@ -192,7 +192,7 @@ ready = ->
 
                 $(this).text("-")
 
-                $(this).parent().parent().parent().css backgroundColor: 'white'
+                $(this).parent().parent().parent().css backgroundColor: '#F2385A'
                 $(this).parent().parent().parent().css opacity: 1.0
 
                 $(".current-lineup-"+pos+"-player-name").text(name)
@@ -214,7 +214,7 @@ ready = ->
                     $(".current-lineup-"+pos+"-player-name").attr("data-id", "")
                     $(".current-lineup-"+pos+"-player-name").attr("data-salary", "")
 
-                    $(this).parent().parent().parent().css backgroundColor: '#273034'
+                    $(this).parent().parent().parent().css backgroundColor: 'white'
                     $(this).parent().parent().parent().css opacity: 1.0
 
                     checkPlayers()

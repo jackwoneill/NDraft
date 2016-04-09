@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160323024734) do
+ActiveRecord::Schema.define(version: 20160405000511) do
 
   create_table "balances", force: :cascade do |t|
     t.integer  "user_id"
@@ -140,6 +140,7 @@ ActiveRecord::Schema.define(version: 20160323024734) do
     t.float    "balance"
     t.float    "total_winnings"
     t.string   "display_name",           default: "", null: false
+    t.integer  "account_verification"
   end
 
   create_table "withdrawals", force: :cascade do |t|

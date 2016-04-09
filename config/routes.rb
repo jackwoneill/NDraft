@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   get '/terms' => 'welcome#terms', as: :terms
   get '/accounterror' => 'welcome#account_error', as: :account_error
+  get '/requireinfo' => 'welcome#requireInfo', as: :require_info
 
   get 'contests/upcoming'
   get 'contests/live'

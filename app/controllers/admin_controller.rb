@@ -14,6 +14,10 @@ class AdminController < ApplicationController
 
   end
 
+  def verifyAccounts
+    
+  end
+
 
   
 end

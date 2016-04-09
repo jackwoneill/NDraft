@@ -9,10 +9,25 @@ display: inline;
   width: 30%;
 }
 
+table {
+  width: 100%;
+}
+
+.contest-details:hover {
+  background-color: #f5f5f5;
+}
+
+.contest-details {
+  border-bottom:1pt solid black;
+  
+}
+
 .contest-details > td {
+  vertical-align: middle;
   padding-left: 30px;
   padding-right: 30px;
   text-align: center;
+  line-height: 50px;
 }
 
 .contest-entries > td {

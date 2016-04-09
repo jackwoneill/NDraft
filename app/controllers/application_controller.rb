@@ -54,7 +54,7 @@ class ApplicationController < ActionController::Base
   def checkTotalWinnings
     if current_user.total_winnings >= 600
       print("600")
-      #redirect_to give me your ssn path
+      redirect_to requireInfo_path
     end
   end
 

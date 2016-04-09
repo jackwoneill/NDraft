@@ -1,14 +1,13 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Available Contests</h1>
-
 <table>
-  <th>Contest</th>
-  <th>Entry</th>
-  <th>Prizes</th>
-  <th>Start Time</th>
-  <th>Size</th>
-  <th>Total Entries</th>
+  <thead>
+    <th>Contest</th>
+    <th>Entry</th>
+    <th>Prizes</th>
+    <th>Start Time</th>
+    <th>Entries</th>
+  </thead>
 
       <tr>
         <td><% if @line %>
@@ -38,10 +37,7 @@
           <%= "#{s} #{contest.start_time.strftime("%l:%M %P")}" %>
         </td>
         <td>
-          <%= contest.max_size %>
-        </td>
-        <td>
-          <%= contest.curr_size %>
+          <%= "#{contest.curr_size} / #{contest.max_size}" %>
         </td>
         <% l = (Lineup.where("user_id" => current_user.id).all) %>
 

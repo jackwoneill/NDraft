@@ -4,22 +4,51 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
+
+<div class="page-content">
 <% if user_signed_in? %>
 
 	<div class="top">
 		<ul class="nav-bar">
-			<li><%= link_to 'Lobby', contests_path %></li>
-			<li><%= link_to 'Upcoming Contests', contests_upcoming_path %></li>
-			<li><%= link_to 'Live Contests', contests_live_path %></li>
-			<li><%= link_to 'Watch', stream_links_path %></li>
+			<li>
+				<div class="nav-button">
+					<div class="outline"></div>
+					<%= link_to 'Lobby', contests_path %>
+				</div>
+			</li>
+			<li>
+				<div class="nav-button">
+					<div class="outline"></div>
+					<%= link_to 'Upcoming', contests_upcoming_path %>
+				</div>
+			</li>
+			<li>
+				<div class="nav-button">
+					<div class="outline"></div>
+					<%= link_to 'Live Contests', contests_live_path %>
+				</div>
+			</li>
+			<li>
+				<div class="nav-button">
+					<div class="outline"></div>
+					<%= link_to 'Watch', stream_links_path %>
+				</div>
+			</li>
 			<% if current_user.permissions == 2 %>
-				<li><%= link_to 'Admin Panel', admin_index_path %></li>
+				<li>
+					<div class="nav-button">
+						<%= link_to 'Admin Panel', admin_index_path %>
+					</div>
+				</li>
 			<% end %>
 
 			<li>
-				<%= link_to "Sign out #{current_user.display_name}", destroy_user_session_path, :method => 'delete' %>
+				<div class="nav-button">
+					<%= link_to "Sign out #{current_user.display_name}", destroy_user_session_path, :method => 'delete' %>
+				</div>
 			</li>
 
 			<li name="deposit"><%= link_to 'Withdraw', new_withdrawal_path %></li>
@@ -29,7 +58,6 @@
 		</ul>
 
 	</div>
-
 	<div class="left">
 	    LEFT
 	</div>
@@ -42,6 +70,7 @@
 	<%= yield %>
 
 <% end %>
+</div>
 
 
 </body>
