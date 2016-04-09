@@ -51,7 +51,7 @@ class LineupsController < ApplicationController
     @players = players.uniq
     @teams = teams.uniq
 
-    #IF LINEUP IS FOR A LEAGUE SLATE
+    #IF LINEUP IS FOR A LEAGUE OF LEGENDS SLATE
     if @lineup.game == 1
 
       tops = Array.new
@@ -82,7 +82,6 @@ class LineupsController < ApplicationController
       @junglers = junglers
 
     end
-
   end
 
   # GET /lineups/1/edit

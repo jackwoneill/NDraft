@@ -7,22 +7,23 @@ ready = ->
       output[@[key]] = @[key] for key in [0...@length]
       value for key, value of output
 
+    ###lineup object that holds player variables so they can be dynamically accessed###
     lineup = 
-        player_1: null  #top
+        player_1: null  
         player_1Sal: null 
-        player_2: null  #mid
+        player_2: null  
         player_2Sal: null
-        player_3: null  #adc
+        player_3: null  
         player_3Sal: null   
-        player_4: null  #support
+        player_4: null  
         player_4Sal: null
-        player_5: null  #jungle
+        player_5: null  
         player_5Sal: null
-        player_6: null  #flex_1
+        player_6: null  
         player_6Sal: null
-        player_7: null  #flex_2
+        player_7: null  
         player_7Sal: null
-        player_8: null  #flex_3
+        player_8: null  
         player_8Sal: null
 
     checkDuplicates = () ->
