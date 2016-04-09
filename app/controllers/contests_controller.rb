@@ -167,7 +167,6 @@ class ContestsController < ApplicationController
     @contest.start_time = @slate.start_time
     @contest.curr_size = 0
     @contest.paid_out = false
-    @contest.closed = false
 
     #RECHECK IF NOT FULL
 

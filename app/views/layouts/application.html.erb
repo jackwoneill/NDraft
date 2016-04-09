@@ -51,10 +51,6 @@
 				</div>
 			</li>
 
-			<li name="deposit"><%= link_to 'Withdraw', new_withdrawal_path %></li>
-			<li name="deposit"><%= link_to 'Deposit', new_deposit_path %></li>
-
-			<li name="deposit"><span>Current Balance: <%= "$#{number_with_precision(current_user.balance, precision: 2)}" %></span></li> 
 		</ul>
 
 	</div>

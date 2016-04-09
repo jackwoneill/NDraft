@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160405000511) do
+ActiveRecord::Schema.define(version: 20160409204038) do
 
   create_table "balances", force: :cascade do |t|
     t.integer  "user_id"
@@ -29,7 +29,6 @@ ActiveRecord::Schema.define(version: 20160405000511) do
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
     t.integer  "slate_id"
-    t.boolean  "closed"
     t.integer  "payment_structure"
     t.boolean  "paid_out"
     t.datetime "start_time"
