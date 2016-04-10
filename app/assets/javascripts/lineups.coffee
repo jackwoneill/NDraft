@@ -85,7 +85,7 @@ ready = ->
             $(".current-lineup-player_" + (numPositions + i) + "-player-name").attr("data-salary", salary)
 
             #UPDATE CSS
-            lineupRow.parent().parent().parent().css backgroundColor: 'white'
+            lineupRow.parent().parent().parent().css backgroundColor: '#F2385A'
             lineupRow.parent().parent().parent().css opacity: 1.0
 
 
@@ -105,7 +105,7 @@ ready = ->
             lineup[("player_" + (numPositions + i) + "Sal").toString()] = null
 
 
-            lineupRow.parent().parent().parent().css backgroundColor: '#273034'
+            lineupRow.parent().parent().parent().css backgroundColor: 'white'
             lineupRow.parent().parent().parent().css opacity: 1.0
 
             $('.player-select').find('[data-id="'+id+'\"]').parent().find(".add-player-button").text("+")
@@ -203,6 +203,7 @@ ready = ->
 
                 $(this).parent().parent().parent().css backgroundColor: '#F2385A'
                 $(this).parent().parent().parent().css opacity: 1.0
+                player.css color: 'white'
 
                 $(".current-lineup-"+pos+"-player-name").text(name)
                 $(".current-lineup-"+pos+"-player-name").attr("data-id", id)
@@ -224,6 +225,7 @@ ready = ->
                     $(".current-lineup-"+pos+"-player-name").attr("data-salary", "")
 
                     $(this).parent().parent().parent().css backgroundColor: 'white'
+                    player.css color: '#F2385A'
                     $(this).parent().parent().parent().css opacity: 1.0
 
                     checkPlayers()
