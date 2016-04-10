@@ -11,7 +11,6 @@ ready = ->
     switch gametype
       when "1" then  numPositions = 5
       when "2" then numPositions = 1 
-      alert gametype
 
 
     ###lineup object that holds player variables so they can be dynamically accessed###
