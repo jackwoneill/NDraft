@@ -65,7 +65,9 @@
                         <span class="player-position">C</span>
                     <% end %>
                     <span class="player-name" data-id="<%= player.id %>" data-position="<%= player.position %>" data-salary="<%= player.salary %>"><%= player.name %></span>
-                    <span class="player-salary"><%= player.salary %></span>
+                    <div class="player-salary-container">
+                      <span class="player-salary"><%="$#{player.salary}" %></span>
+                    </div>
 
                     <button type="button" class="add-player-button">+</button>
                   </div>
