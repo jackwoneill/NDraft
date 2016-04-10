@@ -13,8 +13,8 @@ table {
   width: 100%;
 }
 
-input {
-  outline: 1px solid black;
+.new_user input[type="text"]{
+  outline: 1px solid #bbb;
 }
 
 .contest-details:hover {
