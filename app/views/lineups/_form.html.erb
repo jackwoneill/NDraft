@@ -24,19 +24,19 @@
           <button type="button" data-position-filter="all">All</button>
         </li>
         <li>
-          <button type="button" data-position-filter="1">TOP</button>
+          <button type="button" data-position-filter="1">PG</button>
         </li>
         <li>
-          <button type="button" data-position-filter="2">MID</button>
+          <button type="button" data-position-filter="2">SG</button>
         </li>
         <li>
-          <button type="button" data-position-filter="3">ADC</button>
+          <button type="button" data-position-filter="3">SF</button>
         </li>
         <li>
-          <button type="button" data-position-filter="4">SUP</button>
+          <button type="button" data-position-filter="4">PF</button>
         </li>
         <li>
-          <button type="button" data-position-filter="5">JNG</button>
+          <button type="button" data-position-filter="5">C</button>
         </li>
         <li>
           <div class="search-container">
@@ -55,15 +55,15 @@
                   <div class="player-info">
                     <% case player.position 
                        when "1" %>
-                    <span class="player-position">TOP</span>
+                    <span class="player-position">PG</span>
                     <% when "2" %>
-                    <span class="player-position">MID</span>
+                    <span class="player-position">SG</span>
                     <% when '3' %>
-                    <span class="player-position">ADC</span>
+                    <span class="player-position">SF</span>
                     <% when '4' %>                  
-                    <span class="player-position">SUP</span>
+                    <span class="player-position">PF</span>
                     <% when '5' %>
-                    <span class="player-position">JNG</span>
+                    <span class="player-position">C</span>
                     <% end %>
                     <span class="player-name" data-id="<%= player.id %>" data-position="<%= player.position %>" data-salary="<%= player.salary %>"><%= player.name %></span>
 
@@ -81,7 +81,7 @@
               <tr class=<%= "current-lineup-1" %>>
                 <td>
                   <div class="current-lineup-player-info">
-                    <span class="current-lineup-player-position">TOP</span>
+                    <span class="current-lineup-player-position">PG</span>
                     <span class="current-lineup-1-player-name" data-id="0" data-position="1" data-salary=""></span>
                     <button type="button" class="remove-player-button">-</button>
                   </div>
@@ -90,7 +90,7 @@
               <tr class=<%= "current-lineup-2" %>>
                 <td>
                   <div class="current-lineup-player-info">
-                    <span class="current-lineup-player-position">MID</span>
+                    <span class="current-lineup-player-position">SG</span>
                     <span class="current-lineup-2-player-name" data-id="0" data-position="2" data-salary=""></span>
                     <button type="button" class="remove-player-button">-</button>
                   </div>
@@ -99,7 +99,7 @@
               <tr class=<%= "current-lineup-3" %>>
                 <td>
                   <div class="current-lineup-player-info">
-                    <span class="current-lineup-player-position">ADC</span>
+                    <span class="current-lineup-player-position">SF</span>
                     <span class="current-lineup-3-player-name" data-id="0" data-position="3" data-salary=""></span>
                     <button type="button" class="remove-player-button">-</button>
                   </div>
@@ -108,7 +108,7 @@
               <tr class=<%= "current-lineup-4" %>>
                 <td>
                   <div class="current-lineup-player-info">
-                    <span class="current-lineup-player-position">SUP</span>
+                    <span class="current-lineup-player-position">PF</span>
                     <span class="current-lineup-4-player-name" data-id="0" data-position="4" data-salary=""></span>
                     <button type="button" class="remove-player-button">-</button>
                   </div>
@@ -117,7 +117,7 @@
               <tr class=<%= "current-lineup-5" %>>
                 <td>
                   <div class="current-lineup-player-info">
-                    <span class="current-lineup-player-position">JNG</span>
+                    <span class="current-lineup-player-position">C</span>
                     <span class="current-lineup-5-player-name" data-id="0" data-position="5" data-salary=""></span>
                     <button type="button" class="remove-player-button">-</button>
                   </div>
