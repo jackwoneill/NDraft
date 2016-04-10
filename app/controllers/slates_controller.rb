@@ -28,15 +28,18 @@ class SlatesController < ApplicationController
     @contests = Contest.where(slate_id: @slate.id).where(paid_out: false)
 
     @contests.each do |c|
-      if c.payment_structure == 1
-        pay5050(c)
-        c.paid_out = true
-        c.save
-      elsif c.payment_structure == 2
-        payDoubleUp(c)
-        c.paid_out = true
-        c.save
-      end
+      case c.payment_structure
+        when 1
+          pay5050(c)
+          c.paid_out = true
+          c.save
+        when 2
+          payDoubleUp(c)
+          c.paid_out = true
+          c.save
+        else 
+          redirect_to slates_path
+        end
   
     end
     redirect_to contests_path
@@ -277,8 +280,10 @@ end
 
     cutoffScore = lines[numPaid - 1].total_score
 
+    #number of lineups at cutoff
     cutoffCount = (scores.grep(cutoffScore).size).to_f
 
+    #find all lineups tied at cutoff score
     cutoffLines = lines.where(total_score: cutoffScore).all
 
     cutoffLines.each do |cl|

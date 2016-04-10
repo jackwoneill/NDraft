@@ -74,7 +74,7 @@ class DepositsController < ApplicationController
     
     end
 
-    if @deposit.amount < 1000
+    if @deposit.amount > 1000
 
       redirect_to :back, notice: "Sorry! Unfortunately we can't accept increments of greater than $1000.00" and return
     
