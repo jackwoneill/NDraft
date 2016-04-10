@@ -15,13 +15,14 @@ display: inline;
   color:blue;
   float: left;
   display: inline-block;
-  color: #AFBFC6;
-  background-color: #F8F8FF;
+  color: #F2385A;
+  background-color: white;
 
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
   outline: #AFBFC6 solid thin;
+  border-top: 1px solid  #AFBFC6;
 }
 
 .position-select > li > button:hover {

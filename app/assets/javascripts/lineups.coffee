@@ -3,9 +3,15 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 ready = ->
     Array::unique = ->
-      output = {}
-      output[@[key]] = @[key] for key in [0...@length]
-      value for key, value of output
+        output = {}
+        output[@[key]] = @[key] for key in [0...@length]
+        value for key, value of output
+
+    gametype =  $(".gametype").attr("data-gametype")
+    switch gametype
+      when "1" then  numPositions = 5
+      when "2" then numPositions = 1 
+
 
     ###lineup object that holds player variables so they can be dynamically accessed###
     lineup = 
@@ -62,21 +68,21 @@ ready = ->
     checkPlayers()
 
     handleFlex = (i, id, player_salary, name) ->
-        if (!lineup[("player_" + (5 + i)).toString()]?) 
-            lineup[("player_" + (5 + i) + "Sal").toString()] = player_salary
+        if (!lineup[("player_" + (numPositions + i)).toString()]?) 
+            lineup[("player_" + (numPositions + i) + "Sal").toString()] = player_salary
             salary -= player_salary
             lineupRow = $(".player-info").find("[data-id='" + id + "']")
 
 
             #SET VARIABLE VALUE EQUAL TO ID
-            lineup[("player_" + (5 + i)).toString()] = id
+            lineup[("player_" + (numPositions + i)).toString()] = id
 
             #UPDATE HTML
             $('.player-select').find('[data-id="'+id+'\"]').parent().find(".add-player-button").text("-")
 
-            $(".current-lineup-player_" + (5 + i) + "-player-name").text(name)
-            $(".current-lineup-player_" + (5 + i) + "-player-name").attr("data-id", id)
-            $(".current-lineup-player_" + (5 + i) + "-player-name").attr("data-salary", salary)
+            $(".current-lineup-player_" + (numPositions + i) + "-player-name").text(name)
+            $(".current-lineup-player_" + (numPositions + i) + "-player-name").attr("data-id", id)
+            $(".current-lineup-player_" + (numPositions + i) + "-player-name").attr("data-salary", salary)
 
             #UPDATE CSS
             lineupRow.parent().parent().parent().css backgroundColor: 'white'
@@ -90,22 +96,22 @@ ready = ->
             return true
 
     handleRemoveFlex = (i, id, player_salary, name) ->
-        if lineup[("player_" + (5 + i)).toString()] == id
-            salary += lineup[("player_" + (5 + i) + "Sal").toString()]
+        if lineup[("player_" + (numPositions + i)).toString()] == id
+            salary += lineup[("player_" + (numPositions + i) + "Sal").toString()]
             lineupRow = $(".player-info").find("[data-id='" + id + "']")
 
 
-            lineup[("player_" + (5 + i)).toString()] = null
-            lineup[("player_" + (5 + i) + "Sal").toString()] = null
+            lineup[("player_" + (numPositions + i)).toString()] = null
+            lineup[("player_" + (numPositions + i) + "Sal").toString()] = null
 
 
             lineupRow.parent().parent().parent().css backgroundColor: '#273034'
             lineupRow.parent().parent().parent().css opacity: 1.0
 
             $('.player-select').find('[data-id="'+id+'\"]').parent().find(".add-player-button").text("+")
-            $(".current-lineup-player_" + (5 + i) + "-player-name").empty()
-            $(".current-lineup-player_" + (5 + i) + "-player-name").attr("data-id", "")
-            $(".current-lineup-player_" + (5 + i) + "-player-name").attr("data-salary", "")
+            $(".current-lineup-player_" + (numPositions + i) + "-player-name").empty()
+            $(".current-lineup-player_" + (numPositions + i) + "-player-name").attr("data-id", "")
+            $(".current-lineup-player_" + (numPositions + i) + "-player-name").attr("data-salary", "")
             checkPlayers()
 
             $(".salary").text(salary.toString())
@@ -157,9 +163,11 @@ ready = ->
         $('.position-select').animate { scrollTop: 0 }, 'fast'
 
         $(".player-select > tbody > tr").hide()
-        $(".position-select > li > button").css backgroundColor: '#273034'
-        $(".position-select > li").css backgroundColor: '#273034'
+        $(".position-select > li > button").css backgroundColor: 'white'
+        $(".position-select > li").css backgroundColor: 'white'
+        $(".position-select > li > button").css color: '#F2385A'
         $(this).css backgroundColor: '#F2385A'
+        $(this).css color: 'white'
         $(this).parent().css backgroundColor: '#F2385A'
 
         if pos == "all"
@@ -184,7 +192,7 @@ ready = ->
         if $(this).text() == "+"
             if (lineup["player_" + pos])?
                 #ADD TO FLEX PLAYERS
-                for i in [1..3]
+                for i in [1..(8 - numPositions)]
                     break if handleFlex(i, id, player_salary, name) == true
             else
                 lineup["player_" + pos] = id
@@ -220,7 +228,7 @@ ready = ->
 
                     checkPlayers()
                 else 
-                    for i in [1..3]
+                    for i in [1..(8 - numPositions)]
                         break if handleRemoveFlex(i, id, player_salary, name) == true
 
         $(".salary").text(salary.toString())
@@ -236,8 +244,8 @@ ready = ->
             pos = player.data('position')
             player_salary = player.data('salary')
 
-            if pos > 5
-                for i in [1..3]
+            if pos > numPositions
+                for i in [1..(8 - numPositions)]
                     return if handleRemoveFlex(i, id, player_salary, name) == true
 
             switch id
@@ -253,7 +261,7 @@ ready = ->
                     $(".current-lineup-" + pos + "-player-name").attr("data-id", "")
                     $(".current-lineup-" + pos + "-player-name").attr("data-salary", "")
 
-                    lineupRow.parent().parent().parent().css  backgroundColor: '#273034'
+                    lineupRow.parent().parent().parent().css  backgroundColor: 'white'
                     lineupRow.parent().parent().parent().css  opacity: 1.0
 
                     lineupRow.parent().find("button").text("+")

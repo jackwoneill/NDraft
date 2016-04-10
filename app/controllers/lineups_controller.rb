@@ -190,17 +190,20 @@ class LineupsController < ApplicationController
     player_7 = Player.find(@lineup.player_7)
     player_8 = Player.find(@lineup.player_8)
 
+    
     players += [player_1.id, player_2.id, player_3.id, player_4.id, player_5.id, player_6.id, player_7.id, player_8.id]
+    
+    #Remove duplicate players
     players = players.uniq
 
+    #If there were duplicate players, or an incorrect number of players was submitted, do not create#
     if players.length != 8
-      redirect_to contests_path
+      redirect_to :back, notice: "Error occurred, please try again"
       return
     end
 
     players.each do |player|
       totSalary += Player.find(player).salary
-      print "TOT SAL = #{totSalary}"
     end
 
     if totSalary > 60000
@@ -230,16 +233,9 @@ class LineupsController < ApplicationController
     @lineup.contest_id = params[:contest_id]
     @lineup.user_id = current_user.id
 
-    # if @lineup.save 
-
-    # end
-
-
-
-    #can before_save go here?
-
     respond_to do |format|
       if @lineup.save 
+        #Deduct entry fee from user's balance
         current_user.balance -= @contest.fee
         bal = Balance.where(user_id: current_user.id).take
         bal.amount -= @contest.fee
@@ -248,6 +244,7 @@ class LineupsController < ApplicationController
 
         deduct_amount = ((@contest.fee) * -1.00)
 
+        #Create new transaction
         entryTrans = Transaction.new(user_id: current_user.id, amount: deduct_amount, description: "Contest Entry: Contest ID: #{@contest.id}", current_balance: current_user.balance )
         entryTrans.save
 

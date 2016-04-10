@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160409210103) do
+ActiveRecord::Schema.define(version: 20160410160102) do
 
   create_table "balances", force: :cascade do |t|
     t.integer  "user_id"
@@ -70,6 +70,9 @@ ActiveRecord::Schema.define(version: 20160409210103) do
     t.datetime "updated_at",  null: false
     t.integer  "game"
   end
+
+  add_index "lineups", ["contest_id"], name: "index_lineups_on_contest_id"
+  add_index "lineups", ["user_id"], name: "index_lineups_on_user_id"
 
   create_table "players", force: :cascade do |t|
     t.string   "name"

@@ -47,23 +47,26 @@ $(document).ready ->
   $('#new_registration').submit ->
     $('#notice').text("")
   $('#new_registration').bind('ajax:success', (evt, data, status, xhr) ->
-    #function called on status: 200 
+    #function called on status: 200 (for ex.)
     console.log 'success'
     window.location.href = "/contests"
     return
   ).bind 'ajax:error', (evt, xhr, status, error) ->
-    #function called on status: 401 or 500 
+    #function called on status: 401 or 500 (for ex.)
     #UPDATE A NOTICE THING IN MODAL TO SAY INVALID PASSWORD}}
     $("#notice").text("Invalid Email/Password Combination")
     return
 
+  #form id
   $('#new_user').bind('ajax:success', (evt, data, status, xhr) ->
-    #function called on status: 200 
+    #function called on status: 200 (for ex.)
     console.log 'success'
     window.location.href = "/contests"
     return
   ).bind 'ajax:error', (evt, xhr, status, error) ->
-    #function called on status: 401 or 500 
+    #function called on status: 401 or 500 (for ex.)
+    #UPDATE A NOTICE THING IN MODAL TO SAY INVALID PASSWORD}}
+    $("#notice").text("Invalid Email/Password Combination")
     return
 
 
