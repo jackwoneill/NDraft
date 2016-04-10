@@ -188,6 +188,15 @@ display: inline;
   padding: 16px; 
   padding-left: 5px;
 }
+.player-salary { 
+  color: #E95144;
+  height: 75px;
+  display: block; 
+  border: 1px solid black;
+  padding: 16px; 
+  padding-left: 5px;
+  float: right;
+}
 
 .current-lineup > tbody > tr > td > .current-lineup-player-info > .current-lineup-player-position{ 
   color: #AFBFC6;
