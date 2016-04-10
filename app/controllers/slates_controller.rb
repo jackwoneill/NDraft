@@ -115,10 +115,6 @@ end
     end
   end
 
-  def closeSlate
-
-  end
-
   private
 
 
@@ -129,7 +125,7 @@ end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def slate_params
-      params.require(:slate).permit(:start_time, :name)
+      params.require(:slate).permit(:start_time, :name, :game)
     end
 
     def startSlate
