@@ -80,9 +80,9 @@ ready = ->
             #UPDATE HTML
             $('.player-select').find('[data-id="'+id+'\"]').parent().find(".add-player-button").text("-")
 
-            $(".current-lineup-player-" + (numPositions + i) + "-player-name").text(name)
-            $(".current-lineup-player-" + (numPositions + i) + "-player-name").attr("data-id", id)
-            $(".current-lineup-player-" + (numPositions + i) + "-player-name").attr("data-salary", salary)
+            $(".current-lineup-" + (numPositions + i) + "-player-name").text(name)
+            $(".current-lineup-" + (numPositions + i) + "-player-name").attr("data-id", id)
+            $(".current-lineup-" + (numPositions + i) + "-player-name").attr("data-salary", salary)
 
             #UPDATE CSS
             lineupRow.parent().parent().parent().css backgroundColor: '#F2385A'
@@ -111,9 +111,9 @@ ready = ->
             lineupRow.parent().parent().parent().css opacity: 1.0
 
             $('.player-select').find('[data-id="'+id+'\"]').parent().find(".add-player-button").text("+")
-            $(".current-lineup-player-" + (numPositions + i) + "-player-name").empty()
-            $(".current-lineup-player-" + (numPositions + i) + "-player-name").attr("data-id", "")
-            $(".current-lineup-player-" + (numPositions + i) + "-player-name").attr("data-salary", "")
+            $(".current-lineup-" + (numPositions + i) + "-player-name").empty()
+            $(".current-lineup-" + (numPositions + i) + "-player-name").attr("data-id", "")
+            $(".current-lineup-" + (numPositions + i) + "-player-name").attr("data-salary", "")
             checkPlayers()
 
             $(".salary").text(salary.toString())
