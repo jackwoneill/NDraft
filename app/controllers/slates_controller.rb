@@ -153,7 +153,7 @@ end
     if @contest.curr_size <= @contest.max_size / 4
       lines = Lineup.where(contest_id: @contest.id)
       lines.each do |l|
-        returnBal.amount = Balance.where(user_id: l.user_id).first
+        returnBal = Balance.where(user_id: l.user_id).first
         returnBal.amount += @contest.fee
         returnBal.save
 
