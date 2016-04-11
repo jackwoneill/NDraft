@@ -28,18 +28,17 @@ class SlatesController < ApplicationController
     @contests = Contest.where(slate_id: @slate.id).where(paid_out: false).all
 
     @contests.each do |c|
-      case c.payment_structure
-        when 1
+      if c.payment_structure == 1
           pay5050(c)
           c.paid_out = true
           c.save
-        when 2
+      elsif c.payment_structure == 2
           payDoubleUp(c)
           c.paid_out = true
           c.save
         else 
           redirect_to slates_path
-        end
+      end
   
     end
     redirect_to contests_path
