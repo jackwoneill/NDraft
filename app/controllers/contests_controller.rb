@@ -79,8 +79,6 @@ class ContestsController < ApplicationController
     @lineups = l.uniq
     @contests = cons.uniq
 
-
-
   end
 
   # GET /contests/1
@@ -138,9 +136,6 @@ class ContestsController < ApplicationController
 
     if @contest.start_time < Time.now
       @lineups = Lineup.where(contest_id: @contest.id)
-      @lineups.each do |line|
-        calcTotalScore(line)
-      end
       @lineups = @lineups.order(total_score: :desc)
 
     end

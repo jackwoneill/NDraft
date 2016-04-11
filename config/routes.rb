@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
 
   get 'deposits/verify'
-  get 'deposits/webhookIPN'
 
   get '/terms' => 'welcome#terms', as: :terms
   get '/accounterror' => 'welcome#account_error', as: :account_error
@@ -10,7 +9,6 @@ Rails.application.routes.draw do
   get 'contests/upcoming'
   get 'contests/live'
   get 'contests/completed'
-  get 'contests/pay5050'
 
 
   devise_for :users, controllers: {
@@ -34,8 +32,6 @@ Rails.application.routes.draw do
     end
   end
   root 'welcome#index'
-
- 
 
   get 'slates/:id/payout' => 'slates#payout'
 

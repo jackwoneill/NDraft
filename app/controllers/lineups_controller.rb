@@ -52,36 +52,6 @@ class LineupsController < ApplicationController
     @teams = teams.uniq
 
     #IF LINEUP IS FOR A LEAGUE OF LEGENDS SLATE
-    if @lineup.game == 1
-
-      tops = Array.new
-      mids = Array.new
-      supports = Array.new
-      adcs = Array.new
-      junglers = Array.new
-
-      players.each do |player|
-        if player.position == "1"
-          tops.append(player)
-        elsif player.position == "2"
-          mids.append(player)
-        elsif player.position == "3"
-          adcs.append(player)
-        elsif player.position == "4"
-          supports.append(player)
-        elsif player.position == "5"
-          junglers.append(player)
-                             
-        end
-      end
-
-      @tops = tops
-      @mids = mids
-      @adcs = adcs
-      @supports = supports
-      @junglers = junglers
-
-    end
   end
 
   # GET /lineups/1/edit
@@ -111,37 +81,6 @@ class LineupsController < ApplicationController
     @players = players.uniq
     @teams = teams.uniq
 
-    #IF IT IS A LEAGUE SLATE
-    if @lineup.game == 1
-
-      tops = Array.new
-      mids = Array.new
-      supports = Array.new
-      adcs = Array.new
-      junglers = Array.new
-
-      players.each do |player|
-        if player.position == "1"
-          tops.append(player)
-        elsif player.position == "2"
-          mids.append(player)
-        elsif player.position == "3"
-          adcs.append(player)
-        elsif player.position == "4"
-          supports.append(player)
-        elsif player.position == "5"
-          junglers.append(player)
-                             
-        end
-      end
-
-      @tops = tops
-      @mids = mids
-      @adcs = adcs
-      @supports = supports
-      @junglers = junglers
-
-    end
   end
 
   # POST /lineups
