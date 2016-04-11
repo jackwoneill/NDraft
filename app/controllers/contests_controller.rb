@@ -101,12 +101,6 @@ class ContestsController < ApplicationController
     @players = players.uniq
     @teams = teams.uniq
 
-    @lineups = Lineup.where(contest_id: @contest.id).all
-
-    @lineups.each do |l|
-      calcTotalScore(l)
-    end
-
     if @contest.game == 1
 
       tops = Array.new
@@ -142,6 +136,9 @@ class ContestsController < ApplicationController
 
     if @contest.start_time < Time.now
       @lineups = Lineup.where(contest_id: @contest.id)
+      @lineups.each do |line|
+        calcTotalScore(line)
+      end
       @lineups = @lineups.order(total_score: :desc)
 
     end
