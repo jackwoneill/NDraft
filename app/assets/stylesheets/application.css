@@ -136,7 +136,7 @@
 .nav-button:hover {
   background-color: #F2385A;
   width: 101%;
-  border-right: 1px solid white;
+  border-right: 1px solid #F2385A;
 }
 
 .nav-button > a:hover {
@@ -177,8 +177,7 @@
   cursor: pointer;
   height: 60px;
   width: 85%;
-/*  padding: 15px 80px;
-*/  display: block;
+  display: block;
   margin: 20px;
   text-transform: uppercase;
   letter-spacing: 3px;
@@ -208,7 +207,8 @@
 .green-button:hover {
     background: transparent;
     border: 2px solid #f2385a;
-    color: #f2385a;
+    color: #f2385a
+
 
 }
 

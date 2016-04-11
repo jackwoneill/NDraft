@@ -34,17 +34,9 @@ class DepositsController < ApplicationController
     deposit = Deposit.where(user_id: current_user.id).where(completed: false).where(payment_id: params[:paymentId]).first
     if !deposit.nil?
       @payment = PayPal::SDK::REST::Payment.find("#{deposit.payment_id}")
-      print "lool"
-      print "#{(@payment.transactions[0].amount.total).to_f}"
-      #ENSURE AMOUNt PAID WAS AMOUNT CLAIMED TO BE DEPOSITED
 
-
-
-      #STRING FLOAT COMPARISON HERE, PRINT IT JUST TO BE SURE THO
-      if ((@payment.transactions[0].amount.total).to_f == deposit.amount) #LIKELY DIFFERENCE IN STRING->FLOAT COMPARISON
-        print "in hur"
+      if ((@payment.transactions[0].amount.total).to_f == deposit.amount) 
         if @payment.execute( :payer_id => "#{params[:PayerID]}" )
-          "print executed"
           #PAYMENT WILL ONLY EXECUTE IF IT IS APPROVED ON PAYPALS END
           deposit.completed = true
           current_user.balance += deposit.amount
@@ -87,24 +79,6 @@ class DepositsController < ApplicationController
       :client_secret => "ECTW0SNazTtQPF7pO7jB0v8xLOQhPv6wWZXGaTDyQr0sIwQUAlqCrsuQB-NqFjT2DC6p0TwmoZj4N3n-"
     })
 
-    # web_prof = PayPal::SDK::REST::WebProfile.new({
-    #   "name": "BattleDraft",
-    #   "presentation": {
-    #       "brand_name": "BattleDraft",
-    #       "logo_image": "http://s17.postimg.org/he1udwv7z/pepe2.png",
-    #       "locale_code": "US"
-    #   },
-    #   "input_fields": {
-    #       "allow_note": false,
-    #       "no_shipping": 1,
-    #       "address_override": 1
-    #   },
-    #   "flow_config": {
-    #       "landing_page_type": "billing",
-    #   }
-    # })
-    # web_prof.create
-
     @payment = PayPal::SDK::REST::Payment.new({
         :intent => "sale",
         "experience_profile_id": "XP-RNK5-HFBU-6X9Q-WL5X",
@@ -140,37 +114,6 @@ class DepositsController < ApplicationController
     end  
 
 
-  end
-
-  def webhookIPN
-    pay_id = params[:paymentId]
-    p_payer_id = params[:PayerID]
-    print("pay_id=#{pay_id}")
-    print("payer_id=#{p_payer_id}")
-
-    #puts deposit.id
-    @payment = PayPal::SDK::REST::Payment.find(pay_id)
-    puts @payment.state
-    puts "STATE PRIOR"
-    @deposit = Deposit.where(payment_id: @payment.id)
-    if @deposit.completed == false
-      if @payment.execute( :payer_id => "#{p_payer_id}" )
-        user = User.find(@deposit.user_id)
-        user.balance += @payment.transactions[0].amount.total
-        user.save
-
-        balance = Balance.where(user_id: @deposit.user_id).first
-        balance.amount += @payment.transactions[0].amount.total
-        balance.save
-       
-        @deposit.completed = true
-        @deposit.save
-
-        puts @payment.transactions[0].amount.total
-      else
-        @payment.error
-      end
-    end
   end
 
   # PATCH/PUT /deposits/1

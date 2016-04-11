@@ -16,15 +16,15 @@
     <th></th>
     <tr class="contest-entries">
       <td>
-        <span><b>Top</b></span>
+        <span><b>Player 1</b></span>
       </td>
       <td>
-        <span><%= Player.find(@lineup.top).name %></span>
+        <span><%= Player.find(@lineup.player_1).name %></span>
       </td>
       <td></td>
-      <td><%= Player.find(@lineup.top).salary %></td>
+      <td><%= Player.find(@lineup.player_1).salary %></td>
       <% if started %>
-        <td><%= Player.find(@lineup.top).live_score %></td>
+        <td><%= Player.find(@lineup.player_1).live_score %></td>
       <% end %>
     </tr>
 
@@ -33,12 +33,12 @@
         <span><b>Mid</b></span>
       </td>
       <td>
-        <span><%= Player.find(@lineup.mid).name %></span>
+        <span><%= Player.find(@lineup.player_2).name %></span>
       </td>
       <td></td>
-      <td><%= Player.find(@lineup.mid).salary %></td>
+      <td><%= Player.find(@lineup.player_2).salary %></td>
       <% if started %>
-        <td><%= Player.find(@lineup.mid).live_score %></td>
+        <td><%= Player.find(@lineup.player_2).live_score %></td>
       <% end %>
     </tr>
 
@@ -47,12 +47,12 @@
         <span><b>ADC</b></span>
       </td>
       <td>
-        <span><%= Player.find(@lineup.adc).name %></span>
+        <span><%= Player.find(@lineup.player_3).name %></span>
       </td>
       <td></td>
-      <td><%= Player.find(@lineup.adc).salary %></td>
+      <td><%= Player.find(@lineup.player_3).salary %></td>
       <% if started %>
-        <td><%= Player.find(@lineup.adc).live_score %></td>
+        <td><%= Player.find(@lineup.player_3).live_score %></td>
       <% end %>
     </tr>
 
@@ -61,12 +61,12 @@
         <span><b>Support</b></span>
       </td>
       <td>
-        <span><%= Player.find(@lineup.support).name %></span>
+        <span><%= Player.find(@lineup.player_4).name %></span>
       </td>
       <td></td>
-      <td><%= Player.find(@lineup.support).salary %></td>
+      <td><%= Player.find(@lineup.player_4).salary %></td>
       <% if started %>
-        <td><%= Player.find(@lineup.support).live_score %></td>
+        <td><%= Player.find(@lineup.player_4).live_score %></td>
       <% end %>
     </tr>
 
@@ -75,12 +75,12 @@
         <span><b>Jungler</b></span>
       </td>
       <td>
-        <span><%= Player.find(@lineup.jungler).name %></span>
+        <span><%= Player.find(@lineup.player_5).name %></span>
       </td>
       <td></td>
-      <td><%= Player.find(@lineup.jungler).salary %></td>
+      <td><%= Player.find(@lineup.player_5).salary %></td>
       <% if started %>
-        <td><%= Player.find(@lineup.jungler).live_score %></td>
+        <td><%= Player.find(@lineup.player_5).live_score %></td>
       <% end %>
     </tr>
 
@@ -89,12 +89,12 @@
         <span><b>Flex 1</b></span>
       </td>
       <td>
-        <span><%= Player.find(@lineup.flex_1).name %></span>
+        <span><%= Player.find(@lineup.player_6).name %></span>
       </td>
       <td></td>
-      <td><%= Player.find(@lineup.flex_1).salary %></td>
+      <td><%= Player.find(@lineup.player_6).salary %></td>
       <% if started %>
-        <td><%= Player.find(@lineup.flex_1).live_score %></td>
+        <td><%= Player.find(@lineup.player_6).live_score %></td>
       <% end %>
     </tr>
 
@@ -103,12 +103,12 @@
         <span><b>Flex 2</b></span>
       </td>
       <td>
-        <span><%= Player.find(@lineup.flex_2).name %></span>
+        <span><%= Player.find(@lineup.player_7).name %></span>
       </td>
       <td></td>
-      <td><%= Player.find(@lineup.flex_2).salary %></td>
+      <td><%= Player.find(@lineup.player_7).salary %></td>
       <% if started %>
-        <td><%= Player.find(@lineup.flex_2).live_score %></td>
+        <td><%= Player.find(@lineup.player_7).live_score %></td>
       <% end %>
     </tr>
 
@@ -117,12 +117,12 @@
         <span><b>Flex 3</b></span>
       </td>
       <td>
-        <span><%= Player.find(@lineup.flex_3).name %></span>
+        <span><%= Player.find(@lineup.player_8).name %></span>
       </td>
       <td></td>
-      <td><%= Player.find(@lineup.flex_3).salary %></td>
+      <td><%= Player.find(@lineup.player_8).salary %></td>
       <% if started %>
-        <td><%= Player.find(@lineup.flex_3).live_score %></td>
+        <td><%= Player.find(@lineup.player_8).live_score %></td>
       <% end %>
     </tr>
 

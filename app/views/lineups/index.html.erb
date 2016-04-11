@@ -5,14 +5,14 @@
 <table>
   <thead>
     <tr>
-      <th>Top</th>
-      <th>Mid</th>
-      <th>Adc</th>
-      <th>Support</th>
-      <th>Jungler</th>
-      <th>Flex 1</th>
-      <th>Flex 2</th>
-      <th>Flex 3</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+      <th>4</th>
+      <th>5</th>
+      <th>6</th>
+      <th>7</th>
+      <th>8</th>
       <th>User</th>
       <th>Contest</th>
       <th colspan="3"></th>
@@ -22,14 +22,14 @@
   <tbody>
     <% @lineups.each do |lineup| %>
       <tr>
-        <td><%= lineup.top %></td>
-        <td><%= lineup.mid %></td>
-        <td><%= lineup.adc %></td>
-        <td><%= lineup.support %></td>
-        <td><%= lineup.jungler %></td>
-        <td><%= lineup.flex_1 %></td>
-        <td><%= lineup.flex_2 %></td>
-        <td><%= lineup.flex_3 %></td>
+        <td><%= lineup.player_1 %></td>
+        <td><%= lineup.player_2 %></td>
+        <td><%= lineup.player_3%></td>
+        <td><%= lineup.player_4 %></td>
+        <td><%= lineup.player_5 %></td>
+        <td><%= lineup.player_6 %></td>
+        <td><%= lineup.player_7 %></td>
+        <td><%= lineup.player_8 %></td>
         <td><%= lineup.user_id %></td>
         <td><%= lineup.contest_id %></td>
         <td><%= link_to 'Show', lineup %></td>

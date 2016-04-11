@@ -86,6 +86,7 @@ ready = ->
 
             #UPDATE CSS
             lineupRow.parent().parent().parent().css backgroundColor: '#F2385A'
+            lineupRow.parent().parent().parent().css color: 'white'
             lineupRow.parent().parent().parent().css opacity: 1.0
 
 
@@ -106,6 +107,7 @@ ready = ->
 
 
             lineupRow.parent().parent().parent().css backgroundColor: 'white'
+            lineupRow.parent().parent().parent().css color: '#F2385A'
             lineupRow.parent().parent().parent().css opacity: 1.0
 
             $('.player-select').find('[data-id="'+id+'\"]').parent().find(".add-player-button").text("+")
