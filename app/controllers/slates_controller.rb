@@ -223,7 +223,7 @@ end
         payBalance.amount += (1.8 * @contest.fee)
         payBalance.save
 
-        payTrans = Transaction.new(user_id: line.user_id, amount: ((1.8 * @contest.fee)), description: "Contest Payout: Contest ID: #{@contest.id}", current_balanc: payUser.balance)
+        payTrans = Transaction.new(user_id: line.user_id, amount: ((1.8 * @contest.fee)), description: "Contest Payout: Contest ID: #{@contest.id}", current_balance: payUser.balance)
         payTrans.save
 
       end
