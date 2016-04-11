@@ -157,7 +157,7 @@ end
         returnBal.amount += @contest.fee
         returnBal.save
 
-        returnUser = User.find(l.user_id).first
+        returnUser = User.find(l.user_id)
         returnUser.balance += @contest.fee
         returnUser.save
 
@@ -248,7 +248,7 @@ end
         returnBal += @contest.fee
         returnBal.save
 
-        returnUser = User.find(l.user_id).first
+        returnUser = User.find(l.user_id)
         returnUser.balance += @contest.fee
         returnUser.save
 
