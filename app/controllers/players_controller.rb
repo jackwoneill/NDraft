@@ -91,7 +91,7 @@ class PlayersController < ApplicationController
 
         end
       redirect_to players_url
-      #end
+      end
     end
   end
 
