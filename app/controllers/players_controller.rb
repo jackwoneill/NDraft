@@ -78,14 +78,15 @@ class PlayersController < ApplicationController
         if c.paid_out == false
           slates.append(s)
         end
-
-        slates.each do |s|
-          contests = Contest.where(slate_id = s.id)
-          contests.each do |c|
-            lineups = Lineup.where(contest_id = c.id).where("player_1 = ? or player_2 = ? or player_3 = ? or player_4 = ? or player_5 = ? or player_6 = ? or player_7 = ? or player_8 = ?", @player.id,@player.id,@player.id,@player.id,@player.id,@player.id,@player.id,@player.id ).all          
-            if lineups.length != 0
-              lineups.each do |l|
-                calcTotalScore(l)
+        if slates.count != 0
+          slates.each do |s|
+            contests = Contest.where(slate_id = s.id)
+            contests.each do |c|
+              lineups = Lineup.where(contest_id = c.id).where("player_1 = ? or player_2 = ? or player_3 = ? or player_4 = ? or player_5 = ? or player_6 = ? or player_7 = ? or player_8 = ?", @player.id,@player.id,@player.id,@player.id,@player.id,@player.id,@player.id,@player.id ).all          
+              if lineups.length != 0
+                lineups.each do |l|
+                  calcTotalScore(l)
+                end
               end
             end
           end
