@@ -66,7 +66,7 @@ class PlayersController < ApplicationController
   # PATCH/PUT /players/1
   # PATCH/PUT /players/1.json
   def update
-    #if @player.update(player_params)
+    if @player.update(player_params)
       team = Team.find(@player.team_id)
       games = Game.where("team_1 = ? or team_2 = ?", team, team).all
 
@@ -78,7 +78,6 @@ class PlayersController < ApplicationController
         if c.paid_out == false
           slates.append(s)
         end
-        @player.update(player_params)
         if slates.count != 0
           slates.each do |s|
             contests = Contest.where(slate_id = s.id)

@@ -101,6 +101,12 @@ class ContestsController < ApplicationController
     @players = players.uniq
     @teams = teams.uniq
 
+    @lineups = Lineup.where(contest_id: @contest.id).all
+
+    @lineups.each do |l|
+      calcTotalScore(l)
+    end
+
     if @contest.game == 1
 
       tops = Array.new
