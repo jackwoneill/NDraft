@@ -14,23 +14,3 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
-
-
-$(".left-bar-selection").click ->
-	alert "1"
-        // pos = $(this).data('position-filter')
-        // $('.position-select').animate { scrollTop: 0 }, 'fast'
-
-        // $(".player-select > tbody > tr").hide()
-        // $(".position-select > li > button").css backgroundColor: 'white'
-        // $(".position-select > li").css backgroundColor: 'white'
-        // $(".position-select > li > button").css color: '#F2385A'
-        // $(this).css backgroundColor: '#F2385A'
-        // $(this).css color: 'white'
-        // $(this).parent().css backgroundColor: '#F2385A'
-
-        // if pos == "all"
-        //     $(".player-select > tbody > tr").show()
-        // else
-        //     p = "lineup-"+pos
-        //     $("."+p).show()
