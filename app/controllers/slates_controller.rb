@@ -25,7 +25,7 @@ class SlatesController < ApplicationController
 
   def payout
     @slate = Slate.find(params[:id])
-    @contests = Contest.where(slate_id: @slate.id).where(paid_out: false)
+    @contests = Contest.where(slate_id: @slate.id).where(paid_out: false).all
 
     @contests.each do |c|
       case c.payment_structure
