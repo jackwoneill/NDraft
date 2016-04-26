@@ -17,15 +17,35 @@ class LineupsController < ApplicationController
 
   # GET /lineups/new
   def new
+
     @lineup = Lineup.new
 
     @contest = Contest.find(params[:contest_id])
 
-    @lineup.contest_id = params[:contest_id]
-    @lineup.game = @contest.game
+    @lineup.contest_id = params[:contest_id] 
+    @lineup.gametype = @contest.game
 
     @slate = Slate.find(@contest.slate_id)
 
+
+    ### BEGIN GAMETYPE ###
+    @gametype = Gametype.find(@contest.game)
+    @positions = Position.where(gametype_id: @gametype.id)
+    @num_total_positions = 0
+
+    @players_hash = Hash.new()
+
+    @positions.each do |p|
+      @num_total_positions += p.num_allowed
+      @players_hash["position_#{p.pos_num}"] = "#{p.num_allowed}"
+    end
+
+    gon.players_hash = @players_hash
+    gon.num_total_positions = @num_total_positions
+    gon.num_dif_positions = @positions.count
+    gon.num_flex = @gametype.num_flex
+
+    ##### END GAMETYPE ###
     if @contest.curr_size == @contest.max_size
       redirect_to contests_path and return
     end
@@ -51,7 +71,6 @@ class LineupsController < ApplicationController
     @players = players.uniq
     @teams = teams.uniq
 
-    #IF LINEUP IS FOR A LEAGUE OF LEGENDS SLATE
   end
 
   # GET /lineups/1/edit
@@ -86,93 +105,14 @@ class LineupsController < ApplicationController
   # POST /lineups
   # POST /lineups.json
   def create
-    @lineup = Lineup.new(lineup_params)
-    @contest = Contest.find(params[:contest_id])
-    @slate = Slate.find(@contest.slate_id)
-
-    if current_user.balance < @contest.fee
-      redirect_to contests_path and return
-    end
-
-    if @contest.curr_size == @contest.max_size
-      redirect_to contests_path and return
-    end
-
-    if @slate.start_time < Time.now
-      redirect_to contests_path and return
-    end
-
-    ### BEGIN CHECKING PLAYER VALIDITY ###
-
-    games = Array.new
-    games += Game.where(slate_id: @contest.slate_id).all
-    game_ids = Array.new
-    team_ids = Array.new
-    players = Array.new
-    totSalary = 0
-
-    games.each do |game|
-      team1 = Team.find(game.team_1)
-      team2 = Team.find(game.team_2)
-      team_ids.append(team1.id)
-      team_ids.append(team2.id)
-    end
-
-    ### BEGING CHECK FOR DUPLICATE PLAYERS ###
-
-    player_1 = Player.find(@lineup.player_1)
-    player_2 = Player.find(@lineup.player_2)
-    player_3 = Player.find(@lineup.player_3)
-    player_4 = Player.find(@lineup.player_4)
-    player_5 = Player.find(@lineup.player_5)
-    player_6 = Player.find(@lineup.player_6)
-    player_7 = Player.find(@lineup.player_7)
-    player_8 = Player.find(@lineup.player_8)
-
-    
-    players += [player_1.id, player_2.id, player_3.id, player_4.id, player_5.id, player_6.id, player_7.id, player_8.id]
-    
-    #Remove duplicate players
-    players = players.uniq
-
-    #If there were duplicate players, or an incorrect number of players was submitted, do not create#
-    if players.length != 8
-      redirect_to :back, notice: "Error occurred, please try again"
-      return
-    end
-
-    players.each do |player|
-      totSalary += Player.find(player).salary
-    end
-
-    if totSalary > 60000
-      redirect_to :back, notice: "Total salary cannot exceed $60,000"
-      return
-    end
-
-    #ENSURE PLAYERS ARE PLAYING IN GAME IN SLATE #
-    if !team_ids.include? player_1.team_id
-      redirect_to contests_path and return
-    elsif !team_ids.include? player_2.team_id
-      redirect_to contests_path and return
-    elsif !team_ids.include? player_3.team_id
-      redirect_to contests_path and return
-    elsif !team_ids.include? player_4.team_id
-      redirect_to contests_path and return
-    elsif !team_ids.include? player_5.team_id
-      redirect_to contests_path and return
-    elsif !team_ids.include? player_6.team_id
-      redirect_to contests_path and return
-    elsif !team_ids.include? player_7.team_id
-      redirect_to contests_path and return
-    elsif !team_ids.include? player_8.team_id
-      redirect_to contests_path and return
-    end
-
+    @lineup = Lineup.new()
     @lineup.contest_id = params[:contest_id]
     @lineup.user_id = current_user.id
+    @contest = Contest.find(params[:contest_id])
+    @lineup.gametype = @contest.game
 
     respond_to do |format|
+
       if @lineup.save 
         #Deduct entry fee from user's balance
         current_user.balance -= @contest.fee
@@ -190,8 +130,8 @@ class LineupsController < ApplicationController
         @contest.curr_size += 1
         @contest.save
 
-        format.html { redirect_to @contest, notice: 'Lineup was successfully created.' }
-        format.json { render :show, status: :created, location: @lineup }
+        format.html { redirect_to contests_path, notice: 'Lineup was successfully created.' }
+        format.json { render :show, status: :created, location: @lineup  }
       else
         format.html { render :new }
         format.json { render json: @lineup.errors, status: :unprocessable_entity }
@@ -260,6 +200,6 @@ class LineupsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def lineup_params
-      params.require(:lineup).permit(:player_1, :player_2, :player_3, :player_4, :player_5, :player_6, :player_7, :player_8, :user_id, :contest_id, :game)
+      params.require(:lineup).permit(:user_id, :contest_id, :gametype)
     end
 end

@@ -1,0 +1,47 @@
+/* line 6, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/contests.scss */
+.lineup_display_position {
+  display: inline;
+  margin: 0 1em 0 1em;
+  width: 30%;
+}
+
+/* line 12, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/contests.scss */
+table {
+  width: 100%;
+}
+
+/* line 16, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/contests.scss */
+.new_user input[type="text"] {
+  outline: 1px solid #bbb;
+}
+
+/* line 20, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/contests.scss */
+.contest-details:hover {
+  background-color: #f5f5f5;
+}
+
+/* line 24, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/contests.scss */
+.contest-details {
+  border-bottom: 1pt solid black;
+}
+
+/* line 29, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/contests.scss */
+.contest-details > td {
+  vertical-align: middle;
+  padding-left: 30px;
+  padding-right: 30px;
+  text-align: center;
+  line-height: 50px;
+}
+
+/* line 37, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/contests.scss */
+.contest-entries > td {
+  padding-left: 15px;
+  padding-right: 15px;
+  text-align: center;
+}
+
+/* line 44, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/contests.scss */
+.contest-entries:hover {
+  background: red;
+}

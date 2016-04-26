@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @gametype.name %>
+</p>
+
+<p>
+  <strong>Abbr:</strong>
+  <%= @gametype.abbr %>
+</p>
+
+<%= link_to 'Edit', edit_gametype_path(@gametype) %> |
+<%= link_to 'Back', gametypes_path %>

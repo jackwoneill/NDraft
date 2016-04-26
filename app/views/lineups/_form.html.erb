@@ -22,21 +22,13 @@
         <li>
           <button type="button" data-position-filter="all">All</button>
         </li>
-        <li>
-          <button type="button" data-position-filter="1">PG</button>
-        </li>
-        <li>
-          <button type="button" data-position-filter="2">SG</button>
-        </li>
-        <li>
-          <button type="button" data-position-filter="3">SF</button>
-        </li>
-        <li>
-          <button type="button" data-position-filter="4">PF</button>
-        </li>
-        <li>
-          <button type="button" data-position-filter="5">C</button>
-        </li>
+        <% @positions.each do |p| %>
+          <li>
+            <button type="button" data-position-filter=<%= "#{p.pos_num}" %>>
+              <%= p.abbr %>
+            </button>
+          </li>
+        <% end %>
         <li>
           <div class="search-container">
             <input type="text" id="search" placeholder="Type to Search"></input>
@@ -64,7 +56,7 @@
                       <% when '5' %>
                         <span class="player-position">C</span>
                     <% end %>
-                    <span class="player-name" data-id="<%= player.id %>" data-position="<%= player.position %>" data-salary="<%= player.salary %>"><%= player.name %></span>
+                    <span class="player-name" data-id="<%= player.id %>" data-position="<%= player.position %>" data-salary="<%= player.salary %>" data-pnum = 0><%= player.name %></span>
                     <div class="player-salary-container">
                       <span class="player-salary"><%="$#{player.salary}" %></span>
                     </div>
@@ -80,62 +72,30 @@
   
       <div class="current-lineup-container">
         <table class="current-lineup" cellpadding="0" border="0" align="center" cellspacing="0">
-              <tr class=<%= "current-lineup-1" %>>
-                <td>
-                  <div class="current-lineup-player-info">
-                    <span class="current-lineup-player-position">PG</span>
-                    <span class="current-lineup-1-player-name" data-id="0" data-position="1" data-salary=""></span>
-                    <button type="button" class="remove-player-button">-</button>
-                  </div>
-                </td>
-              </tr>
-              <tr class=<%= "current-lineup-2" %>>
-                <td>
-                  <div class="current-lineup-player-info">
-                    <span class="current-lineup-player-position">SG</span>
-                    <span class="current-lineup-2-player-name" data-id="0" data-position="2" data-salary=""></span>
-                    <button type="button" class="remove-player-button">-</button>
-                  </div>
-                </td>
-              </tr>
-              <tr class=<%= "current-lineup-3" %>>
-                <td>
-                  <div class="current-lineup-player-info">
-                    <span class="current-lineup-player-position">SF</span>
-                    <span class="current-lineup-3-player-name" data-id="0" data-position="3" data-salary=""></span>
-                    <button type="button" class="remove-player-button">-</button>
-                  </div>
-                </td>
-              </tr>
-              <tr class=<%= "current-lineup-4" %>>
-                <td>
-                  <div class="current-lineup-player-info">
-                    <span class="current-lineup-player-position">PF</span>
-                    <span class="current-lineup-4-player-name" data-id="0" data-position="4" data-salary=""></span>
-                    <button type="button" class="remove-player-button">-</button>
-                  </div>
-                </td>
-              </tr>
-              <tr class=<%= "current-lineup-5" %>>
-                <td>
-                  <div class="current-lineup-player-info">
-                    <span class="current-lineup-player-position">C</span>
-                    <span class="current-lineup-5-player-name" data-id="0" data-position="5" data-salary=""></span>
-                    <button type="button" class="remove-player-button">-</button>
-                  </div>
-                </td>
-              </tr>
-              <% for i in 1..3 %>
-                <tr class=<%= "current-lineup-#{5 + i}" %>>
+            <% for i in 1..@positions.count %>
+              <% for j in 1..@players_hash["position_#{i}"].to_i %>
+                <tr class=<%= "current-lineup-pos-#{i}-#{j}" %>>
                   <td>
                     <div class="current-lineup-player-info">
-                      <span class="current-lineup-player-position">FLEX <%= i %></span>
-                      <span class=<%= "current-lineup-#{5 + i}-player-name"  %> data-id="0" data-position=<%= "#{5 + i}" %> data-salary=""></span>
+                      <span class="current-lineup-player-position"><%= @positions[i-1].abbr %></span>
+                      <span class=<%= "current-lineup-pos-#{i}-#{j}-player-name "%> data-id="0" data-position=<%= @positions[i-1].pos_num %> data-salary="0" data-pnum = 0></span>
                       <button type="button" class="remove-player-button">-</button>
                     </div>
                   </td>
                 </tr>
               <% end %>
+            <% end %>
+            <% for i in 1..@gametype.num_flex %>
+              <tr class=<%= "current-lineup-pos-0-#{i}" %>>
+                <td>
+                  <div class="current-lineup-player-info">
+                    <span class="current-lineup-player-position"><%= "Flex #{i}" %></span>
+                    <span class=<%= "current-lineup-pos-0-#{i}-player-name "%> data-id="0" data-position=<%= "0" %> data-salary=""></span>
+                    <button type="button" class="remove-player-button">-</button>
+                  </div>
+                </td>
+              </tr>
+            <% end %>
         </table>
       </div>
 

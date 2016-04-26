@@ -1,0 +1,29 @@
+<%= form_for(@gametype) do |f| %>
+  <% if @gametype.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@gametype.errors.count, "error") %> prohibited this gametype from being saved:</h2>
+
+      <ul>
+      <% @gametype.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :abbr %><br>
+    <%= f.text_field :abbr %>
+  </div>
+  <div class="field">
+    <%= f.label :num_flex %><br>
+    <%= f.text_field :num_flex %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

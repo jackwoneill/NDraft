@@ -1,9 +1,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <head>
-  <title>DfsEsport</title>
+  <title>Jack O'Neill JR IS</title>
+	<%= include_gon(:init => true) %>
+    <%= Gon::Base.render_data({}) %>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', params[:controller], 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>

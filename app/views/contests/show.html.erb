@@ -46,93 +46,22 @@
     <th></th>
     <th></th>
     <th></th>
+    
+    <% players = LineupPlayer.where(lineup_id: l.id) %>
+    <% players.each do |p| %>
+      <% player = Player.find(p.player_id) %>
     <tr class="contest-entries">
+      <td><%= @positions.where(pos_num: player.position).take.abbr %></td>
       <td>
-        <span><%= Player.find(l.player_1).name %></span>
+        <span><%= player.name %></span>
       </td>
       <td></td>
-      <td><%= Player.find(l.player_1).salary %></td>
+      <td><%= player.salary %></td>
       <% if started %>
-        <td><%= Player.find(l.player_1).live_score %></td>
+        <td><%= player.live_score %></td>
       <% end %>
     </tr>
-
-    <tr class="contest-entries">
-      <td>
-        <span><%= Player.find(l.player_2).name %></span>
-      </td>
-      <td></td>
-      <td><%= Player.find(l.player_2).salary %></td>
-      <% if started %>
-        <td><%= Player.find(l.player_2).live_score %></td>
-      <% end %>
-    </tr>
-
-    <tr class="contest-entries">
-      <td>
-        <span><%= Player.find(l.player_3).name %></span>
-      </td>
-      <td></td>
-      <td><%= Player.find(l.player_3).salary %></td>
-      <% if started %>
-        <td><%= Player.find(l.player_3).live_score %></td>
-      <% end %>
-    </tr>
-
-    <tr class="contest-entries">
-      <td>
-        <span><%= Player.find(l.player_4).name %></span>
-      </td>
-      <td></td>
-      <td><%= Player.find(l.player_4).salary %></td>
-      <% if started %>
-        <td><%= Player.find(l.player_4).live_score %></td>
-      <% end %>
-    </tr>
-
-    <tr class="contest-entries">
-      <td>
-        <span><%= Player.find(l.player_5).name %></span>
-      </td>
-      <td></td>
-      <td><%= Player.find(l.player_5).salary %></td>
-      <% if started %>
-        <td><%= Player.find(l.player_5).live_score %></td>
-      <% end %>
-    </tr>
-
-    <tr class="contest-entries">
-      <td>
-        <span><%= Player.find(l.player_6).name %></span>
-      </td>
-      <td></td>
-      <td><%= Player.find(l.player_6).salary %></td>
-      <% if started %>
-        <td><%= Player.find(l.player_6).live_score %></td>
-      <% end %>
-    </tr>
-
-    <tr class="contest-entries">
-      <td>
-        <span><%= Player.find(l.player_7).name %></span>
-      </td>
-      <td></td>
-      <td><%= Player.find(l.player_7).salary %></td>
-      <% if started %>
-        <td><%= Player.find(l.player_7).live_score %></td>
-      <% end %>
-    </tr>
-
-    <tr class="contest-entries">
-      <td>
-        <span><%= Player.find(l.player_8).name %></span>
-      </td>
-      <td></td>
-      <td><%= Player.find(l.player_8).salary %></td>
-      <% if started %>
-        <td><%= Player.find(l.player_8).live_score %></td>
-      <% end %>
-    </tr>
+    <% end %>
 
   </table>
 <% end %>

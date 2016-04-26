@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  game_id: 1
+  name: MyString
+  abbr: MyString
+  pos_num: 1
+  num_allowed: 1
+
+two:
+  game_id: 1
+  name: MyString
+  abbr: MyString
+  pos_num: 1
+  num_allowed: 1

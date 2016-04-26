@@ -3,6 +3,9 @@
 # Version of your assets, change this if you want to expire all your assets.
 Rails.application.config.assets.version = '1.0'
 
+Rails.application.config.controllers_with_assets = %w( contests deposits games gametypes lineups notifications players positions slates stream_links teams transactions welcome withdrawals
+)
+
 # Add additional assets to the asset load path
 # Rails.application.config.assets.paths << Emoji.images_path
 
@@ -10,3 +13,7 @@ Rails.application.config.assets.version = '1.0'
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
 # Rails.application.config.assets.precompile += %w( search.js )
 Rails.application.config.assets.precompile += %w( login.scss )
+
+Rails.application.config.controllers_with_assets.each do |controller|
+  Rails.application.config.assets.precompile += ["#{controller}.js", "#{controller}.css"]
+end

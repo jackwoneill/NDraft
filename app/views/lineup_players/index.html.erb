@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Lineup Players</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Lineup</th>
+      <th>Player</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @lineup_players.each do |lineup_player| %>
+      <tr>
+        <td><%= lineup_player.lineup_id %></td>
+        <td><%= lineup_player.player_id %></td>
+        <td><%= link_to 'Show', lineup_player %></td>
+        <td><%= link_to 'Edit', edit_lineup_player_path(lineup_player) %></td>
+        <td><%= link_to 'Destroy', lineup_player, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Lineup player', new_lineup_player_path %>

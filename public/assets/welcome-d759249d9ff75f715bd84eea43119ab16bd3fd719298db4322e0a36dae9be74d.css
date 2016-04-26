@@ -1,0 +1,389 @@
+/* line 1, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/welcome.scss */
+.landing-main {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  /*background: #000 url(/siteassets/images/landing-page-bg2.jpg) no-repeat center center fixed;*/
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+  width: 100%;
+  height: 100%;
+}
+
+/* line 14, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/welcome.scss */
+.page-content {
+  max-width: 1500px;
+  width: 100%;
+  min-height: 610px;
+  height: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+  text-align: center;
+}
+
+/* line 27, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/welcome.scss */
+.landing-hero {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  z-index: 0;
+}
+
+/* line 35, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/welcome.scss */
+.bg-img {
+  width: 100%;
+  height: 100%;
+}
+
+/* line 40, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/welcome.scss */
+.img-container {
+  position: fixed;
+  top: 25%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -55%);
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+/* line 51, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/welcome.scss */
+.description-container {
+  position: fixed;
+  top: 55%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -55%);
+}
+
+/* line 58, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/welcome.scss */
+.description-container > h3 {
+  color: #2C3E50;
+  font-size: 17px;
+  text-align: center;
+}
+
+/* The Modal (background) */
+/* line 64, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/welcome.scss */
+.modal {
+  display: none;
+  /* Hidden by default */
+  position: fixed;
+  /* Stay in place */
+  z-index: 1;
+  /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: hidden;
+  /* Enable scroll if needed */
+  background-color: black;
+  /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+/* line 78, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/welcome.scss */
+.login-modal-content {
+  background-color: #fff;
+  margin: 15% auto;
+  /* 15% from the top and centered */
+  width: 30%;
+  /* Could be more or less, depending on screen size */
+  height: 53%;
+  -webkit-border-top-left-radius: 20px 20px;
+  -webkit-border-top-right-radius: 20px 20px;
+}
+
+/* line 86, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/welcome.scss */
+.signup-modal-content {
+  background-color: #fff;
+  margin: 15% auto;
+  /* 15% from the top and centered */
+  width: 40%;
+  /* Could be more or less, depending on screen size */
+  height: 80%;
+  top: 30%;
+  left: 0%;
+  -webkit-border-top-left-radius: 20px 20px;
+  -webkit-border-top-right-radius: 20px 20px;
+  -webkit-border-bottom-left-radius: 20px 20px;
+  -webkit-border-bottom-right-radius: 20px 20px;
+  -webkit-transform: translate(0%, -30%);
+  transform: translate(0%, -30%);
+}
+
+/* The Close Button */
+/* line 102, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/welcome.scss */
+.close {
+  color: #aaa;
+  float: right;
+  text-align: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+/* line 110, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/welcome.scss */
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* line 117, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/welcome.scss */
+.new_user-content {
+  width: 20%;
+  position: fixed;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* line 125, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/welcome.scss */
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px white inset;
+}
+
+/* line 129, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/welcome.scss */
+.modal-header {
+  border: 1px solid white;
+  -webkit-border-top-left-radius: 15px 20px;
+  -webkit-border-top-right-radius: 15px 20px;
+}
+
+/* line 135, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/welcome.scss */
+.new_user {
+  width: 300px;
+  margin: 16px auto;
+  font-size: 16px;
+}
+
+/* Reset top and bottom margins from certain elements */
+/* line 142, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/welcome.scss */
+.new_user-header,
+.new_user p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+/* The triangle form is achieved by a CSS hack */
+/* line 149, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/welcome.scss */
+.new_user-triangle {
+  width: 0;
+  margin-right: auto;
+  margin-left: auto;
+  border: 12px solid transparent;
+  border-bottom-color: #28d;
+}
+
+/* line 157, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/welcome.scss */
+.new_user-header {
+  background: #28d;
+  padding: 20px;
+  font-size: 1.4em;
+  font-weight: normal;
+  text-align: center;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+/* line 167, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/welcome.scss */
+.new_user-container {
+  background: #ebebeb;
+  padding: 12px;
+}
+
+/* Every row inside .new_user-container is defined with p tags */
+/* line 173, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/welcome.scss */
+.new_user p {
+  padding: 12px;
+}
+
+/* line 177, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/welcome.scss */
+.new_user input[type="checkbox"] {
+  width: 13px;
+  height: 13px;
+  padding: 0;
+  margin: 0;
+  vertical-align: bottom;
+  position: relative;
+  top: -1px;
+  overflow: hidden;
+}
+
+/* line 188, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/welcome.scss */
+.new_user input[type="email"],
+.new_user input[type="password"] {
+  background: #fff;
+  border-color: #bbb;
+  color: #555;
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  border-width: 1px;
+  border-style: solid;
+  padding: 16px;
+  outline: 0;
+  font-family: inherit;
+  font-size: 0.95em;
+}
+
+/* Text fields' focus effect */
+/* line 205, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/welcome.scss */
+.new_user input[type="email"]:focus,
+.new_user input[type="password"]:focus {
+  border: 1px solid #4AD9D9;
+}
+
+/* line 210, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/welcome.scss */
+.new_user input[type="submit"] {
+  background: #F5A503;
+  border-color: transparent;
+  color: #fff;
+  cursor: pointer;
+  height: 0;
+}
+
+/* line 218, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/welcome.scss */
+.new_user input[type="submit"]:hover {
+  background: #17c;
+}
+
+/* Buttons' focus effect */
+/* line 223, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/welcome.scss */
+.new_user input[type="submit"]:focus {
+  border-color: #05a;
+}
+
+/* line 226, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/welcome.scss */
+.submit-link, .submit-link:visited {
+  display: inline-block;
+  outline: none;
+  text-decoration: none;
+  font-size: 24px;
+  height: 20%;
+  width: 100%;
+  background-color: #F5A503;
+  color: white;
+  text-align: center;
+  line-height: 70px;
+  -webkit-border-bottom-left-radius: 20px 20px;
+  -webkit-border-bottom-right-radius: 20px 20px;
+}
+
+/* line 240, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/welcome.scss */
+.submit-link:hover {
+  background: #36B1BF;
+  cursor: pointer;
+}
+
+/* line 245, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/welcome.scss */
+.forgot, .forgot:visited {
+  display: inline-block;
+  outline: none;
+  text-decoration: none;
+  background-color: #fff;
+  color: #4AD9D9;
+}
+
+/* line 253, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/welcome.scss */
+.forgot:hover {
+  background: #fff;
+  color: #36B1BF;
+  cursor: pointer;
+}
+
+/* line 259, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/welcome.scss */
+.modal-header {
+  padding: 2px 16px;
+  background-color: #fff;
+  color: black;
+}
+
+/* line 264, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/welcome.scss */
+.modal-header > span {
+  display: block;
+  text-align: center;
+  padding: 15px;
+  font-size: 24px;
+}
+
+/* line 270, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/welcome.scss */
+hr {
+  border: 0;
+  height: 1px;
+  background-image: linear-gradient(to right, white, #4AD9D9, white);
+}
+
+/* line 276, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/welcome.scss */
+.hidden {
+  visibility: hidden;
+  padding: 0px;
+  margin: 0px;
+  height: 0px;
+  width: 0px;
+}
+
+/* line 283, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/welcome.scss */
+#remember_me_label {
+  display: block;
+  padding-left: 20px;
+  text-indent: -15px;
+}
+
+/* line 288, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/welcome.scss */
+.notice-container {
+  text-align: center;
+  width: 300px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* line 295, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/welcome.scss */
+#notice {
+  color: black;
+}
+
+/* line 299, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/welcome.scss */
+.user-button-container {
+  bottom: 0;
+  height: 100px;
+  left: 0;
+  margin: auto;
+  position: absolute;
+  text-align: center;
+  top: 0;
+  right: 0;
+  width: 100%;
+}
+
+/* line 311, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/welcome.scss */
+.login-button-container {
+  max-width: 400px;
+  width: 100%;
+  min-height: 80px;
+  height: 100%;
+  display: inline-block;
+}
+
+/* line 319, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/welcome.scss */
+.signup-button-container {
+  max-width: 400px;
+  width: 100%;
+  min-height: 80px;
+  height: 100%;
+  display: inline-block;
+}

@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  resources :lineup_players
+  resources :positions
+  resources :gametypes
   get 'deposits/verify'
 
   get '/terms' => 'welcome#terms', as: :terms

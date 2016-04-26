@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160410160102) do
+ActiveRecord::Schema.define(version: 20160426164119) do
 
   create_table "balances", force: :cascade do |t|
     t.integer  "user_id"
@@ -54,25 +54,29 @@ ActiveRecord::Schema.define(version: 20160410160102) do
     t.integer  "game_type"
   end
 
+  create_table "gametypes", force: :cascade do |t|
+    t.string   "name"
+    t.string   "abbr"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer  "num_flex"
+  end
+
+  create_table "lineup_players", force: :cascade do |t|
+    t.integer  "lineup_id"
+    t.integer  "player_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "lineups", force: :cascade do |t|
     t.integer  "contest_id"
     t.integer  "user_id"
-    t.integer  "total_score"
-    t.integer  "player_1"
-    t.integer  "player_2"
-    t.integer  "player_3"
-    t.integer  "player_4"
-    t.integer  "player_5"
-    t.integer  "player_6"
-    t.integer  "player_7"
-    t.integer  "player_8"
+    t.float    "total_score"
+    t.integer  "gametype"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.integer  "game"
   end
-
-  add_index "lineups", ["contest_id"], name: "index_lineups_on_contest_id"
-  add_index "lineups", ["user_id"], name: "index_lineups_on_user_id"
 
   create_table "players", force: :cascade do |t|
     t.string   "name"
@@ -83,6 +87,16 @@ ActiveRecord::Schema.define(version: 20160410160102) do
     t.string   "position"
     t.integer  "team_id"
     t.float    "live_score"
+  end
+
+  create_table "positions", force: :cascade do |t|
+    t.string   "name"
+    t.string   "abbr"
+    t.integer  "pos_num"
+    t.integer  "num_allowed"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "gametype_id"
   end
 
   create_table "slates", force: :cascade do |t|

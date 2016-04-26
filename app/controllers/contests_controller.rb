@@ -84,6 +84,9 @@ class ContestsController < ApplicationController
   # GET /contests/1
   # GET /contests/1.json
   def show
+    @gametype = Gametype.find(@contest.game)
+    @positions = Position.where(gametype_id: @gametype.id)
+    @num_total_positions = 0
 
     @games = Game.where(slate_id: @contest.slate_id)
     teams = Array.new
@@ -100,38 +103,6 @@ class ContestsController < ApplicationController
 
     @players = players.uniq
     @teams = teams.uniq
-
-    if @contest.game == 1
-
-      tops = Array.new
-      mids = Array.new
-      supports = Array.new
-      adcs = Array.new
-      junglers = Array.new
-
-    #THROW A SWITCH ON THE POSITION NOW"
-      players.each do |player|
-        if player.position == "1"
-          tops.append(player)
-        elsif player.position == "2"
-          mids.append(player)
-        elsif player.position == "3"
-          adcs.append(player)
-        elsif player.position == "4"
-          supports.append(player)
-        elsif player.position == "5"
-          junglers.append(player)
-                             
-        end
-      end
-
-      @tops = tops
-      @mids = mids
-      @adcs = adcs
-      @supports = supports
-      @junglers = junglers
-
-    end
 
 
     if @contest.start_time < Time.now

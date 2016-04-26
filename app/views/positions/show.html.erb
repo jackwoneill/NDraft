@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Game:</strong>
+  <%= @position.gametype_id %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @position.name %>
+</p>
+
+<p>
+  <strong>Abbr:</strong>
+  <%= @position.abbr %>
+</p>
+
+<p>
+  <strong>Pos num:</strong>
+  <%= @position.pos_num %>
+</p>
+
+<p>
+  <strong>Num allowed:</strong>
+  <%= @position.num_allowed %>
+</p>
+
+<%= link_to 'Edit', edit_position_path(@position) %> |
+<%= link_to 'Back', positions_path %>

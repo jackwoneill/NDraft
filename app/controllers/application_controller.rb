@@ -34,17 +34,13 @@ class ApplicationController < ActionController::Base
 
   def calcTotalScore(lineup)
 
-    player_1 = Player.find(lineup.player_1)
-    player_2 = Player.find(lineup.player_2)
-    player_3 = Player.find(lineup.player_3)
-    player_4 = Player.find(lineup.player_4)
-    player_5 = Player.find(lineup.player_5)
-    player_6 = Player.find(lineup.player_6)
-    player_7 = Player.find(lineup.player_7)
-    player_8 = Player.find(lineup.player_8)
+    players = LineupPlayer.where(lineup_id: lineup.id)
 
-    total_score = player_1.live_score + player_2.live_score + player_3.live_score + player_4.live_score + player_5.live_score
-    total_score = total_score + player_6.live_score + player_7.live_score + player_8.live_score
+    total_score = 0
+
+    players.each do |p|
+      total_score += Player.find(p.player_id).live_score
+    end
 
     lineup.total_score = total_score
     lineup.save
@@ -56,6 +52,10 @@ class ApplicationController < ActionController::Base
       print("600")
       redirect_to requireInfo_path
     end
+  end
+
+  def javascript(*files)
+    content_for(:head) { javascript_include_tag(*files) }
   end
 
   # Prevent CSRF attacks by raising an exception.
