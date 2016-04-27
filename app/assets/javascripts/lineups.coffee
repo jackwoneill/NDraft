@@ -7,6 +7,7 @@ ready = ->
         output[@[key]] = @[key] for key in [0...@length]
         value for key, value of output
 
+    action = gon.action
     gametype =  gon.gametype
     num_dif_positions = gon.num_dif_positions
     num_total_positions = gon.num_total_positions
@@ -145,12 +146,27 @@ ready = ->
         e.preventDefault()
 
         ### Send the data using post and redirect to contest###
-        $.post('/lineups.json',
-          contest_id: cid).success (data) ->
-            lid = data.id
-            window.location.href = "/contests/"+ cid if createPlayers(lid, cid) == true
-            return
+        if action == 1
+            $.post('/lineups.json',
+                contest_id: cid).success (data) ->
+                    lid = data.id
+                    window.location.href = "/contests/"+ cid if createPlayers(lid, cid) == true
+                    return
 
+    $('.edit_lineup').submit (e) ->
+        lid = gon.lid
+        cid = $("#contest_id").val()
+
+        alert "a"
+
+        e.preventDefault()
+
+
+        $.get('/lineups/' + lid + '/edit?contest_id=' + cid).success (data) ->
+                window.location.href = "/contests/"+ cid if createPlayers(lid, cid) == true
+                return
+
+        ### Stop form from submitting ###
 
     createPlayers = (lid) ->
         success = true

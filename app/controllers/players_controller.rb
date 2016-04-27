@@ -18,13 +18,11 @@ class PlayersController < ApplicationController
   def new
     @player = Player.new
     @teams = Team.all
-    @positions = [ "top", "mid", "adc", "support", "jungle" ]
   end
 
   # GET /players/1/edit
   def edit
     @teams = Team.all
-    @positions = [ "top", "mid", "adc", "support", "jungle" ]
   end
 
   # POST /players

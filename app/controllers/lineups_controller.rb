@@ -44,6 +44,7 @@ class LineupsController < ApplicationController
     gon.num_total_positions = @num_total_positions
     gon.num_dif_positions = @positions.count
     gon.num_flex = @gametype.num_flex
+    gon.action = 1
 
     ##### END GAMETYPE ###
     if @contest.curr_size == @contest.max_size
@@ -78,15 +79,40 @@ class LineupsController < ApplicationController
     if @lineup.user_id != current_user.id
       redirect_to contests_path
     end
-    @contest = Contest.find(params[:contest_id])
+    @contest = Contest.find(@lineup.contest_id)
     if @contest.start_time < Time.now
       redirect_to contests_path
     end
 
+    @lineup.gametype = @contest.game
+
+    @slate = Slate.find(@contest.slate_id)
+
+    ### BEGIN GAMETYPE ###
+    @gametype = Gametype.find(@contest.game)
+    @positions = Position.where(gametype_id: @gametype.id)
+    @num_total_positions = 0
+
+    @players_hash = Hash.new()
+
+    @positions.each do |p|
+      @num_total_positions += p.num_allowed
+      @players_hash["position_#{p.pos_num}"] = "#{p.num_allowed}"
+    end
+
+    gon.players_hash = @players_hash
+    gon.num_total_positions = @num_total_positions
+    gon.num_dif_positions = @positions.count
+    gon.num_flex = @gametype.num_flex
+    gon.action = 2
+    gon.lid = @lineup.id
+
+    ##### END GAMETYPE ###
+
     @games = Game.where(slate_id: @contest.slate_id)
+
     teams = Array.new
     players = Array.new
-
 
     @games.each do |game|
       teams.append(Team.find(game.team_1))
@@ -99,7 +125,6 @@ class LineupsController < ApplicationController
 
     @players = players.uniq
     @teams = teams.uniq
-
   end
 
   # POST /lineups
@@ -142,10 +167,15 @@ class LineupsController < ApplicationController
   # PATCH/PUT /lineups/1
   # PATCH/PUT /lineups/1.json
   def update
+    @lineup = Lineup.find(params[:id])
     if @lineup.user_id != current_user.id
       redirect_to contests_path
     end
     @contest = Contest.find(@lineup.contest_id)
+    @players = LineupPlayer.where(lineup_id: @lineup.id)
+
+    @players.destroy_all
+
 
     respond_to do |format|
       if @lineup.update(lineup_params)
