@@ -157,8 +157,6 @@ ready = ->
         lid = gon.lid
         cid = $("#contest_id").val()
 
-        alert "a"
-
         e.preventDefault()
 
 
