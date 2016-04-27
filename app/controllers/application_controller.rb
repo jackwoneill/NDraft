@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  before_filter :authenticate_user!
+  before_filter :auth_user
   before_filter :confirm_balance?
   before_filter :configure_permitted_parameters, if: :devise_controller?
 
@@ -52,6 +52,10 @@ class ApplicationController < ActionController::Base
       print("600")
       redirect_to requireInfo_path
     end
+  end
+
+  def auth_user
+    redirect_to root_path unless user_signed_in?
   end
 
   def javascript(*files)
