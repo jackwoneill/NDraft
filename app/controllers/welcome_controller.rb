@@ -1,5 +1,5 @@
 class WelcomeController < ApplicationController  
-  skip before_filter :authenticate_user!, only: [:index, :terms, :account_error]
+  skip_before_filter :authenticate_user!, only: [:index, :terms, :account_error]
   skip_before_filter :confirm_balance?, only: [:account_error, :requireInfo]
 
   def index
