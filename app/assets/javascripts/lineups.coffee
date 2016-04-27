@@ -28,9 +28,10 @@ ready = ->
             lineup["pos_" + i + "_" + j] = 0
             lineup["pos_" + i + "_" + j + "Sal"] = 0
 
-    for i in [1..num_flex]
-        lineup["pos_0_" + i] = 0
-        lineup["pos_0_" + i + "Sal"] = 0
+    if num_flex != 0
+        for i in [1..num_flex]
+            lineup["pos_0_" + i] = 0
+            lineup["pos_0_" + i + "Sal"] = 0
 
     checkDuplicates = () ->
         arr = []
@@ -38,8 +39,9 @@ ready = ->
             for j in [1..gon.players_hash["position_" + i]]
                 arr.push(lineup["pos_" + i + "_" + j])
 
-        for i in [1..num_flex]
-            arr.push(lineup["pos_0_" + i])
+        if num_flex != 0
+            for i in [1..num_flex]
+                arr.push(lineup["pos_0_" + i])
 
         arr = arr.unique()
         true if arr.length == num_total_positions + num_flex
@@ -51,12 +53,11 @@ ready = ->
             for j in [1..gon.players_hash["position_" + i]]
                 filled = false if lineup["pos_" + i + "_" + j] == 0 or lineup["pos_" + i + "_" + j] == null
 
+        if num_flex != 0
+            for i in [1..num_flex]
+                filled = false if lineup["pos_0_" + i] == 0 or lineup["pos_" + i + "_" + j] == null
 
-        for i in [1..num_flex]
-            filled = false if lineup["pos_0_" + i] == 0 or lineup["pos_" + i + "_" + j] == null
-
-        $("input[name='commit']").attr("disabled", false) if filled == true
-
+        $("input[name='commit']").attr("disabled", false) if filled == true and 
         salary >= 0 and
         checkDuplicates() == true
 
@@ -159,11 +160,12 @@ ready = ->
                     lineup_player: 
                         lineup_id: lid, player_id: lineup["pos_" + i + "_" + j]).error ->
                             success = false
-        for i in [1..num_flex]
-            $.post('/lineup_players.json',
-                    lineup_player: 
-                        lineup_id: lid, player_id: lineup["pos_0_" + i]).error ->
-                            success = false
+        if num_flex != 0
+            for i in [1..num_flex]
+                $.post('/lineup_players.json',
+                        lineup_player: 
+                            lineup_id: lid, player_id: lineup["pos_0_" + i]).error ->
+                                success = false
             
         return true if success == true
           
@@ -210,8 +212,9 @@ ready = ->
         if $(this).text() == "+"
             if positions["position_" + pos] == 0
                 #ADD TO FLEX PLAYERS
-                for i in [1..num_flex]
-                    break if handleFlex(i, id, player_salary, name) == true
+                if num_flex != 0
+                    for i in [1..num_flex]
+                        break if handleFlex(i, id, player_salary, name) == true
             else
 
                 ###
@@ -266,8 +269,9 @@ ready = ->
 
                     checkPlayers()
                 else 
-                    for i in [1..num_flex]
-                        break if handleRemoveFlex(i, id, player_salary, name) == true
+                    if num_flex != 0
+                        for i in [1..num_flex]
+                            break if handleRemoveFlex(i, id, player_salary, name) == true
 
         $(".salary").text(salary.toString())
     ### END ADD PLAYER EVENT ####
@@ -286,8 +290,9 @@ ready = ->
             pn = parseInt(player.attr("data-pnum"))
 
             if pos == 0
-                for i in [1..num_flex]
-                    return if handleRemoveFlex(i, id, player_salary, name) == true
+                if num_flex != 0
+                    for i in [1..num_flex]
+                        return if handleRemoveFlex(i, id, player_salary, name) == true
             switch id
                 when lineup["pos_" + pos + "_" + pn]
                     lineupRow = $(".player-info").find("[data-id='" + id + "']")
