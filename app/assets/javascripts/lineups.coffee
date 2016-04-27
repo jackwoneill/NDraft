@@ -159,7 +159,6 @@ ready = ->
 
         e.preventDefault()
 
-
         $.get('/lineups/' + lid + '/edit?contest_id=' + cid).success (data) ->
                 window.location.href = "/contests/"+ cid if createPlayers(lid, cid) == true
                 return
