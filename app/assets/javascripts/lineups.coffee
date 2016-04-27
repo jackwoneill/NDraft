@@ -215,78 +215,87 @@ ready = ->
         name = player.text()
         id = parseInt(player.attr("data-id"))
         pos = parseInt(player.attr("data-position"))
-
         player_salary = parseInt(player.attr("data-salary"))
-        player_num = (gon.players_hash["position_" + pos] - positions["position_" + pos] + 1)
+        alert player_salary
 
         # lineup["player_" + pos] #Dynamic position var
         # lineup["player_" + (pos + "Sal").toString()] #Dynamic salary var
 
         if $(this).text() == "+"
+            alert "b"
+
             if positions["position_" + pos] == 0
                 #ADD TO FLEX PLAYERS
                 if num_flex != 0
                     for i in [1..num_flex]
                         break if handleFlex(i, id, player_salary, name) == true
             else
+                for i in [1..gon.players_hash["position_" + pos]]
+                    if lineup["pos_" + pos + "_" + i] == 0
+                        lineup["pos_" + pos + "_" + i] = id
+                        lineup["pos_" + pos + "_" + i + "Sal"] = player_salary
+                            
+                        salary -= player_salary
+
+                        $(this).text("-")
+
+                        $(this).parent().parent().parent().css backgroundColor: '#F2385A'
+                        $(this).parent().parent().parent().css opacity: 1.0
+                        player.css color: 'white'
+
+                        $(".current-lineup-pos-"+pos+"-"+i+"-player-name").text(name)
+                        $(".current-lineup-pos-"+pos+"-"+i+"-player-name").attr("data-id", id)
+                        $(".current-lineup-pos-"+pos+"-"+i+"-player-name").attr("data-salary", player_salary)
+                        $(".current-lineup-pos-"+pos+"-"+i+"-player-name").attr('data-pnum', i)
+
+                        player.attr('data-pnum', i)
+
+                        positions["position_" + pos] -= 1
+
+                        checkPlayers()
+                        $(".salary").text(salary.toString())
+
+                        return
 
                 ###
                 For Assignment 
                 ((Number of total players allowed at a position) - (Number of slots open at that position) + 1)
                 ###
-                lineup["pos_" + pos + "_" + player_num] = id
-                lineup["pos_" + pos + "_" + player_num + "Sal"] = player_salary
-                    
-                salary -= player_salary
-
-                $(this).text("-")
-
-                $(this).parent().parent().parent().css backgroundColor: '#F2385A'
-                $(this).parent().parent().parent().css opacity: 1.0
-                player.css color: 'white'
-
-                $(".current-lineup-pos-"+pos+"-"+player_num+"-player-name").text(name)
-                $(".current-lineup-pos-"+pos+"-"+player_num+"-player-name").attr("data-id", id)
-                $(".current-lineup-pos-"+pos+"-"+player_num+"-player-name").attr("data-salary", player_salary)
-                $(".current-lineup-pos-"+pos+"-"+player_num+"-player-name").attr('data-pnum', player_num)
-
-                player.data('pnum', player_num)
-
-                positions["position_" + pos] -= 1
-
-                checkPlayers()
-
+                
         else if $(this).text() == "-"
-            pn = player.data('pnum')
+            alert "a"
+            pn = player.attr('data-pnum')
+            alert pn
             switch id
                 when lineup["pos_" + pos + "_" + pn]
 
                     salary += lineup["pos_" + pos + "_" + pn + "Sal"]
 
-                    lineup["pos_" + pos + "_" + pn] = null
+                    lineup["pos_" + pos + "_" + pn] = 0
                     lineup["pos_" + pos + "_" + pn + "Sal"] = null
 
                     $(this).text("+")
                     $(".current-lineup-pos-"+pos+"-"+pn+"-player-name").empty()
                     $(".current-lineup-pos-"+pos+"-"+pn+"-player-name").attr("data-id", 0)
-                    $(".current-lineup-pos-"+pos+"-"+pn+"-player-name").attr("data-salary", "")
+                    $(".current-lineup-pos-"+pos+"-"+pn+"-player-name").attr("data-salary", "0")
                     $(".current-lineup-pos-"+pos+"-"+pn+"-player-name").attr("data-pnum", "0")
 
                     $(this).parent().parent().parent().css backgroundColor: 'white'
                     player.css color: '#F2385A'
                     $(this).parent().parent().parent().css opacity: 1.0            
 
-                    positions["position_" + pos]++
+                    positions["position_" + pos] += 1
 
-                    player.data('pnum', 0)
+                    player.attr('data-pnum', "0")
 
                     checkPlayers()
+                    $(".salary").text(salary.toString())
+
                 else 
                     if num_flex != 0
                         for i in [1..num_flex]
                             break if handleRemoveFlex(i, id, player_salary, name) == true
 
-        $(".salary").text(salary.toString())
     ### END ADD PLAYER EVENT ####
 
     ### BEGIN REMOVE PLAYER FROM CURR LINE ###
