@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  before_filter :auth_user
+  before_filter :authenticate_user!
   before_filter :confirm_balance?
   before_filter :configure_permitted_parameters, if: :devise_controller?
 
