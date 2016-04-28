@@ -114,14 +114,14 @@ display: inline;
   padding-left: 5px;
 }
 
-.player-select > tbody > tr > td > .player-info > .player-position{ 
+.player-select > tbody > tr > td > .player-info > .line-1 > .player-position{ 
   color: #AFBFC6;
   margin-left: 0;
   padding-right: 10px; 
   float: left;
 }
 
-.player-select > tbody > tr > td > .player-info > .player-name{ 
+.player-select > tbody > tr > td > .player-info > .line-1 > .player-name{ 
   color: #F2385A;
   margin-left: 0;
   padding-right: 10px; 
@@ -130,7 +130,7 @@ display: inline;
 }
 
 
-.player-select > tbody > tr > td > .player-info > .add-player-button { 
+.player-select > tbody > tr > td > .player-info > .line-1> .add-player-button { 
   background:none;
   border:none;
   font-size:1em;
@@ -152,12 +152,12 @@ display: inline;
   color: black;
 }
 
-.player-select > tbody > tr > td > .player-info > .add-player-button, .remove-player-button{
+.player-select > tbody > tr > td > .player-info > .line-1> .add-player-button, .remove-player-button{
   cursor: pointer; 
   cursor: hand;
 } 
 
-.player-select > tbody > tr > td > .player-info > .add-player-button:hover:disabled{
+.player-select > tbody > tr > td > .player-info > .line-1 > .add-player-button:hover:disabled{
 
 } 
 
@@ -220,5 +220,10 @@ display: inline;
   outline:none;
   height: 20px;
   width: 20px;
+}
+
+.line-1 {
+  width: 100%;
+  height: 50%;
 }
 

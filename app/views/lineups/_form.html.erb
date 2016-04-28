@@ -44,24 +44,18 @@
 
                 <td>
                   <div class="player-info">
-                    <% case player.position 
-                       when "1" %>
-                        <span class="player-position">PG</span>
-                      <% when "2" %>
-                        <span class="player-position">SG</span>
-                      <% when '3' %>
-                        <span class="player-position">SF</span>
-                      <% when '4' %>                  
-                        <span class="player-position">PF</span>
-                      <% when '5' %>
-                        <span class="player-position">C</span>
-                    <% end %>
+                    <div class="line-1">
+                    <span class="player-position">
+                      <%= Position.where(gametype_id: @contest.game).where(pos_num: player.position).take.abbr %>
+                    </span>
+
                     <span class="player-name" data-id="<%= player.id %>" data-position="<%= player.position %>" data-salary="<%= player.salary %>" data-pnum = 0><%= player.name %></span>
                     <div class="player-salary-container">
                       <span class="player-salary"><%="$#{player.salary}" %></span>
                     </div>
 
                     <button type="button" class="add-player-button">+</button>
+                    </div>
                   </div>
                 </td>
               </tr>

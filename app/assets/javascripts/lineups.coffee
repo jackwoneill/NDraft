@@ -321,7 +321,7 @@ ready = ->
 
                     salary += lineup["pos_" + pos + "_" + pn + "Sal"]
 
-                    lineup["pos_" + pos + "_" + pn] = null
+                    lineup["pos_" + pos + "_" + pn] = 0
                     lineup["pos_" + pos + "_" + pn + "Sal"] = null
 
                     $(".current-lineup-pos-"+pos+"-"+pn+"-player-name").empty()
