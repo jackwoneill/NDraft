@@ -53,9 +53,26 @@
                     <div class="player-salary-container">
                       <span class="player-salary"><%="$#{player.salary}" %></span>
                     </div>
-
-                    <button type="button" class="add-player-button">+</button>
                     </div>
+                    <button type="button" class="add-player-button">+</button>
+                    
+                    <div class="line-2">
+                      <% game = Game.where(slate_id: @contest.slate_id).where('team_1 = :team OR team_2 = :team', team: player.team_id).take %>
+                      <div class="player-team">
+                        <span>
+                          <% if game.team_1 == player.team %>
+                              <b><%= Team.find(game.team_1).abbrev%></b>
+                                vs
+                                <%= Team.find(game.team_2).abbrev %>
+                          <% else %>
+                            <%= Team.find(game.team_1).abbrev%>
+                               vs
+                            <b><%= Team.find(game.team_2).abbreb %></b>
+                          <% end %>
+                        </span>
+                      </div>
+                    </div>
+
                   </div>
                 </td>
               </tr>
