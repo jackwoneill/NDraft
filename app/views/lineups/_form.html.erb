@@ -60,14 +60,14 @@
                       <% game = Game.where(slate_id: @contest.slate_id).where('team_1 = :team OR team_2 = :team', team: player.team_id).take %>
                       <div class="player-team">
                         <span>
-                          <% if game.team_1 == player.team %>
-                              <b><%= Team.find(game.team_1).abbrev%></b>
+                          <% if game.team_1 == player.team_id %>
+                              <div class="bold-team"><%= Team.find(game.team_1).abbr%></div>
                                 vs
-                                <%= Team.find(game.team_2).abbrev %>
+                                <%= Team.find(game.team_2).abbr %>
                           <% else %>
-                            <%= Team.find(game.team_1).abbrev%>
+                            <%= Team.find(game.team_1).abbr%>
                                vs
-                            <b><%= Team.find(game.team_2).abbreb %></b>
+                            <div class="bold-team"><%= Team.find(game.team_2).abbr %></div>
                           <% end %>
                         </span>
                       </div>

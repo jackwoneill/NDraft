@@ -2,10 +2,11 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.player_salary{
-display: inline;
-  margin: 0 1em 0 1em;
-  width: 30%;
+.player-salary-container{
+  display: inline;
+  width: 100%;
+  overflow: hidden;
+  float: left;
 }
 
 .position-select > li > button {
@@ -30,14 +31,10 @@ display: inline;
   list-style-type: none;
   margin: 0;
   padding: 0;
-/*  padding-top: 5px;
-  padding-bottom: 5px;*/
   overflow: hidden;
 }
 
 .position-select > li {
-/*  padding-top: 5px;
-  padding-bottom: 5px;*/
   float: left;
 
 }
@@ -130,14 +127,14 @@ display: inline;
 }
 
 
-.player-select > tbody > tr > td > .player-info > .line-1> .add-player-button { 
+.player-select > tbody > tr > td > .player-info > .add-player-button { 
   background:none;
   border:none;
   font-size:1em;
   color:blue;
   padding-top: 5px;
   padding-bottom: 5px;
-  float: right;
+  float: left;
   display: inline-block;
   color: #AFBFC6;
   text-align: center;
@@ -226,5 +223,18 @@ display: inline;
   width: 90%;
   height: 50%;
   float: left;
+}
+
+.line-2 {
+  width: 90%;
+  height: 50%;
+  float: left;
+  text-align: left;
+  color: #36B1BF;
+}
+
+.bold-team {
+  display: inline;
+  text-decoration: underline;
 }
 
