@@ -1,0 +1,1463 @@
+/*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
+/**
+ * 1. Set default font family to sans-serif.
+ * 2. Prevent iOS and IE text size adjust after device orientation change,
+ *    without disabling user zoom.
+ */
+/* line 9, /Users/Jack/.rvm/gems/ruby-2.2.1/gems/normalize-rails-3.0.3/vendor/assets/stylesheets/normalize-rails/normalize.css */
+html {
+  font-family: sans-serif;
+  /* 1 */
+  -ms-text-size-adjust: 100%;
+  /* 2 */
+  -webkit-text-size-adjust: 100%;
+  /* 2 */
+}
+
+/**
+ * Remove default margin.
+ */
+/* line 19, /Users/Jack/.rvm/gems/ruby-2.2.1/gems/normalize-rails-3.0.3/vendor/assets/stylesheets/normalize-rails/normalize.css */
+body {
+  margin: 0;
+}
+
+/* HTML5 display definitions
+   ========================================================================== */
+/**
+ * Correct `block` display not defined for any HTML5 element in IE 8/9.
+ * Correct `block` display not defined for `details` or `summary` in IE 10/11
+ * and Firefox.
+ * Correct `block` display not defined for `main` in IE 11.
+ */
+/* line 33, /Users/Jack/.rvm/gems/ruby-2.2.1/gems/normalize-rails-3.0.3/vendor/assets/stylesheets/normalize-rails/normalize.css */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+menu,
+nav,
+section,
+summary {
+  display: block;
+}
+
+/**
+ * 1. Correct `inline-block` display not defined in IE 8/9.
+ * 2. Normalize vertical alignment of `progress` in Chrome, Firefox, and Opera.
+ */
+/* line 54, /Users/Jack/.rvm/gems/ruby-2.2.1/gems/normalize-rails-3.0.3/vendor/assets/stylesheets/normalize-rails/normalize.css */
+audio,
+canvas,
+progress,
+video {
+  display: inline-block;
+  /* 1 */
+  vertical-align: baseline;
+  /* 2 */
+}
+
+/**
+ * Prevent modern browsers from displaying `audio` without controls.
+ * Remove excess height in iOS 5 devices.
+ */
+/* line 67, /Users/Jack/.rvm/gems/ruby-2.2.1/gems/normalize-rails-3.0.3/vendor/assets/stylesheets/normalize-rails/normalize.css */
+audio:not([controls]) {
+  display: none;
+  height: 0;
+}
+
+/**
+ * Address `[hidden]` styling not present in IE 8/9/10.
+ * Hide the `template` element in IE 8/9/10/11, Safari, and Firefox < 22.
+ */
+/* line 77, /Users/Jack/.rvm/gems/ruby-2.2.1/gems/normalize-rails-3.0.3/vendor/assets/stylesheets/normalize-rails/normalize.css */
+[hidden],
+template {
+  display: none;
+}
+
+/* Links
+   ========================================================================== */
+/**
+ * Remove the gray background color from active links in IE 10.
+ */
+/* line 89, /Users/Jack/.rvm/gems/ruby-2.2.1/gems/normalize-rails-3.0.3/vendor/assets/stylesheets/normalize-rails/normalize.css */
+a {
+  background-color: transparent;
+}
+
+/**
+ * Improve readability of focused elements when they are also in an
+ * active/hover state.
+ */
+/* line 98, /Users/Jack/.rvm/gems/ruby-2.2.1/gems/normalize-rails-3.0.3/vendor/assets/stylesheets/normalize-rails/normalize.css */
+a:active,
+a:hover {
+  outline: 0;
+}
+
+/* Text-level semantics
+   ========================================================================== */
+/**
+ * Address styling not present in IE 8/9/10/11, Safari, and Chrome.
+ */
+/* line 110, /Users/Jack/.rvm/gems/ruby-2.2.1/gems/normalize-rails-3.0.3/vendor/assets/stylesheets/normalize-rails/normalize.css */
+abbr[title] {
+  border-bottom: 1px dotted;
+}
+
+/**
+ * Address style set to `bolder` in Firefox 4+, Safari, and Chrome.
+ */
+/* line 118, /Users/Jack/.rvm/gems/ruby-2.2.1/gems/normalize-rails-3.0.3/vendor/assets/stylesheets/normalize-rails/normalize.css */
+b,
+strong {
+  font-weight: bold;
+}
+
+/**
+ * Address styling not present in Safari and Chrome.
+ */
+/* line 127, /Users/Jack/.rvm/gems/ruby-2.2.1/gems/normalize-rails-3.0.3/vendor/assets/stylesheets/normalize-rails/normalize.css */
+dfn {
+  font-style: italic;
+}
+
+/**
+ * Address variable `h1` font-size and margin within `section` and `article`
+ * contexts in Firefox 4+, Safari, and Chrome.
+ */
+/* line 136, /Users/Jack/.rvm/gems/ruby-2.2.1/gems/normalize-rails-3.0.3/vendor/assets/stylesheets/normalize-rails/normalize.css */
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+
+/**
+ * Address styling not present in IE 8/9.
+ */
+/* line 145, /Users/Jack/.rvm/gems/ruby-2.2.1/gems/normalize-rails-3.0.3/vendor/assets/stylesheets/normalize-rails/normalize.css */
+mark {
+  background: #ff0;
+  color: #000;
+}
+
+/**
+ * Address inconsistent and variable font size in all browsers.
+ */
+/* line 154, /Users/Jack/.rvm/gems/ruby-2.2.1/gems/normalize-rails-3.0.3/vendor/assets/stylesheets/normalize-rails/normalize.css */
+small {
+  font-size: 80%;
+}
+
+/**
+ * Prevent `sub` and `sup` affecting `line-height` in all browsers.
+ */
+/* line 162, /Users/Jack/.rvm/gems/ruby-2.2.1/gems/normalize-rails-3.0.3/vendor/assets/stylesheets/normalize-rails/normalize.css */
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+/* line 170, /Users/Jack/.rvm/gems/ruby-2.2.1/gems/normalize-rails-3.0.3/vendor/assets/stylesheets/normalize-rails/normalize.css */
+sup {
+  top: -0.5em;
+}
+
+/* line 174, /Users/Jack/.rvm/gems/ruby-2.2.1/gems/normalize-rails-3.0.3/vendor/assets/stylesheets/normalize-rails/normalize.css */
+sub {
+  bottom: -0.25em;
+}
+
+/* Embedded content
+   ========================================================================== */
+/**
+ * Remove border when inside `a` element in IE 8/9/10.
+ */
+/* line 185, /Users/Jack/.rvm/gems/ruby-2.2.1/gems/normalize-rails-3.0.3/vendor/assets/stylesheets/normalize-rails/normalize.css */
+img {
+  border: 0;
+}
+
+/**
+ * Correct overflow not hidden in IE 9/10/11.
+ */
+/* line 193, /Users/Jack/.rvm/gems/ruby-2.2.1/gems/normalize-rails-3.0.3/vendor/assets/stylesheets/normalize-rails/normalize.css */
+svg:not(:root) {
+  overflow: hidden;
+}
+
+/* Grouping content
+   ========================================================================== */
+/**
+ * Address margin not present in IE 8/9 and Safari.
+ */
+/* line 204, /Users/Jack/.rvm/gems/ruby-2.2.1/gems/normalize-rails-3.0.3/vendor/assets/stylesheets/normalize-rails/normalize.css */
+figure {
+  margin: 1em 40px;
+}
+
+/**
+ * Address differences between Firefox and other browsers.
+ */
+/* line 212, /Users/Jack/.rvm/gems/ruby-2.2.1/gems/normalize-rails-3.0.3/vendor/assets/stylesheets/normalize-rails/normalize.css */
+hr {
+  box-sizing: content-box;
+  height: 0;
+}
+
+/**
+ * Contain overflow in all browsers.
+ */
+/* line 221, /Users/Jack/.rvm/gems/ruby-2.2.1/gems/normalize-rails-3.0.3/vendor/assets/stylesheets/normalize-rails/normalize.css */
+pre {
+  overflow: auto;
+}
+
+/**
+ * Address odd `em`-unit font size rendering in all browsers.
+ */
+/* line 229, /Users/Jack/.rvm/gems/ruby-2.2.1/gems/normalize-rails-3.0.3/vendor/assets/stylesheets/normalize-rails/normalize.css */
+code,
+kbd,
+pre,
+samp {
+  font-family: monospace, monospace;
+  font-size: 1em;
+}
+
+/* Forms
+   ========================================================================== */
+/**
+ * Known limitation: by default, Chrome and Safari on OS X allow very limited
+ * styling of `select`, unless a `border` property is set.
+ */
+/**
+ * 1. Correct color not being inherited.
+ *    Known issue: affects color of disabled elements.
+ * 2. Correct font properties not being inherited.
+ * 3. Address margins set differently in Firefox 4+, Safari, and Chrome.
+ */
+/* line 252, /Users/Jack/.rvm/gems/ruby-2.2.1/gems/normalize-rails-3.0.3/vendor/assets/stylesheets/normalize-rails/normalize.css */
+button,
+input,
+optgroup,
+select,
+textarea {
+  color: inherit;
+  /* 1 */
+  font: inherit;
+  /* 2 */
+  margin: 0;
+  /* 3 */
+}
+
+/**
+ * Address `overflow` set to `hidden` in IE 8/9/10/11.
+ */
+/* line 266, /Users/Jack/.rvm/gems/ruby-2.2.1/gems/normalize-rails-3.0.3/vendor/assets/stylesheets/normalize-rails/normalize.css */
+button {
+  overflow: visible;
+}
+
+/**
+ * Address inconsistent `text-transform` inheritance for `button` and `select`.
+ * All other form control elements do not inherit `text-transform` values.
+ * Correct `button` style inheritance in Firefox, IE 8/9/10/11, and Opera.
+ * Correct `select` style inheritance in Firefox.
+ */
+/* line 277, /Users/Jack/.rvm/gems/ruby-2.2.1/gems/normalize-rails-3.0.3/vendor/assets/stylesheets/normalize-rails/normalize.css */
+button,
+select {
+  text-transform: none;
+}
+
+/**
+ * 1. Avoid the WebKit bug in Android 4.0.* where (2) destroys native `audio`
+ *    and `video` controls.
+ * 2. Correct inability to style clickable `input` types in iOS.
+ * 3. Improve usability and consistency of cursor style between image-type
+ *    `input` and others.
+ */
+/* line 290, /Users/Jack/.rvm/gems/ruby-2.2.1/gems/normalize-rails-3.0.3/vendor/assets/stylesheets/normalize-rails/normalize.css */
+button,
+html input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+  -webkit-appearance: button;
+  /* 2 */
+  cursor: pointer;
+  /* 3 */
+}
+
+/**
+ * Re-set default cursor for disabled elements.
+ */
+/* line 302, /Users/Jack/.rvm/gems/ruby-2.2.1/gems/normalize-rails-3.0.3/vendor/assets/stylesheets/normalize-rails/normalize.css */
+button[disabled],
+html input[disabled] {
+  cursor: default;
+}
+
+/**
+ * Remove inner padding and border in Firefox 4+.
+ */
+/* line 311, /Users/Jack/.rvm/gems/ruby-2.2.1/gems/normalize-rails-3.0.3/vendor/assets/stylesheets/normalize-rails/normalize.css */
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+
+/**
+ * Address Firefox 4+ setting `line-height` on `input` using `!important` in
+ * the UA stylesheet.
+ */
+/* line 322, /Users/Jack/.rvm/gems/ruby-2.2.1/gems/normalize-rails-3.0.3/vendor/assets/stylesheets/normalize-rails/normalize.css */
+input {
+  line-height: normal;
+}
+
+/**
+ * It's recommended that you don't attempt to style these elements.
+ * Firefox's implementation doesn't respect box-sizing, padding, or width.
+ *
+ * 1. Address box sizing set to `content-box` in IE 8/9/10.
+ * 2. Remove excess padding in IE 8/9/10.
+ */
+/* line 334, /Users/Jack/.rvm/gems/ruby-2.2.1/gems/normalize-rails-3.0.3/vendor/assets/stylesheets/normalize-rails/normalize.css */
+input[type="checkbox"],
+input[type="radio"] {
+  box-sizing: border-box;
+  /* 1 */
+  padding: 0;
+  /* 2 */
+}
+
+/**
+ * Fix the cursor style for Chrome's increment/decrement buttons. For certain
+ * `font-size` values of the `input`, it causes the cursor style of the
+ * decrement button to change from `default` to `text`.
+ */
+/* line 346, /Users/Jack/.rvm/gems/ruby-2.2.1/gems/normalize-rails-3.0.3/vendor/assets/stylesheets/normalize-rails/normalize.css */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  height: auto;
+}
+
+/**
+ * 1. Address `appearance` set to `searchfield` in Safari and Chrome.
+ * 2. Address `box-sizing` set to `border-box` in Safari and Chrome.
+ */
+/* line 356, /Users/Jack/.rvm/gems/ruby-2.2.1/gems/normalize-rails-3.0.3/vendor/assets/stylesheets/normalize-rails/normalize.css */
+input[type="search"] {
+  -webkit-appearance: textfield;
+  /* 1 */
+  box-sizing: content-box;
+  /* 2 */
+}
+
+/**
+ * Remove inner padding and search cancel button in Safari and Chrome on OS X.
+ * Safari (but not Chrome) clips the cancel button when the search input has
+ * padding (and `textfield` appearance).
+ */
+/* line 367, /Users/Jack/.rvm/gems/ruby-2.2.1/gems/normalize-rails-3.0.3/vendor/assets/stylesheets/normalize-rails/normalize.css */
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+/**
+ * Define consistent border, margin, and padding.
+ */
+/* line 376, /Users/Jack/.rvm/gems/ruby-2.2.1/gems/normalize-rails-3.0.3/vendor/assets/stylesheets/normalize-rails/normalize.css */
+fieldset {
+  border: 1px solid #c0c0c0;
+  margin: 0 2px;
+  padding: 0.35em 0.625em 0.75em;
+}
+
+/**
+ * 1. Correct `color` not being inherited in IE 8/9/10/11.
+ * 2. Remove padding so people aren't caught out if they zero out fieldsets.
+ */
+/* line 387, /Users/Jack/.rvm/gems/ruby-2.2.1/gems/normalize-rails-3.0.3/vendor/assets/stylesheets/normalize-rails/normalize.css */
+legend {
+  border: 0;
+  /* 1 */
+  padding: 0;
+  /* 2 */
+}
+
+/**
+ * Remove default vertical scrollbar in IE 8/9/10/11.
+ */
+/* line 396, /Users/Jack/.rvm/gems/ruby-2.2.1/gems/normalize-rails-3.0.3/vendor/assets/stylesheets/normalize-rails/normalize.css */
+textarea {
+  overflow: auto;
+}
+
+/**
+ * Don't inherit the `font-weight` (applied by a rule above).
+ * NOTE: the default cannot safely be changed in Chrome and Safari on OS X.
+ */
+/* line 405, /Users/Jack/.rvm/gems/ruby-2.2.1/gems/normalize-rails-3.0.3/vendor/assets/stylesheets/normalize-rails/normalize.css */
+optgroup {
+  font-weight: bold;
+}
+
+/* Tables
+   ========================================================================== */
+/**
+ * Remove most spacing between table cells.
+ */
+/* line 416, /Users/Jack/.rvm/gems/ruby-2.2.1/gems/normalize-rails-3.0.3/vendor/assets/stylesheets/normalize-rails/normalize.css */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* line 421, /Users/Jack/.rvm/gems/ruby-2.2.1/gems/normalize-rails-3.0.3/vendor/assets/stylesheets/normalize-rails/normalize.css */
+td,
+th {
+  padding: 0;
+}
+/* line 6, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/contests.scss */
+.lineup_display_position {
+  display: inline;
+  margin: 0 1em 0 1em;
+  width: 30%;
+}
+
+/* line 12, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/contests.scss */
+table {
+  width: 100%;
+}
+
+/* line 16, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/contests.scss */
+.new_user input[type="text"] {
+  outline: 1px solid #bbb;
+}
+
+/* line 20, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/contests.scss */
+.contest-details:hover {
+  background-color: #f5f5f5;
+}
+
+/* line 24, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/contests.scss */
+.contest-details {
+  border-bottom: 1pt solid black;
+}
+
+/* line 29, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/contests.scss */
+.contest-details > td {
+  vertical-align: middle;
+  padding-left: 30px;
+  padding-right: 30px;
+  text-align: center;
+  line-height: 50px;
+}
+
+/* line 37, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/contests.scss */
+.contest-entries > td {
+  padding-left: 15px;
+  padding-right: 15px;
+  text-align: center;
+}
+
+/* line 44, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/contests.scss */
+.contest-entries:hover {
+  background: red;
+}
+/* line 5, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/lineups.scss */
+.player-salary-container {
+  display: inline;
+  width: 100%;
+  overflow: hidden;
+  float: left;
+}
+
+/* line 12, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/lineups.scss */
+.position-select > li > button {
+  background: none;
+  border: none;
+  font-size: 1em;
+  color: blue;
+  float: left;
+  display: inline-block;
+  color: #F2385A;
+  background-color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  outline: #AFBFC6 solid thin;
+  border-top: 1px solid  #AFBFC6;
+}
+
+/* line 29, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/lineups.scss */
+.position-select {
+  width: 55%;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* line 37, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/lineups.scss */
+.position-select > li {
+  float: left;
+}
+
+/* line 42, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/lineups.scss */
+.position-select > li > a {
+  display: inline-block;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  background-color: #F8F8FF;
+}
+
+/* line 50, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/lineups.scss */
+.search-container {
+  float: left;
+  display: inline-block;
+  text-align: center;
+  height: 44px;
+}
+
+/* line 57, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/lineups.scss */
+#search {
+  width: 145px;
+  position: relative;
+  bottom: -22px;
+  padding-right: 10px;
+  font-size: 1em;
+  overflow: hidden;
+  display: table-cell;
+  float: left;
+  text-decoration: none;
+  outline: #AFBFC6 solid thin;
+}
+
+/* line 70, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/lineups.scss */
+.position-select > li > a:hover {
+  background-color: #AFBFC6;
+}
+
+/* line 74, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/lineups.scss */
+.new-player-selection-container {
+  float: left;
+  background-color: white;
+  width: 55%;
+  height: 450px;
+  overflow: auto;
+}
+
+/* line 82, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/lineups.scss */
+.player-select-container {
+  max-width: 100%;
+  height: 450px;
+  overflow: hidden;
+  background-color: white;
+}
+
+/* line 89, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/lineups.scss */
+.player-select {
+  float: left;
+  width: 100%;
+  height: 0%;
+}
+
+/* line 95, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/lineups.scss */
+.player-select > tbody > tr {
+  background-color: white;
+  width: 100%;
+  height: 45px;
+}
+
+/* line 100, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/lineups.scss */
+.player-select > tbody > tr > td {
+  height: 45px;
+  margin-right: 0;
+}
+
+/* line 105, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/lineups.scss */
+.player-select > tbody > tr > td > .player-info {
+  color: #E95144;
+  height: 75px;
+  display: block;
+  border: 1px solid black;
+  padding: 16px;
+  padding-left: 5px;
+}
+
+/* line 114, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/lineups.scss */
+.player-select > tbody > tr > td > .player-info > .line-1 > .player-position {
+  color: #AFBFC6;
+  margin-left: 0;
+  padding-right: 10px;
+  float: left;
+}
+
+/* line 121, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/lineups.scss */
+.player-select > tbody > tr > td > .player-info > .line-1 > .player-name {
+  color: #F2385A;
+  margin-left: 0;
+  padding-right: 10px;
+  float: left;
+  font-weight: bold;
+}
+
+/* line 130, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/lineups.scss */
+.player-select > tbody > tr > td > .player-info > .add-player-button {
+  background: none;
+  border: none;
+  font-size: 1em;
+  color: blue;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  float: left;
+  display: inline-block;
+  color: #AFBFC6;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  outline: none;
+  height: 20px;
+  width: 20px;
+}
+
+/* line 148, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/lineups.scss */
+.player-salary-container > span {
+  color: black;
+}
+
+/* line 152, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/lineups.scss */
+.player-select > tbody > tr > td > .player-info > .line-1 > .add-player-button, .remove-player-button {
+  cursor: pointer;
+  cursor: hand;
+}
+
+/* line 161, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/lineups.scss */
+.current-lineup-container {
+  float: right;
+  max-width: 40%;
+  width: 40%;
+  height: 450px;
+  overflow: auto;
+}
+
+/* line 170, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/lineups.scss */
+.current-lineup {
+  float: right;
+  width: 100%;
+}
+
+/* line 175, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/lineups.scss */
+.current-lineup > tbody > tr {
+  background-color: #F8F8FF;
+  width: 100%;
+  height: 75px;
+}
+
+/* line 180, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/lineups.scss */
+.current-lineup > tbody > tr > td {
+  height: 45px;
+  margin-right: 0;
+}
+
+/* line 185, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/lineups.scss */
+.current-lineup > tbody > tr > td > .current-lineup-player-info {
+  color: #E95144;
+  height: 75px;
+  display: block;
+  border: 1px solid black;
+  padding: 16px;
+  padding-left: 5px;
+}
+
+/* line 195, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/lineups.scss */
+.current-lineup > tbody > tr > td > .current-lineup-player-info > .current-lineup-player-position {
+  color: #AFBFC6;
+  float: left;
+  margin-left: 0;
+  padding-right: 10px;
+  padding-left: 5px;
+}
+
+/* line 204, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/lineups.scss */
+.current-lineup > tbody > tr > td > .current-lineup-player-info > .remove-player-button {
+  background: none;
+  border: none;
+  font-size: 1em;
+  color: blue;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  float: right;
+  display: inline-block;
+  color: #AFBFC6;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  outline: none;
+  height: 20px;
+  width: 20px;
+}
+
+/* line 222, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/lineups.scss */
+.line-1 {
+  width: 90%;
+  height: 50%;
+  float: left;
+}
+
+/* line 228, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/lineups.scss */
+.line-2 {
+  width: 90%;
+  height: 50%;
+  float: left;
+  text-align: left;
+  color: #36B1BF;
+}
+
+/* line 236, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/lineups.scss */
+.bold-team {
+  display: inline;
+  text-decoration: underline;
+}
+/* line 1, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/login.scss */
+.page-container {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: #000 url(/siteassets/images/landing-page-bg2.jpg) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+  width: 100%;
+  height: 100%;
+}
+/* line 1, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/scaffolds.scss */
+body {
+  background-color: #fff;
+  color: #333;
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size: 13px;
+  line-height: 18px;
+}
+
+/* line 9, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/scaffolds.scss */
+p, ol, ul, td {
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size: 13px;
+  line-height: 18px;
+}
+
+/* line 15, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/scaffolds.scss */
+pre {
+  background-color: #eee;
+  padding: 10px;
+  font-size: 11px;
+}
+
+/* line 21, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/scaffolds.scss */
+a {
+  color: #000;
+}
+/* line 24, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/scaffolds.scss */
+a:visited {
+  color: #666;
+}
+/* line 28, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/scaffolds.scss */
+a:hover {
+  color: #fff;
+  background-color: #000;
+}
+
+/* line 35, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/scaffolds.scss */
+div.field, div.actions {
+  margin-bottom: 10px;
+}
+
+/* line 40, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/scaffolds.scss */
+#notice {
+  color: green;
+}
+
+/* line 44, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/scaffolds.scss */
+.field_with_errors {
+  padding: 2px;
+  background-color: red;
+  display: table;
+}
+
+/* line 50, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/scaffolds.scss */
+#error_explanation {
+  width: 450px;
+  border: 2px solid red;
+  padding: 7px;
+  padding-bottom: 0;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+}
+/* line 58, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/scaffolds.scss */
+#error_explanation h2 {
+  text-align: left;
+  font-weight: bold;
+  padding: 5px 5px 5px 15px;
+  font-size: 12px;
+  margin: -7px;
+  margin-bottom: 0px;
+  background-color: #c00;
+  color: #fff;
+}
+/* line 69, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/scaffolds.scss */
+#error_explanation ul li {
+  font-size: 12px;
+  list-style: square;
+}
+/* line 1, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/welcome.scss */
+.landing-main {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  /*background: #000 url(/siteassets/images/landing-page-bg2.jpg) no-repeat center center fixed;*/
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 100%;
+  width: 100%;
+  width: 100%;
+  height: 100%;
+}
+
+/* line 14, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/welcome.scss */
+.page-content {
+  max-width: 1500px;
+  width: 100%;
+  min-height: 610px;
+  height: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+  text-align: center;
+}
+
+/* line 27, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/welcome.scss */
+.landing-hero {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  z-index: 0;
+}
+
+/* line 35, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/welcome.scss */
+.bg-img {
+  width: 100%;
+  height: 100%;
+}
+
+/* line 40, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/welcome.scss */
+.img-container {
+  position: fixed;
+  top: 25%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -55%);
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+/* line 51, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/welcome.scss */
+.description-container {
+  position: fixed;
+  top: 55%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -55%);
+}
+
+/* line 58, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/welcome.scss */
+.description-container > h3 {
+  color: #2C3E50;
+  font-size: 17px;
+  text-align: center;
+}
+
+/* The Modal (background) */
+/* line 64, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/welcome.scss */
+.modal {
+  display: none;
+  /* Hidden by default */
+  position: fixed;
+  /* Stay in place */
+  z-index: 1;
+  /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: hidden;
+  /* Enable scroll if needed */
+  background-color: black;
+  /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Black w/ opacity */
+}
+
+/* Modal Content/Box */
+/* line 78, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/welcome.scss */
+.login-modal-content {
+  background-color: #fff;
+  margin: 15% auto;
+  /* 15% from the top and centered */
+  width: 30%;
+  /* Could be more or less, depending on screen size */
+  height: 53%;
+  -webkit-border-top-left-radius: 20px 20px;
+  -webkit-border-top-right-radius: 20px 20px;
+}
+
+/* line 86, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/welcome.scss */
+.signup-modal-content {
+  background-color: #fff;
+  margin: 15% auto;
+  /* 15% from the top and centered */
+  width: 40%;
+  /* Could be more or less, depending on screen size */
+  height: 80%;
+  top: 30%;
+  left: 0%;
+  -webkit-border-top-left-radius: 20px 20px;
+  -webkit-border-top-right-radius: 20px 20px;
+  -webkit-border-bottom-left-radius: 20px 20px;
+  -webkit-border-bottom-right-radius: 20px 20px;
+  -webkit-transform: translate(0%, -30%);
+  transform: translate(0%, -30%);
+}
+
+/* The Close Button */
+/* line 102, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/welcome.scss */
+.close {
+  color: #aaa;
+  float: right;
+  text-align: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+/* line 110, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/welcome.scss */
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* line 117, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/welcome.scss */
+.new_user-content {
+  width: 20%;
+  position: fixed;
+  top: 55%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* line 125, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/welcome.scss */
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px white inset;
+}
+
+/* line 129, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/welcome.scss */
+.modal-header {
+  border: 1px solid white;
+  -webkit-border-top-left-radius: 15px 20px;
+  -webkit-border-top-right-radius: 15px 20px;
+}
+
+/* line 135, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/welcome.scss */
+.new_user {
+  width: 300px;
+  margin: 16px auto;
+  font-size: 16px;
+}
+
+/* Reset top and bottom margins from certain elements */
+/* line 142, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/welcome.scss */
+.new_user-header,
+.new_user p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+/* The triangle form is achieved by a CSS hack */
+/* line 149, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/welcome.scss */
+.new_user-triangle {
+  width: 0;
+  margin-right: auto;
+  margin-left: auto;
+  border: 12px solid transparent;
+  border-bottom-color: #28d;
+}
+
+/* line 157, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/welcome.scss */
+.new_user-header {
+  background: #28d;
+  padding: 20px;
+  font-size: 1.4em;
+  font-weight: normal;
+  text-align: center;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+/* line 167, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/welcome.scss */
+.new_user-container {
+  background: #ebebeb;
+  padding: 12px;
+}
+
+/* Every row inside .new_user-container is defined with p tags */
+/* line 173, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/welcome.scss */
+.new_user p {
+  padding: 12px;
+}
+
+/* line 177, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/welcome.scss */
+.new_user input[type="checkbox"] {
+  width: 13px;
+  height: 13px;
+  padding: 0;
+  margin: 0;
+  vertical-align: bottom;
+  position: relative;
+  top: -1px;
+  overflow: hidden;
+}
+
+/* line 188, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/welcome.scss */
+.new_user input[type="email"],
+.new_user input[type="password"] {
+  background: #fff;
+  border-color: #bbb;
+  color: #555;
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  border-width: 1px;
+  border-style: solid;
+  padding: 16px;
+  outline: 0;
+  font-family: inherit;
+  font-size: 0.95em;
+}
+
+/* Text fields' focus effect */
+/* line 205, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/welcome.scss */
+.new_user input[type="email"]:focus,
+.new_user input[type="password"]:focus {
+  border: 1px solid #4AD9D9;
+}
+
+/* line 210, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/welcome.scss */
+.new_user input[type="submit"] {
+  background: #F5A503;
+  border-color: transparent;
+  color: #fff;
+  cursor: pointer;
+  height: 0;
+}
+
+/* line 218, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/welcome.scss */
+.new_user input[type="submit"]:hover {
+  background: #17c;
+}
+
+/* Buttons' focus effect */
+/* line 223, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/welcome.scss */
+.new_user input[type="submit"]:focus {
+  border-color: #05a;
+}
+
+/* line 226, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/welcome.scss */
+.submit-link, .submit-link:visited {
+  display: inline-block;
+  outline: none;
+  text-decoration: none;
+  font-size: 24px;
+  height: 20%;
+  width: 100%;
+  background-color: #F5A503;
+  color: white;
+  text-align: center;
+  line-height: 70px;
+  -webkit-border-bottom-left-radius: 20px 20px;
+  -webkit-border-bottom-right-radius: 20px 20px;
+}
+
+/* line 240, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/welcome.scss */
+.submit-link:hover {
+  background: #36B1BF;
+  cursor: pointer;
+}
+
+/* line 245, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/welcome.scss */
+.forgot, .forgot:visited {
+  display: inline-block;
+  outline: none;
+  text-decoration: none;
+  background-color: #fff;
+  color: #4AD9D9;
+}
+
+/* line 253, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/welcome.scss */
+.forgot:hover {
+  background: #fff;
+  color: #36B1BF;
+  cursor: pointer;
+}
+
+/* line 259, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/welcome.scss */
+.modal-header {
+  padding: 2px 16px;
+  background-color: #fff;
+  color: black;
+}
+
+/* line 264, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/welcome.scss */
+.modal-header > span {
+  display: block;
+  text-align: center;
+  padding: 15px;
+  font-size: 24px;
+}
+
+/* line 270, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/welcome.scss */
+hr {
+  border: 0;
+  height: 1px;
+  background-image: linear-gradient(to right, white, #4AD9D9, white);
+}
+
+/* line 276, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/welcome.scss */
+.hidden {
+  visibility: hidden;
+  padding: 0px;
+  margin: 0px;
+  height: 0px;
+  width: 0px;
+}
+
+/* line 283, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/welcome.scss */
+#remember_me_label {
+  display: block;
+  padding-left: 20px;
+  text-indent: -15px;
+}
+
+/* line 288, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/welcome.scss */
+.notice-container {
+  text-align: center;
+  width: 300px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* line 295, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/welcome.scss */
+#notice {
+  color: black;
+}
+
+/* line 299, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/welcome.scss */
+.user-button-container {
+  bottom: 0;
+  height: 100px;
+  left: 0;
+  margin: auto;
+  position: absolute;
+  text-align: center;
+  top: 0;
+  right: 0;
+  width: 100%;
+}
+
+/* line 311, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/welcome.scss */
+.login-button-container {
+  max-width: 400px;
+  width: 100%;
+  min-height: 80px;
+  height: 100%;
+  display: inline-block;
+}
+
+/* line 319, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/welcome.scss */
+.signup-button-container {
+  max-width: 400px;
+  width: 100%;
+  min-height: 80px;
+  height: 100%;
+  display: inline-block;
+}
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+
+
+
+ */
+
+
+ @font-face {
+  font-family: Work-Sans-Regular;
+  src: url(/siteassets/Roboto/Roboto-Medium.ttf);
+}
+@font-face {
+  font-family: Work-Sans-Bold;
+  src: url(/siteassets/Roboto/Roboto-Bold.ttf);
+}
+ *,
+ *:before,
+ *:after {
+  box-sizing: border-box;
+ }
+
+ *{
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent;
+  font-family: Work-Sans-Regular
+ }
+
+
+
+.page-content {
+  z-index:0;
+  background-position:fixed;
+  max-width: 1500px;
+  width: 100%;
+  min-height: 610px;
+  height: 100%;
+  
+  margin: 0 auto;
+
+  overflow: hidden;
+  text-align: center;
+
+}
+
+.top {
+  z-index: 10;
+  position: fixed;
+  margin: 0;
+  left:0; right:0; top:0;
+  min-height: 100px;
+  height: 15%;
+  background-color: white;
+  border-bottom: 1px solid grey;
+}
+.left {
+  z-index: 9;
+  position:absolute;
+  max-width: 250px;
+  width: 18%;
+  min-height: 800px;
+  height: 100%;
+  border-right: 1px solid grey;
+
+  left:0; top:16%; bottom: 0;
+  background-color: white;
+  float: left;
+
+}
+.main {
+  position: absolute;
+  min-height: 600px;
+  max-width: 1200px;
+  width: 82%;
+  height: 80%;
+  left:18%; top:16%; right:0; bottom:0;
+  float: right;
+}
+
+.nav-bar{
+  margin: 0;
+  left:18%; right:0; top:0;
+  min-height: 100px;
+  height: 100%;
+  width: 82.1%;
+  float: right;
+  list-style-type: none;
+  overflow: hidden;
+  vertical-align: middle;
+}
+
+.nav-bar > li {
+  position: relative;
+  float: left;
+  vertical-align: middle;
+  height: 100%;
+  max-width: 145.5px;
+  width: 14%;
+}
+
+.nav-button {
+  position: inherit;
+  max-width: 145.5px;
+  line-height: 100px;
+  height: 100%;
+  color: black;
+  text-align: center;
+  text-decoration: none;
+  vertical-align : middle;
+}
+.nav-button > a {
+  height: 100%;
+  width: 100%;
+  display: inline-block;
+  color: #F2385A;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.nav-button:hover {
+  background-color: #F2385A;
+  width: 101%;
+  border-right: 1px solid #F2385A;
+}
+
+.nav-button > a:hover {
+  background-color: transparent;
+  color: white;
+}
+.outline {
+  height: 60%;
+  width: 100%;
+  display: inline-block;
+  overflow: visible;
+  position: absolute;
+  z-index: -1;
+  line-height: 100px;
+  top: 20px;
+  border-left: 1px solid #F2385A;
+}
+
+.outline:hover {
+  border-left: none;
+}
+
+.top > .nav-bar > li[name="deposit"] {
+  float: right;
+}
+
+.top > .nav-bar > li[name="deposit"] > span {
+  display: inline-block;
+  color: white;
+  text-align: center;
+  padding: 25px 25px;
+  text-decoration: none;
+}
+
+.green-button, .green-button:visited {
+  font-family: Work-Sans-Regular;
+  font-size: 15px;
+  cursor: pointer;
+  height: 60px;
+  width: 85%;
+  display: block;
+  margin: 20px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-weight: 700;
+  outline: none;
+  position: relative;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s;
+  border-radius: 15px;
+  border: 2px solid transparent;
+  color: #fff;
+  background: #f2385a;
+  text-decoration: none;
+  text-align: center;
+  line-height: 57px;
+
+
+  overflow: hidden;
+}
+
+.green-button:active {
+  border-color: #f2385a;
+  color: #f2385a;
+}
+
+.green-button:hover {
+    background: transparent;
+    border: 2px solid #f2385a;
+    color: #f2385a
+
+
+}
+
+.trans-button, .trans-button:visited {
+
+  font-family: myFirstFont;
+  background: transparent;
+  display: inline-block;
+  width: 200px;
+  padding: 8px;
+  color: #fff;
+  border: 2px solid #fff;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  letter-spacing: 3px;
+  font-size: 15px;
+
+  -webkit-transition: all 0.3s ease-out;  /* Saf3.2+, Chrome */
+   -moz-transition: all 0.3s ease-out;  /* FF4+ */
+    -ms-transition: all 0.3s ease-out;  /* IE10 */
+     -o-transition: all 0.3s ease-out;  /* Opera 10.5+ */
+        transition: all 0.3s ease-out;
+  }
+.trans-button:hover,
+.trans-button:active {
+  background-color: #fff;
+  color: #000;
+}

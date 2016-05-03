@@ -1,0 +1,256 @@
+/* line 5, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/lineups.scss */
+.player-salary-container {
+  display: inline;
+  width: 100%;
+  overflow: hidden;
+  float: left;
+}
+
+/* line 12, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/lineups.scss */
+.position-select > li > button {
+  background: none;
+  border: none;
+  font-size: 1em;
+  color: blue;
+  float: left;
+  display: inline-block;
+  color: #F2385A;
+  background-color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  outline: #AFBFC6 solid thin;
+  border-top: 1px solid  #AFBFC6;
+}
+
+/* line 29, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/lineups.scss */
+.position-select {
+  width: 55%;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* line 37, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/lineups.scss */
+.position-select > li {
+  float: left;
+}
+
+/* line 42, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/lineups.scss */
+.position-select > li > a {
+  display: inline-block;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  background-color: #F8F8FF;
+}
+
+/* line 50, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/lineups.scss */
+.search-container {
+  float: left;
+  display: inline-block;
+  text-align: center;
+  height: 44px;
+}
+
+/* line 57, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/lineups.scss */
+#search {
+  width: 145px;
+  position: relative;
+  bottom: -22px;
+  padding-right: 10px;
+  font-size: 1em;
+  overflow: hidden;
+  display: table-cell;
+  float: left;
+  text-decoration: none;
+  outline: #AFBFC6 solid thin;
+}
+
+/* line 70, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/lineups.scss */
+.position-select > li > a:hover {
+  background-color: #AFBFC6;
+}
+
+/* line 74, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/lineups.scss */
+.new-player-selection-container {
+  float: left;
+  background-color: white;
+  width: 55%;
+  height: 450px;
+  overflow: auto;
+}
+
+/* line 82, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/lineups.scss */
+.player-select-container {
+  max-width: 100%;
+  height: 450px;
+  overflow: hidden;
+  background-color: white;
+}
+
+/* line 89, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/lineups.scss */
+.player-select {
+  float: left;
+  width: 100%;
+  height: 0%;
+}
+
+/* line 95, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/lineups.scss */
+.player-select > tbody > tr {
+  background-color: white;
+  width: 100%;
+  height: 45px;
+}
+
+/* line 100, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/lineups.scss */
+.player-select > tbody > tr > td {
+  height: 45px;
+  margin-right: 0;
+}
+
+/* line 105, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/lineups.scss */
+.player-select > tbody > tr > td > .player-info {
+  color: #E95144;
+  height: 75px;
+  display: block;
+  border: 1px solid black;
+  padding: 16px;
+  padding-left: 5px;
+}
+
+/* line 114, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/lineups.scss */
+.player-select > tbody > tr > td > .player-info > .line-1 > .player-position {
+  color: #AFBFC6;
+  margin-left: 0;
+  padding-right: 10px;
+  float: left;
+}
+
+/* line 121, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/lineups.scss */
+.player-select > tbody > tr > td > .player-info > .line-1 > .player-name {
+  color: #F2385A;
+  margin-left: 0;
+  padding-right: 10px;
+  float: left;
+  font-weight: bold;
+}
+
+/* line 130, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/lineups.scss */
+.player-select > tbody > tr > td > .player-info > .add-player-button {
+  background: none;
+  border: none;
+  font-size: 1em;
+  color: blue;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  float: left;
+  display: inline-block;
+  color: #AFBFC6;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  outline: none;
+  height: 20px;
+  width: 20px;
+}
+
+/* line 148, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/lineups.scss */
+.player-salary-container > span {
+  color: black;
+}
+
+/* line 152, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/lineups.scss */
+.player-select > tbody > tr > td > .player-info > .line-1 > .add-player-button, .remove-player-button {
+  cursor: pointer;
+  cursor: hand;
+}
+
+/* line 161, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/lineups.scss */
+.current-lineup-container {
+  float: right;
+  max-width: 40%;
+  width: 40%;
+  height: 450px;
+  overflow: auto;
+}
+
+/* line 170, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/lineups.scss */
+.current-lineup {
+  float: right;
+  width: 100%;
+}
+
+/* line 175, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/lineups.scss */
+.current-lineup > tbody > tr {
+  background-color: #F8F8FF;
+  width: 100%;
+  height: 75px;
+}
+
+/* line 180, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/lineups.scss */
+.current-lineup > tbody > tr > td {
+  height: 45px;
+  margin-right: 0;
+}
+
+/* line 185, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/lineups.scss */
+.current-lineup > tbody > tr > td > .current-lineup-player-info {
+  color: #E95144;
+  height: 75px;
+  display: block;
+  border: 1px solid black;
+  padding: 16px;
+  padding-left: 5px;
+}
+
+/* line 195, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/lineups.scss */
+.current-lineup > tbody > tr > td > .current-lineup-player-info > .current-lineup-player-position {
+  color: #AFBFC6;
+  float: left;
+  margin-left: 0;
+  padding-right: 10px;
+  padding-left: 5px;
+}
+
+/* line 204, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/lineups.scss */
+.current-lineup > tbody > tr > td > .current-lineup-player-info > .remove-player-button {
+  background: none;
+  border: none;
+  font-size: 1em;
+  color: blue;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  float: right;
+  display: inline-block;
+  color: #AFBFC6;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  outline: none;
+  height: 20px;
+  width: 20px;
+}
+
+/* line 222, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/lineups.scss */
+.line-1 {
+  width: 90%;
+  height: 50%;
+  float: left;
+}
+
+/* line 228, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/lineups.scss */
+.line-2 {
+  width: 90%;
+  height: 50%;
+  float: left;
+  text-align: left;
+  color: #36B1BF;
+}
+
+/* line 236, /Users/Jack/Desktop/dfsEsport/app/assets/stylesheets/lineups.scss */
+.bold-team {
+  display: inline;
+  text-decoration: underline;
+}
