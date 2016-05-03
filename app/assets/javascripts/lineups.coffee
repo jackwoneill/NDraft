@@ -216,13 +216,8 @@ ready = ->
         id = parseInt(player.attr("data-id"))
         pos = parseInt(player.attr("data-position"))
         player_salary = parseInt(player.attr("data-salary"))
-        alert player_salary
-
-        # lineup["player_" + pos] #Dynamic position var
-        # lineup["player_" + (pos + "Sal").toString()] #Dynamic salary var
 
         if $(this).text() == "+"
-            alert "b"
 
             if positions["position_" + pos] == 0
                 #ADD TO FLEX PLAYERS
@@ -263,9 +258,7 @@ ready = ->
                 ###
                 
         else if $(this).text() == "-"
-            alert "a"
             pn = player.attr('data-pnum')
-            alert pn
             switch id
                 when lineup["pos_" + pos + "_" + pn]
 
