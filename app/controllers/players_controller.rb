@@ -65,31 +65,15 @@ class PlayersController < ApplicationController
   # PATCH/PUT /players/1.json
   def update
     if @player.update(player_params)
-      team = Team.find(@player.team_id)
-      games = Game.where("team_1 = ? or team_2 = ?", team, team).all
 
-      slates = Array.new
+      lps = LineupPlayer.where(player_id: @player.id)
 
-      games.each do |g|
-        s = Slate.where(id: g.slate_id).where('start_time <?', Time.now).take
-        c = Contest.where(slate_id: s.id).take
-        if c.paid_out == false
-          slates.append(s)
+      lps.each do |player|
+        if Contest.find(Lineup.find(player.lineup_id).id).paid_out == false
+          calcTotalScore(Lineup.find(player.lineup_id))
         end
-        if slates.count != 0
-          slates.each do |s|
-            contests = Contest.where(slate_id = s.id)
-            contests.each do |c|
-              lineups = Lineup.where(contest_id = c.id).where("player_1 = ? or player_2 = ? or player_3 = ? or player_4 = ? or player_5 = ? or player_6 = ? or player_7 = ? or player_8 = ?", @player.id,@player.id,@player.id,@player.id,@player.id,@player.id,@player.id,@player.id )
-              lineups.each do |l|
-                calcTotalScore(l)
-              end
-            end
-          end
-
-        end
-      redirect_to players_url
       end
+      redirect_to players_url
     end
   end
 
