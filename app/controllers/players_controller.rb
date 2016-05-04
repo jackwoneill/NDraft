@@ -69,7 +69,7 @@ class PlayersController < ApplicationController
       lps = LineupPlayer.where(player_id: @player.id)
 
       lps.each do |player|
-        if Contest.find(Lineup.find(player.lineup_id).id).paid_out == false
+        if Contest.find(Lineup.find(player.lineup_id).contest_id).paid_out == false
           calcTotalScore(Lineup.find(player.lineup_id))
         end
       end
