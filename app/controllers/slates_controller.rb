@@ -22,6 +22,7 @@ class SlatesController < ApplicationController
 
   # GET /slates/1/edit
   def edit
+    @games = Gametype.all
   end
 
   def payout
@@ -80,7 +81,6 @@ class SlatesController < ApplicationController
       end
     end
   end
-
 
   def update_all
     params['player'].keys.each do |id|
