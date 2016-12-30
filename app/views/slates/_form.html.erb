@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= f.label :game %><br>
-    <%= f.number_field :game %>
+    <%= f.collection_select :game, @games, :id, :name %>
   </div>
   <div class="field">
     <%= f.label :start_time %><br>

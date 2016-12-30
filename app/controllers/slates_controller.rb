@@ -17,6 +17,7 @@ class SlatesController < ApplicationController
   # GET /slates/new
   def new
     @slate = Slate.new
+    @games = Gametype.all
   end
 
   # GET /slates/1/edit
