@@ -75,13 +75,13 @@ class DepositsController < ApplicationController
 
     PayPal::SDK.configure({
       :mode => "sandbox",
-      :client_id => "AbX1ZA9XsdUGnVRNDJwvyzURE9BLbmDAuM1DxExjvJDEgAVdNMHZXUP_IOnGnZVqOL6_s0PlQ2yBSy7p",
-      :client_secret => "ECTW0SNazTtQPF7pO7jB0v8xLOQhPv6wWZXGaTDyQr0sIwQUAlqCrsuQB-NqFjT2DC6p0TwmoZj4N3n-"
+      :client_id => "",
+      :client_secret => ""
     })
 
     @payment = PayPal::SDK::REST::Payment.new({
         :intent => "sale",
-        "experience_profile_id": "XP-RNK5-HFBU-6X9Q-WL5X",
+        "experience_profile_id": "",
         :payer => {
           :payment_method => "paypal" },
         :redirect_urls => {
