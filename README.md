@@ -17,7 +17,7 @@ Withdrawals are not automatic, as they are meant to be checked manually prior to
 
 
 # Todo
-Currently prototyped, many routes must be removed/actions to be changed. Frontend display bugs. Lineup builder is prototyped so it likely has a few bugs that will appear. Add new paypal business account. 
+Currently prototyped, many routes must be removed/actions to be changed. Frontend display bugs. Lineup builder is prototyped so it likely has a few bugs that will appear. Add new paypal business account. Locate service with both REST and streaming API to handle updating of live scores and player costs. In real-world scenario, SSN's must be verified - a key reason why this is not in production, SSN verification is scary.
 
 
 
