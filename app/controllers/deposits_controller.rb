@@ -25,7 +25,7 @@ class DepositsController < ApplicationController
     @deposit = Deposit.new
 
   end
-
+  
   # GET /deposits/1/edit
   # def edit
   # end
